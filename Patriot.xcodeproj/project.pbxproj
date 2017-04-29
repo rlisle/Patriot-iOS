@@ -13,10 +13,18 @@
 		E49EB17D1EB4BCA400FBA04D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E49EB17C1EB4BCA400FBA04D /* Assets.xcassets */; };
 		E49EB1801EB4BCA400FBA04D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E49EB17E1EB4BCA400FBA04D /* LaunchScreen.storyboard */; };
 		E49EB18B1EB4BCA400FBA04D /* PatriotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49EB18A1EB4BCA400FBA04D /* PatriotTests.swift */; };
+		E49EB19C1EB4C43C00FBA04D /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49EB19B1EB4C43C00FBA04D /* IntegrationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		E49EB1871EB4BCA400FBA04D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E49EB16A1EB4BCA400FBA04D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E49EB1711EB4BCA400FBA04D;
+			remoteInfo = Patriot;
+		};
+		E49EB19E1EB4C43C00FBA04D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E49EB16A1EB4BCA400FBA04D /* Project object */;
 			proxyType = 1;
@@ -36,6 +44,9 @@
 		E49EB1861EB4BCA400FBA04D /* PatriotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PatriotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E49EB18A1EB4BCA400FBA04D /* PatriotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatriotTests.swift; sourceTree = "<group>"; };
 		E49EB18C1EB4BCA400FBA04D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E49EB1991EB4C43C00FBA04D /* IntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E49EB19B1EB4C43C00FBA04D /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
+		E49EB19D1EB4C43C00FBA04D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +64,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E49EB1961EB4C43C00FBA04D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -61,6 +79,7 @@
 			children = (
 				E49EB1741EB4BCA400FBA04D /* Patriot */,
 				E49EB1891EB4BCA400FBA04D /* PatriotTests */,
+				E49EB19A1EB4C43C00FBA04D /* IntegrationTests */,
 				E49EB1731EB4BCA400FBA04D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,6 +89,7 @@
 			children = (
 				E49EB1721EB4BCA400FBA04D /* Patriot.app */,
 				E49EB1861EB4BCA400FBA04D /* PatriotTests.xctest */,
+				E49EB1991EB4C43C00FBA04D /* IntegrationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,6 +114,15 @@
 				E49EB18C1EB4BCA400FBA04D /* Info.plist */,
 			);
 			path = PatriotTests;
+			sourceTree = "<group>";
+		};
+		E49EB19A1EB4C43C00FBA04D /* IntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				E49EB19B1EB4C43C00FBA04D /* IntegrationTests.swift */,
+				E49EB19D1EB4C43C00FBA04D /* Info.plist */,
+			);
+			path = IntegrationTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,6 +163,24 @@
 			productReference = E49EB1861EB4BCA400FBA04D /* PatriotTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		E49EB1981EB4C43C00FBA04D /* IntegrationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E49EB1A21EB4C43C00FBA04D /* Build configuration list for PBXNativeTarget "IntegrationTests" */;
+			buildPhases = (
+				E49EB1951EB4C43C00FBA04D /* Sources */,
+				E49EB1961EB4C43C00FBA04D /* Frameworks */,
+				E49EB1971EB4C43C00FBA04D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E49EB19F1EB4C43C00FBA04D /* PBXTargetDependency */,
+			);
+			name = IntegrationTests;
+			productName = IntegrationTests;
+			productReference = E49EB1991EB4C43C00FBA04D /* IntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -150,6 +197,12 @@
 						ProvisioningStyle = Automatic;
 					};
 					E49EB1851EB4BCA400FBA04D = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 65NFWK9633;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E49EB1711EB4BCA400FBA04D;
+					};
+					E49EB1981EB4C43C00FBA04D = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 65NFWK9633;
 						ProvisioningStyle = Automatic;
@@ -172,6 +225,7 @@
 			targets = (
 				E49EB1711EB4BCA400FBA04D /* Patriot */,
 				E49EB1851EB4BCA400FBA04D /* PatriotTests */,
+				E49EB1981EB4C43C00FBA04D /* IntegrationTests */,
 			);
 		};
 /* End PBXProject section */
@@ -188,6 +242,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E49EB1841EB4BCA400FBA04D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E49EB1971EB4C43C00FBA04D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -214,6 +275,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E49EB1951EB4C43C00FBA04D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E49EB19C1EB4C43C00FBA04D /* IntegrationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -221,6 +290,11 @@
 			isa = PBXTargetDependency;
 			target = E49EB1711EB4BCA400FBA04D /* Patriot */;
 			targetProxy = E49EB1871EB4BCA400FBA04D /* PBXContainerItemProxy */;
+		};
+		E49EB19F1EB4C43C00FBA04D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E49EB1711EB4BCA400FBA04D /* Patriot */;
+			targetProxy = E49EB19E1EB4C43C00FBA04D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -395,6 +469,36 @@
 			};
 			name = Release;
 		};
+		E49EB1A01EB4C43C00FBA04D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 65NFWK9633;
+				INFOPLIST_FILE = IntegrationTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.lisles.IntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Patriot.app/Patriot";
+			};
+			name = Debug;
+		};
+		E49EB1A11EB4C43C00FBA04D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 65NFWK9633;
+				INFOPLIST_FILE = IntegrationTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.lisles.IntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Patriot.app/Patriot";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -414,12 +518,22 @@
 				E49EB1911EB4BCA400FBA04D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E49EB1921EB4BCA400FBA04D /* Build configuration list for PBXNativeTarget "PatriotTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E49EB1931EB4BCA400FBA04D /* Debug */,
 				E49EB1941EB4BCA400FBA04D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E49EB1A21EB4C43C00FBA04D /* Build configuration list for PBXNativeTarget "IntegrationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E49EB1A01EB4C43C00FBA04D /* Debug */,
+				E49EB1A11EB4C43C00FBA04D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
