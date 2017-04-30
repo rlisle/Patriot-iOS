@@ -152,9 +152,10 @@ extension PhotonManagerIntegrationTests
     func login()
     {
         let promise = expectation(description: "login")
-        manager.loginToParticleCloud(user: Secret.TestEmail, password: Secret.TestPassword) { (error) in
-            XCTAssertNil(error)
+        manager.loginToParticleCloud(user: Secret.TestEmail, password: Secret.TestPassword).then { _ in
             promise.fulfill()
+        }.catch { _ in
+            XCTFail()
         }
         waitForExpectations(timeout: 3)
     }

@@ -52,10 +52,17 @@ class PhotonManager: NSObject
     * The particle SDK will use the returned token in subsequent calls.
     * We don't have to save it.
     */
-    func loginToParticleCloud(user: String, password: String, completionHandler: @escaping(Error?) -> Void)
+    func loginToParticleCloud(user: String, password: String) -> Promise<Void>
     {
-        print("loginToParticleCloud")
-        ParticleCloud.sharedInstance().login(withUser: user, password: password, completion: completionHandler)
+        return Promise { fulfill, reject in
+            print("loginToParticleCloud")
+            ParticleCloud.sharedInstance().login(withUser: user, password: password) { (error) in
+                if let error = error {
+                    return reject(error)
+                }
+                return fulfill()
+            }
+        }
     }
 
 
