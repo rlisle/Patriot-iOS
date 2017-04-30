@@ -10,13 +10,31 @@
 		1A4140F8729E1FC3C7B6B1DF /* Pods_IntegrationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D126776005D773F26E28AEE /* Pods_IntegrationTests.framework */; };
 		70F41E728D67DB2D52369B26 /* Pods_PatriotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC5B585582339570622CC4E /* Pods_PatriotTests.framework */; };
 		9820D3696E6F7AB1A5EEF0EE /* Pods_Patriot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6896CA38F42FD381333A5B0B /* Pods_Patriot.framework */; };
+		E432A1481EB607D4003C9E0E /* PhotonIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1461EB607D4003C9E0E /* PhotonIntegrationTests.swift */; };
+		E432A1491EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1471EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift */; };
+		E432A14C1EB607E3003C9E0E /* PhotonHardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14A1EB607E3003C9E0E /* PhotonHardware.swift */; };
+		E432A14D1EB607E3003C9E0E /* PhotonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14B1EB607E3003C9E0E /* PhotonManager.swift */; };
+		E432A14F1EB60879003C9E0E /* PhotonHardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14A1EB607E3003C9E0E /* PhotonHardware.swift */; };
+		E432A1501EB6087A003C9E0E /* PhotonHardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14A1EB607E3003C9E0E /* PhotonHardware.swift */; };
+		E432A1511EB6087E003C9E0E /* PhotonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14B1EB607E3003C9E0E /* PhotonManager.swift */; };
+		E432A1521EB6087F003C9E0E /* PhotonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14B1EB607E3003C9E0E /* PhotonManager.swift */; };
+		E432A1541EB609B4003C9E0E /* DeviceNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1531EB609B4003C9E0E /* DeviceNotifying.swift */; };
+		E432A1551EB609CA003C9E0E /* DeviceNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1531EB609B4003C9E0E /* DeviceNotifying.swift */; };
+		E432A1561EB609CB003C9E0E /* DeviceNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1531EB609B4003C9E0E /* DeviceNotifying.swift */; };
+		E432A1581EB60A0A003C9E0E /* secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1571EB60A0A003C9E0E /* secret.swift */; };
+		E432A15A1EB60A10003C9E0E /* secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1571EB60A0A003C9E0E /* secret.swift */; };
+		E432A15C1EB60A7C003C9E0E /* Hardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A15B1EB60A7C003C9E0E /* Hardware.swift */; };
+		E432A15F1EB60BAE003C9E0E /* ActivityNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A15E1EB60BAE003C9E0E /* ActivityNotifying.swift */; };
+		E432A1611EB60BE9003C9E0E /* ActivityNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A15E1EB60BAE003C9E0E /* ActivityNotifying.swift */; };
+		E432A1621EB60BEB003C9E0E /* ActivityNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A15E1EB60BAE003C9E0E /* ActivityNotifying.swift */; };
+		E432A1631EB60DB2003C9E0E /* Hardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A15B1EB60A7C003C9E0E /* Hardware.swift */; };
+		E432A1641EB60DB3003C9E0E /* Hardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A15B1EB60A7C003C9E0E /* Hardware.swift */; };
 		E49EB1761EB4BCA400FBA04D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */; };
 		E49EB1781EB4BCA400FBA04D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49EB1771EB4BCA400FBA04D /* ViewController.swift */; };
 		E49EB17B1EB4BCA400FBA04D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E49EB1791EB4BCA400FBA04D /* Main.storyboard */; };
 		E49EB17D1EB4BCA400FBA04D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E49EB17C1EB4BCA400FBA04D /* Assets.xcassets */; };
 		E49EB1801EB4BCA400FBA04D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E49EB17E1EB4BCA400FBA04D /* LaunchScreen.storyboard */; };
 		E49EB18B1EB4BCA400FBA04D /* PatriotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49EB18A1EB4BCA400FBA04D /* PatriotTests.swift */; };
-		E49EB19C1EB4C43C00FBA04D /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49EB19B1EB4C43C00FBA04D /* IntegrationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +63,14 @@
 		9E5DFBFE4CB69660C54284B5 /* Pods-IntegrationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests.release.xcconfig"; sourceTree = "<group>"; };
 		ACFFF650179FA7139DF7089E /* Pods-PatriotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PatriotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PatriotTests/Pods-PatriotTests.release.xcconfig"; sourceTree = "<group>"; };
 		B509096D8564412980F09864 /* Pods-Patriot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Patriot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Patriot/Pods-Patriot.release.xcconfig"; sourceTree = "<group>"; };
+		E432A1461EB607D4003C9E0E /* PhotonIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotonIntegrationTests.swift; sourceTree = "<group>"; };
+		E432A1471EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotonManagerIntegrationTests.swift; sourceTree = "<group>"; };
+		E432A14A1EB607E3003C9E0E /* PhotonHardware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotonHardware.swift; sourceTree = "<group>"; };
+		E432A14B1EB607E3003C9E0E /* PhotonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotonManager.swift; sourceTree = "<group>"; };
+		E432A1531EB609B4003C9E0E /* DeviceNotifying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceNotifying.swift; sourceTree = "<group>"; };
+		E432A1571EB60A0A003C9E0E /* secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = secret.swift; sourceTree = "<group>"; };
+		E432A15B1EB60A7C003C9E0E /* Hardware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hardware.swift; sourceTree = "<group>"; };
+		E432A15E1EB60BAE003C9E0E /* ActivityNotifying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityNotifying.swift; sourceTree = "<group>"; };
 		E49EB1721EB4BCA400FBA04D /* Patriot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patriot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E49EB1771EB4BCA400FBA04D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +82,6 @@
 		E49EB18A1EB4BCA400FBA04D /* PatriotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatriotTests.swift; sourceTree = "<group>"; };
 		E49EB18C1EB4BCA400FBA04D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E49EB1991EB4C43C00FBA04D /* IntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E49EB19B1EB4C43C00FBA04D /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		E49EB19D1EB4C43C00FBA04D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA0E2DDDF2812FD69A804252 /* Pods-Patriot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Patriot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Patriot/Pods-Patriot.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +137,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E432A14E1EB60852003C9E0E /* Hardware */ = {
+			isa = PBXGroup;
+			children = (
+				E432A15E1EB60BAE003C9E0E /* ActivityNotifying.swift */,
+				E432A1531EB609B4003C9E0E /* DeviceNotifying.swift */,
+				E432A15B1EB60A7C003C9E0E /* Hardware.swift */,
+				E432A14A1EB607E3003C9E0E /* PhotonHardware.swift */,
+				E432A14B1EB607E3003C9E0E /* PhotonManager.swift */,
+			);
+			name = Hardware;
+			sourceTree = "<group>";
+		};
 		E49EB1691EB4BCA400FBA04D = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +174,8 @@
 		E49EB1741EB4BCA400FBA04D /* Patriot */ = {
 			isa = PBXGroup;
 			children = (
+				E432A1571EB60A0A003C9E0E /* secret.swift */,
+				E432A14E1EB60852003C9E0E /* Hardware */,
 				E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */,
 				E49EB1771EB4BCA400FBA04D /* ViewController.swift */,
 				E49EB1791EB4BCA400FBA04D /* Main.storyboard */,
@@ -159,7 +198,8 @@
 		E49EB19A1EB4C43C00FBA04D /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
-				E49EB19B1EB4C43C00FBA04D /* IntegrationTests.swift */,
+				E432A1461EB607D4003C9E0E /* PhotonIntegrationTests.swift */,
+				E432A1471EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift */,
 				E49EB19D1EB4C43C00FBA04D /* Info.plist */,
 			);
 			path = IntegrationTests;
@@ -450,7 +490,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E49EB1781EB4BCA400FBA04D /* ViewController.swift in Sources */,
+				E432A14D1EB607E3003C9E0E /* PhotonManager.swift in Sources */,
+				E432A15C1EB60A7C003C9E0E /* Hardware.swift in Sources */,
 				E49EB1761EB4BCA400FBA04D /* AppDelegate.swift in Sources */,
+				E432A1541EB609B4003C9E0E /* DeviceNotifying.swift in Sources */,
+				E432A14C1EB607E3003C9E0E /* PhotonHardware.swift in Sources */,
+				E432A15F1EB60BAE003C9E0E /* ActivityNotifying.swift in Sources */,
+				E432A1581EB60A0A003C9E0E /* secret.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,7 +504,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E432A1621EB60BEB003C9E0E /* ActivityNotifying.swift in Sources */,
 				E49EB18B1EB4BCA400FBA04D /* PatriotTests.swift in Sources */,
+				E432A1511EB6087E003C9E0E /* PhotonManager.swift in Sources */,
+				E432A1631EB60DB2003C9E0E /* Hardware.swift in Sources */,
+				E432A14F1EB60879003C9E0E /* PhotonHardware.swift in Sources */,
+				E432A1551EB609CA003C9E0E /* DeviceNotifying.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,7 +517,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E49EB19C1EB4C43C00FBA04D /* IntegrationTests.swift in Sources */,
+				E432A1521EB6087F003C9E0E /* PhotonManager.swift in Sources */,
+				E432A1481EB607D4003C9E0E /* PhotonIntegrationTests.swift in Sources */,
+				E432A1611EB60BE9003C9E0E /* ActivityNotifying.swift in Sources */,
+				E432A1501EB6087A003C9E0E /* PhotonHardware.swift in Sources */,
+				E432A1561EB609CB003C9E0E /* DeviceNotifying.swift in Sources */,
+				E432A1491EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift in Sources */,
+				E432A15A1EB60A10003C9E0E /* secret.swift in Sources */,
+				E432A1641EB60DB3003C9E0E /* Hardware.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,6 +787,7 @@
 				E49EB1A11EB4C43C00FBA04D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
