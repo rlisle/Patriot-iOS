@@ -12,10 +12,10 @@
 		9820D3696E6F7AB1A5EEF0EE /* Pods_Patriot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6896CA38F42FD381333A5B0B /* Pods_Patriot.framework */; };
 		E432A1481EB607D4003C9E0E /* PhotonIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1461EB607D4003C9E0E /* PhotonIntegrationTests.swift */; };
 		E432A1491EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1471EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift */; };
-		E432A14C1EB607E3003C9E0E /* PhotonHardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14A1EB607E3003C9E0E /* PhotonHardware.swift */; };
+		E432A14C1EB607E3003C9E0E /* Photon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14A1EB607E3003C9E0E /* Photon.swift */; };
 		E432A14D1EB607E3003C9E0E /* PhotonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14B1EB607E3003C9E0E /* PhotonManager.swift */; };
-		E432A14F1EB60879003C9E0E /* PhotonHardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14A1EB607E3003C9E0E /* PhotonHardware.swift */; };
-		E432A1501EB6087A003C9E0E /* PhotonHardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14A1EB607E3003C9E0E /* PhotonHardware.swift */; };
+		E432A14F1EB60879003C9E0E /* Photon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14A1EB607E3003C9E0E /* Photon.swift */; };
+		E432A1501EB6087A003C9E0E /* Photon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14A1EB607E3003C9E0E /* Photon.swift */; };
 		E432A1511EB6087E003C9E0E /* PhotonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14B1EB607E3003C9E0E /* PhotonManager.swift */; };
 		E432A1521EB6087F003C9E0E /* PhotonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14B1EB607E3003C9E0E /* PhotonManager.swift */; };
 		E432A1541EB609B4003C9E0E /* DeviceNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1531EB609B4003C9E0E /* DeviceNotifying.swift */; };
@@ -65,7 +65,7 @@
 		B509096D8564412980F09864 /* Pods-Patriot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Patriot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Patriot/Pods-Patriot.release.xcconfig"; sourceTree = "<group>"; };
 		E432A1461EB607D4003C9E0E /* PhotonIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotonIntegrationTests.swift; sourceTree = "<group>"; };
 		E432A1471EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotonManagerIntegrationTests.swift; sourceTree = "<group>"; };
-		E432A14A1EB607E3003C9E0E /* PhotonHardware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotonHardware.swift; sourceTree = "<group>"; };
+		E432A14A1EB607E3003C9E0E /* Photon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photon.swift; sourceTree = "<group>"; };
 		E432A14B1EB607E3003C9E0E /* PhotonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotonManager.swift; sourceTree = "<group>"; };
 		E432A1531EB609B4003C9E0E /* DeviceNotifying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceNotifying.swift; sourceTree = "<group>"; };
 		E432A1571EB60A0A003C9E0E /* secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = secret.swift; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 				E432A15E1EB60BAE003C9E0E /* ActivityNotifying.swift */,
 				E432A1531EB609B4003C9E0E /* DeviceNotifying.swift */,
 				E432A15B1EB60A7C003C9E0E /* Hardware.swift */,
-				E432A14A1EB607E3003C9E0E /* PhotonHardware.swift */,
+				E432A14A1EB607E3003C9E0E /* Photon.swift */,
 				E432A14B1EB607E3003C9E0E /* PhotonManager.swift */,
 			);
 			name = Hardware;
@@ -496,7 +496,7 @@
 				E432A15C1EB60A7C003C9E0E /* Hardware.swift in Sources */,
 				E49EB1761EB4BCA400FBA04D /* AppDelegate.swift in Sources */,
 				E432A1541EB609B4003C9E0E /* DeviceNotifying.swift in Sources */,
-				E432A14C1EB607E3003C9E0E /* PhotonHardware.swift in Sources */,
+				E432A14C1EB607E3003C9E0E /* Photon.swift in Sources */,
 				E432A15F1EB60BAE003C9E0E /* ActivityNotifying.swift in Sources */,
 				E432A1581EB60A0A003C9E0E /* secret.swift in Sources */,
 			);
@@ -510,7 +510,7 @@
 				E49EB18B1EB4BCA400FBA04D /* PatriotTests.swift in Sources */,
 				E432A1511EB6087E003C9E0E /* PhotonManager.swift in Sources */,
 				E432A1631EB60DB2003C9E0E /* Hardware.swift in Sources */,
-				E432A14F1EB60879003C9E0E /* PhotonHardware.swift in Sources */,
+				E432A14F1EB60879003C9E0E /* Photon.swift in Sources */,
 				E432A1551EB609CA003C9E0E /* DeviceNotifying.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,7 +522,7 @@
 				E432A1521EB6087F003C9E0E /* PhotonManager.swift in Sources */,
 				E432A1481EB607D4003C9E0E /* PhotonIntegrationTests.swift in Sources */,
 				E432A1611EB60BE9003C9E0E /* ActivityNotifying.swift in Sources */,
-				E432A1501EB6087A003C9E0E /* PhotonHardware.swift in Sources */,
+				E432A1501EB6087A003C9E0E /* Photon.swift in Sources */,
 				E432A1561EB609CB003C9E0E /* DeviceNotifying.swift in Sources */,
 				E432A1491EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift in Sources */,
 				E432A15A1EB60A10003C9E0E /* secret.swift in Sources */,
