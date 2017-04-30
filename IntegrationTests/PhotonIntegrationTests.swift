@@ -66,7 +66,7 @@ class PhotonIntegrationTests: XCTestCase
             XCTAssert(devices.contains("led"))
             expect.fulfill()
         }
-        waitForExpectations(timeout: 2)
+        waitForExpectations(timeout: 3)
     }
     
     
