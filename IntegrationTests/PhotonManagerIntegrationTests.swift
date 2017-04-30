@@ -1,6 +1,6 @@
 //
 //  PhotonManagerIntegrationTests.swift
-//  rvcp
+//  Patriot
 //
 //  This is an integration test for the Photon hardware manager.
 //

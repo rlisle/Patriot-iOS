@@ -1,6 +1,6 @@
 //
 //  Photon.swift
-//  rvcp
+//  Patriot
 //
 //  This class provides the interface to a Photon device.
 //

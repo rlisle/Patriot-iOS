@@ -1,6 +1,6 @@
 //
 //  Hardware.swift
-//  rvcp
+//  Patriot
 //
 //  Created by Ron Lisle on 4/6/17
 //  Copyright © 2017 Ron Lisle. All rights reserved.

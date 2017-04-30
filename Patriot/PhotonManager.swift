@@ -1,6 +1,6 @@
 //
 //  PhotonManager.swift
-//  rvcp
+//  Patriot
 //
 //  This class manages the collection of Photon devices
 //
