@@ -71,6 +71,7 @@
 		E432A1571EB60A0A003C9E0E /* secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = secret.swift; sourceTree = "<group>"; };
 		E432A15B1EB60A7C003C9E0E /* Hardware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hardware.swift; sourceTree = "<group>"; };
 		E432A15E1EB60BAE003C9E0E /* ActivityNotifying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityNotifying.swift; sourceTree = "<group>"; };
+		E432A1651EB60EBF003C9E0E /* secret-template.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "secret-template.swift"; sourceTree = "<group>"; };
 		E49EB1721EB4BCA400FBA04D /* Patriot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patriot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E49EB1771EB4BCA400FBA04D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +175,7 @@
 		E49EB1741EB4BCA400FBA04D /* Patriot */ = {
 			isa = PBXGroup;
 			children = (
+				E432A1651EB60EBF003C9E0E /* secret-template.swift */,
 				E432A1571EB60A0A003C9E0E /* secret.swift */,
 				E432A14E1EB60852003C9E0E /* Hardware */,
 				E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */,
