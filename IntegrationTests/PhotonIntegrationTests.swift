@@ -118,12 +118,12 @@ class PhotonIntegrationTests: XCTestCase
     }
     
     
-    func test_Photon_Refresh()
+    func test_Photon_Refresh_updates_supported()
     {
         let expect = expectation(description: "refresh")
 
-        self.photon?.refresh().then { publish -> Void in
-            print("Publish read: \(publish)")
+        self.photon?.refresh().then { _ -> Void in
+            XCTAssert((self.photon?.supported?.count)! > 0)
             expect.fulfill()
         }
 

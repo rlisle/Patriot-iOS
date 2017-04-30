@@ -65,11 +65,11 @@ class Photon
     {
         return Promise { fulfill, reject in
             firstly {
-                refreshDevices()
+                return refreshDevices()
+            }.then {_ in
+                return self.refreshActivities()
             }.then {_ in 
-                self.refreshSupported()
-            }.then {_ in 
-                self.refreshActivities()
+                return self.refreshSupported()
             }.then {_ in
                 fulfill()
             }
@@ -162,7 +162,7 @@ class Photon
                     if let hwActivities = result as? String, hwActivities != "" {
                         self.parseActivities(hwActivities)
                     }
-                    print("Activities result: \(result)")
+                    print("Activities result: \(self.activities)")
                     fulfill(self.activities!)
                 } else {
                     print("  Error reading activities variable.")
