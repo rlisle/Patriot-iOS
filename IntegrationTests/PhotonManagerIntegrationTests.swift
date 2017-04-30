@@ -49,8 +49,8 @@ class PhotonManagerIntegrationTests: XCTestCase
     
     func test_TwoSharedReferences_AreTheSameInstance()
     {
-        let shared1 = PhotonManager.sharedInstance
-        let shared2 = PhotonManager.sharedInstance
+        let shared1 = PhotonManager.sharedInstance as! PhotonManager
+        let shared2 = PhotonManager.sharedInstance as! PhotonManager
         XCTAssertEqual(shared1, shared2)
     }
     
@@ -110,7 +110,7 @@ class PhotonManagerIntegrationTests: XCTestCase
     {
         login()
         let promise = expectation(description: "discovery")
-        self.manager.performDiscovery().then { _ -> Void in
+        self.manager.discoverDevices().then { _ -> Void in
             XCTAssertEqual(self.deviceFound, "myphoton")
             promise.fulfill()
         }
@@ -166,7 +166,7 @@ extension PhotonManagerIntegrationTests
     func login()
     {
         let promise = expectation(description: "login")
-        manager.loginToParticleCloud(user: Secret.TestEmail, password: Secret.TestPassword).then { _ in
+        manager.login(user: Secret.TestEmail, password: Secret.TestPassword).then { _ in
             promise.fulfill()
         }.catch { _ in
             XCTFail()

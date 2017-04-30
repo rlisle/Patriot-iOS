@@ -24,13 +24,13 @@ class AppDependencies
     {
         activitiesViewController = viewController
         activitiesDataManager = ActivitiesDataManager()
-        let hardware = PhotonManager.sharedInstance
+        var hardware = PhotonManager.sharedInstance
         activitiesDataManager?.hardware = hardware
         hardware.activityDelegate = activitiesDataManager
         
         //TODO: move to interactor. Here for initial testing only.
-        hardware.loginToParticleCloud(user: Secret.LoginEmail, password: Secret.LoginPassword).then { _ -> Void in
-            hardware.performDiscovery()
+        hardware.login(user: Secret.LoginEmail, password: Secret.LoginPassword).then { _ -> Void in
+            hardware.discoverDevices()
         }
     }
 }

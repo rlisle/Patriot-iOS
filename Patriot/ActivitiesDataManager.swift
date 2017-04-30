@@ -18,7 +18,7 @@ protocol ActivitiesDisplaying
 class ActivitiesDataManager
 {
     var activities:     [ Activity ] = []
-    var hardware:       Hardware?
+    var hardware:       HwManager?
     var delegate:       ActivitiesDisplaying?
     
     init()

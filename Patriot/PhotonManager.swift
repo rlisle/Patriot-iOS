@@ -9,8 +9,11 @@
 //  and a delegate or notification sent.
 //  This is the anticipated way of updating displays, etc.
 //
-//  It will subscribe to particle events in order to track activity changes
-//  in addition to new Photons coming online.
+//  The current activity state will be gleaned from the exposed Activities
+//  properties of one or more Photons initially, but then tracked directly
+//  after initialization by subscribing to particle events.
+//  Subscribing to particle events will also allow detecting new Photons
+//  as they come online and start issuing 'alive' events.
 //
 //  This file uses the Particle SDK: 
 //      https://docs.particle.io/reference/ios/#common-tasks
@@ -23,6 +26,22 @@ import Foundation
 import Particle_SDK
 import PromiseKit
 
+protocol HwManager
+{
+    static var sharedInstance:  HwManager           { get }
+    var deviceDelegate:         DeviceNotifying?    { get set }
+    var activityDelegate:       ActivityNotifying?  { get set }
+    var photons:                [String: Photon]    { get }
+    var eventName:              String              { get }
+    var deviceNames:            [String]            { get }
+    var supportedNames:         Set<String>         { get }
+    var currentActivities:      [String: String]    { get }
+    
+    func login(user: String, password: String) -> Promise<Void>
+    func discoverDevices() -> Promise<Void>
+    func sendActivityCommand(command: String, percent: Int)
+}
+
 
 enum ParticleSDKError : Error
 {
@@ -31,10 +50,10 @@ enum ParticleSDKError : Error
 }
 
 
-class PhotonManager: NSObject
+class PhotonManager: NSObject, HwManager
 {
     // Singleton pattern. Use sharedInstance instead of instantiating a new objects.
-    static let sharedInstance = PhotonManager()
+    static let sharedInstance: HwManager = PhotonManager()
 
     var deviceDelegate:     DeviceNotifying?
     var activityDelegate:   ActivityNotifying?
@@ -43,16 +62,15 @@ class PhotonManager: NSObject
     let eventName          = "patriot"
     var deviceNames:        [String] = []       // Names exposed by the "Devices" variables
     var supportedNames:     Set<String> = []    // Activity names exposed by the "Supported" variables
-    var currentActivities:  [String] = []       // List of currently on activities reported by Master
-    var master:             Photon?
+    var currentActivities:  [String: String] = [: ] // List of currently on activities reported by Master
     
 
     /**
-    * Login to your particle.io account
+    * Login to the particle.io account
     * The particle SDK will use the returned token in subsequent calls.
     * We don't have to save it.
     */
-    func loginToParticleCloud(user: String, password: String) -> Promise<Void>
+    func login(user: String, password: String) -> Promise<Void>
     {
         return Promise { fulfill, reject in
             print("loginToParticleCloud")
@@ -66,7 +84,7 @@ class PhotonManager: NSObject
     }
 
 
-    func performDiscovery() -> Promise<[String: Photon]>
+    func discoverDevices() -> Promise<Void>
     {
         return getAllPhotonDevices()
 //        return Promise { fulfill, reject in
@@ -85,7 +103,7 @@ class PhotonManager: NSObject
     /**
      * Locate all the particle.io devices
      */
-    func getAllPhotonDevices() -> Promise<[String: Photon]>
+    func getAllPhotonDevices() -> Promise<Void>
     {
         return Promise { fulfill, reject in
             print("getAllPhotonDevices")
@@ -96,7 +114,7 @@ class PhotonManager: NSObject
                     return
                 }
                 self.addAllPhotonsToCollection(devices: devices)
-                fulfill(self.photons)
+                fulfill()
             }
         }
     }
@@ -128,12 +146,6 @@ class PhotonManager: NSObject
     }
     
     
-    func getMasterDevice(name: String)
-    {
-        master = self.getPhoton(named: name)
-    }
-    
-    
     func getPhoton(named: String) -> Photon?
     {
         let lowerCaseName = named.lowercased()
@@ -141,42 +153,7 @@ class PhotonManager: NSObject
         
         return photon
     }
-}
 
-
-extension PhotonManager: Hardware
-{
-    func discoverDevices()
-    {
-        print("discoveryDevices")
-        performDiscovery()
-    }
-    
-    
-    func getAllDeviceNames() -> [String]
-    {
-        print("getAllDeviceNames returning \(deviceNames)")
-        
-        return self.deviceNames
-    }
-    
-    
-    func getAllSupportedNames() -> Set<String>
-    {
-        print("getAllSupportedNames returning \(supportedNames)")
-        
-        return supportedNames
-    }
-
-    
-    //TODO: either remove the callback, or else initiate a read
-    //TODO: convert to promise
-    func getCurrentActivities(completionHandler: @escaping ([String]) -> Void)
-    {
-        print("getCurrentActivities returning \(currentActivities)")
-        completionHandler(currentActivities)
-    }
-    
     
     func sendActivityCommand(command: String, percent: Int)
     {
@@ -193,56 +170,9 @@ extension PhotonManager: Hardware
     }
 }
 
+
 extension PhotonManager
 {
-//    /**
-//     * Read the Devices variable from each Photon and add to deviceNames
-//     * TODO: provide a completion callback or flag
-//     */
-//    func refreshDeviceNames()
-//    {
-//        print("refreshDeviceNames")
-//        deviceNames = []
-//        for (name, photon) in photons
-//        {
-//            let particleDevice = photon.particleDevice
-//            if particleDevice?.variables["Devices"] != nil
-//            {
-//                print("  reading Devices variable from \(name)")
-//                particleDevice?.getVariable("Devices") { (result: Any?, error: Error?) in
-//                    if error == nil
-//                    {
-//                        if let devices = result as? String, devices != ""
-//                        {
-//                            self.deviceNames += self.parseDeviceNames(devices)
-//                            print("  Updated device names = \(self.deviceNames)")
-//                        }
-//                    } else {
-//                        print("  Error reading devices variable.")
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    
-//    
-//    private func parseDeviceNames(_ devices: String) -> [String]
-//    {
-//        print("Parsing devices: \(devices)")
-//        var newDevices: [String] = []
-//        let items = devices.components(separatedBy: ",")
-//        for item in items
-//        {
-//            let itemComponents = item.components(separatedBy: ":")
-//            let lcDevice = itemComponents[0].localizedLowercase
-//            newDevices.append(lcDevice)
-//            self.deviceDelegate?.deviceFound(name: lcDevice)
-//        }
-//        
-//        return newDevices
-//    }
-    
-    
     func refreshSupportedNames()
     {
         print("refreshSupportedNames")
@@ -290,24 +220,33 @@ extension PhotonManager
     func refreshCurrentActivities()
     {
         print("refreshCurrentActivities")
-        currentActivities = []
-        master?.particleDevice.getVariable("Activities")
-        { (result:Any?, error:Error?) in
-            if error == nil
+        currentActivities = [: ]
+        for (name, photon) in photons
+        {
+            let particleDevice = photon.particleDevice
+            if particleDevice?.variables["Activities"] != nil
             {
-                if let activities = result as? String
-                {
-                    print("Activities = \(activities)")
-                    let items = activities.components(separatedBy: ",")
-                    for item in items
+                print("  reading Activities variable from \(name)")
+                particleDevice?.getVariable("Activities") { (result: Any?, error: Error?) in
+                    if error == nil
                     {
-                        self.currentActivities += [item]
-                        self.activityDelegate?.activityChanged(event: item)
+                        if let activities = result as? String, activities != ""
+                        {
+                            print("Activities = \(activities)")
+                            let items = activities.components(separatedBy: ",")
+                            for item in items
+                            {
+                                let parts = item.components(separatedBy: ":")
+                                self.currentActivities[parts[0]] = parts[1]
+//                                self.activityDelegate?.activityChanged(event: item)
+                            }
+                        }
+                    } else {
+                        print("Error reading Supported variable. Skipping this device.")
                     }
+                    print("Updated Supported names = \(self.supportedNames)")
+                    self.activityDelegate?.supportedListChanged(list: self.supportedNames)
                 }
-                
-            } else {
-                print("Error reading activities variable")
             }
         }
     }
