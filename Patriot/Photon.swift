@@ -27,6 +27,20 @@ typealias CompletionPassingSet = (Set<String>) -> Void
 typealias CompletionPassingDict = ([String: String]) -> Void
 
 
+// This protocol represents each microcontroller
+// Currently these are Particle.io Photons, but they
+// might be something different in the future.
+protocol HwController
+{
+    var devices: Set<String>?           { get }
+    var supported: Set<String>?         { get }
+    var activities: [String: String]?   { get }
+    var publish: String                 { get }
+    var name: String                    { get }
+    init(device: ParticleDevice)
+    func refresh() -> Promise<Void>
+}
+
 enum PhotonError : Error
 {
     case DeviceVariable
@@ -38,15 +52,17 @@ enum PhotonError : Error
 }
 
 
-class Photon
+// Public interface
+class Photon: HwController
 {
-    internal let particleDevice: ParticleDevice! // Reference to Particle-SDK device object
     var devices: Set<String>?           // Cached list of device names exposed by Photon
     var supported: Set<String>?         // Cached list of supported activities
     var activities: [String: String]?   // Optional list of current activities and state
     var publish: String                 // Publish event name that this device monitors
 
-
+    internal let particleDevice: ParticleDevice! // Reference to Particle-SDK device object
+    
+    
     var name: String
     {
         get {
@@ -55,13 +71,17 @@ class Photon
     }
     
     
-    init(device: ParticleDevice)
+    required init(device: ParticleDevice)
     {
         particleDevice  = device
         publish         = "uninitialized"
     }
 
-    func refresh(method: String = #function) -> Promise<Void>
+    /**
+     * Refresh is expected to be called once after init
+     * or in the unlikely event that the Photon reboots.
+     */
+    func refresh() -> Promise<Void>
     {
         return Promise { fulfill, reject in
             firstly {
@@ -83,8 +103,10 @@ class Photon
 //            }
         }
     }
-    
+}
 
+extension Photon
+{
     func refreshDevices() -> Promise<Set<String>>
     {
         return Promise { fulfill, reject in
