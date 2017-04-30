@@ -73,15 +73,15 @@ class Photon
             }.then {_ in
                 fulfill()
             }
-        }
+// Would prefer this, but can't figure out how to get compiler to accept it.
 //            firstly {
-//                refreshDevices()
-//            }.then { _ -> Promise<Any> in
+//                return refreshDevices()
+//            }.then { _ in
 //                let supportedPromise = self.refreshSupported()
 //                let activitiesPromise = self.refreshActivities()
 //                return when(fulfilled: supportedPromise, activitiesPromise)
 //            }
-//        }
+        }
     }
     
 
