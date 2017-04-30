@@ -66,13 +66,18 @@ class PhotonManager: NSObject
     }
 
 
-    func performDiscovery()
+    func performDiscovery() -> Promise<[String: Photon]>
     {
-        print("PhotonManager performDiscovery")
-//        self.getAllPhotonDevices().then { allPhotons in
-//            self.refreshCurrentActivities()
-//            self.refreshDeviceNames()
-//            self.refreshSupportedNames()
+        return getAllPhotonDevices()
+//        return Promise { fulfill, reject in
+//            print("PhotonManager performDiscovery")
+//            self.getAllPhotonDevices().then { allPhotons in
+//                return self.refreshCurrentActivities()
+//            }.then { activities in
+//                return self.getAllDeviceNames()
+//            }.then { deviceNames -> Void in
+//                return self.refreshSupportedNames()
+//            }
 //        }
     }
     

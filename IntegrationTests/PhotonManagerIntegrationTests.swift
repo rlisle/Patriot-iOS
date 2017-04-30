@@ -105,6 +105,20 @@ class PhotonManagerIntegrationTests: XCTestCase
     }
     
     
+    //MARK: performDiscovery
+    func test_PerformDiscovery_CallsDelegate()
+    {
+        login()
+        let promise = expectation(description: "discovery")
+        self.manager.performDiscovery().then { _ -> Void in
+            XCTAssertEqual(self.deviceFound, "myphoton")
+            promise.fulfill()
+        }
+        waitForExpectations(timeout: 5)
+    }
+    
+    
+    
     //MARK: SupportedNames
     
     func testSupportedInitiallyEmpty()
