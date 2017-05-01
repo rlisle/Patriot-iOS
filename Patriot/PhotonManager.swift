@@ -131,8 +131,11 @@ class PhotonManager: NSObject, HwManager
                 {
                     if let name = device.name?.lowercased()
                     {
-                        self.photons[name] = Photon(device: device)
-                        deviceDelegate?.deviceFound(name: name)
+                        let photon = Photon(device: device)
+                        self.photons[name] = photon
+                        photon.refresh().then { _ in
+                            self.deviceDelegate?.deviceFound(name: name)
+                        }
                     }
                 }
             }

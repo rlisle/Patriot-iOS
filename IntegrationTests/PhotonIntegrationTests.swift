@@ -18,7 +18,6 @@ import PromiseKit
 class PhotonIntegrationTests: XCTestCase
 {
     var cloud: ParticleCloud!
-    var device: ParticleDevice?
     var photon: Photon?
     
     override func setUp()
@@ -26,45 +25,68 @@ class PhotonIntegrationTests: XCTestCase
         super.setUp()
 
         cloud = ParticleCloud.sharedInstance()
-        login()
-        findTestDevice()
+        photon = nil
     }
     
 
     //MARK: Tests
     
-    func test_ParticleCloud_IsSet()
+    func test_ThatParticleCloud_IsInstantiated()
     {
         XCTAssertNotNil(cloud)
     }
     
-    
-    func test_ParticleDevice_IsSet()
+
+    func test_ThatLogin_Succeeds()
     {
-        XCTAssertNotNil(device)
-    }
-    
-    
-    func test_Photon_IsInstantiated()
-    {
-        XCTAssertNotNil(photon)
+        let promise = expectation(description: "login")
+        cloud.login(withUser: Secret.TestEmail, password: Secret.TestPassword) { (error) in
+            XCTAssertNil(error)
+            promise.fulfill()
+        }
+        waitForExpectations(timeout: 3)
     }
     
 
-    func test_PhotonDeviceProperty_EqualsParticleDevice()
+    func test_ThatTestDevice_IsOnline()
     {
-        XCTAssertNotNil(photon?.particleDevice)
-        XCTAssertEqual(device, photon?.particleDevice!)
+        let devicePromise = expectation(description: "device")
+        login().then { _ -> Void in
+            self.cloud.getDevice(Secret.TestDeviceId) { (device: ParticleDevice?, error: Error?) in
+                print("getDevice return")
+                XCTAssertNil(error)
+                XCTAssertNotNil(device)
+                devicePromise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 3)
+    }
+    
+    
+    func test_ThatPhoton_IsSet()
+    {
+        let photonPromise = expectation(description: "photon")
+        login().then { _ -> Void in
+            self.findTestDevice().then { _ -> Void in
+                XCTAssertNotNil(self.photon)
+                photonPromise.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 3)
     }
     
     
     func test_Photon_ReadsDevices()
     {
         let expect = expectation(description: "devices")
-        photon?.refreshDevices().then { devices -> Void in
-            print("devices = \(devices)")
-            XCTAssert(devices.contains("led"))
-            expect.fulfill()
+        login().then { _ -> Void in
+            self.findTestDevice().then { _ -> Void in
+                self.photon?.refreshDevices().then { devices -> Void in
+                    print("devices = \(devices)")
+                    XCTAssert(devices.contains("led"))
+                    expect.fulfill()
+                }
+            }
         }
         waitForExpectations(timeout: 3)
     }
@@ -73,10 +95,14 @@ class PhotonIntegrationTests: XCTestCase
     func test_Photon_ReadsSupported()
     {
         let expect = expectation(description: "supported")
-        photon?.refreshSupported().then { supported -> Void in
-            print("supported = \(supported)")
-            XCTAssert(supported.contains("photon"))
-            expect.fulfill()
+        login().then { _ -> Void in
+            self.findTestDevice().then { _ -> Void in
+                self.photon?.refreshSupported().then { supported -> Void in
+                    print("supported = \(supported)")
+                    XCTAssert(supported.contains("photon"))
+                    expect.fulfill()
+                }
+            }
         }
         waitForExpectations(timeout: 2)
     }
@@ -87,17 +113,21 @@ class PhotonIntegrationTests: XCTestCase
         let expect = expectation(description: "activities")
 
         //Set test activity to 33 (if not already)
-        cloud.publishEvent(withName: "patriot", data: "test:33", isPrivate: true, ttl: 60)
-        { (error:Error?) in
-            if let e = error
-            {
-                print("Error publishing event \(e.localizedDescription)")
-            }
-            print("published test:33")
-            self.photon?.refreshActivities().then { activities -> Void in
-                print("activities read: \(activities)")
-                XCTAssertEqual(activities["test"], "33")
-                expect.fulfill()
+        login().then { _ -> Void in
+            self.findTestDevice().then { _ -> Void in
+                self.cloud.publishEvent(withName: "patriot", data: "test:33", isPrivate: true, ttl: 60)
+                { (error:Error?) in
+                    if let e = error
+                    {
+                        print("Error publishing event \(e.localizedDescription)")
+                    }
+                    print("published test:33")
+                    self.photon?.refreshActivities().then { activities -> Void in
+                        print("activities read: \(activities)")
+                        XCTAssertEqual(activities["test"], "33")
+                        expect.fulfill()
+                    }
+                }
             }
         }
 
@@ -108,12 +138,14 @@ class PhotonIntegrationTests: XCTestCase
     func test_Photon_ReadsPublish()
     {
         let expect = expectation(description: "publish")
-
-        self.photon?.refreshActivities().then { publish -> Void in
-            print("Publish read: \(publish)")
-            expect.fulfill()
+        login().then { _ -> Void in
+            self.findTestDevice().then { _ -> Void in
+                self.photon?.refreshActivities().then { publish -> Void in
+                    print("Publish read: \(publish)")
+                    expect.fulfill()
+                }
+            }
         }
-
         waitForExpectations(timeout: 2)
     }
     
@@ -121,12 +153,14 @@ class PhotonIntegrationTests: XCTestCase
     func test_Photon_Refresh_updates_supported()
     {
         let expect = expectation(description: "refresh")
-
-        self.photon?.refresh().then { _ -> Void in
-            XCTAssert((self.photon?.supported?.count)! > 0)
-            expect.fulfill()
+        login().then { _ -> Void in
+            self.findTestDevice().then { _ -> Void in
+                self.photon?.refresh().then { _ -> Void in
+                    XCTAssert((self.photon?.supported?.count)! > 0)
+                    expect.fulfill()
+                }
+            }
         }
-
         waitForExpectations(timeout: 5)
     }
 }
@@ -137,35 +171,42 @@ class PhotonIntegrationTests: XCTestCase
 
 extension PhotonIntegrationTests
 {
-    func login()
+    func login() -> Promise<Void>
     {
-        let promise = expectation(description: "login")
-        cloud.login(withUser: Secret.TestEmail, password: Secret.TestPassword) { (error) in
-            XCTAssertNil(error)
-            promise.fulfill()
+        return Promise<Void> { fulfill, reject in
+            cloud.login(withUser: Secret.TestEmail, password: Secret.TestPassword) { (error) in
+                if error != nil
+                {
+                    print("Login error: \(error!)")
+                    reject(error!)
+                }
+                else
+                {
+                    print("Login succeed for user \(Secret.TestEmail)")
+                    fulfill()
+                }
+            }
         }
-        waitForExpectations(timeout: 3)
     }
     
     
-    func findTestDevice()
+    func findTestDevice() -> Promise<Photon?>
     {
-        let devicePromise = expectation(description: "device")
-        cloud.getDevice(Secret.TestDeviceId) { (device: ParticleDevice?, error: Error?) in
-            guard error == nil else
-            {
-                print("getDevice error = \(error!)")
-                
-                return
+        return Promise<Photon?> { fulfill, reject in
+            cloud.getDevice(Secret.TestDeviceId) { (device: ParticleDevice?, error: Error?) in
+                if error != nil
+                {
+                    print("findTestDevice error = \(error!)")
+                    reject(error!)
+                }
+                else
+                {
+                    print("findTestDevice: \(device!.name)")
+                    self.photon = Photon(device: device!)
+                    fulfill(self.photon)
+                }
             }
-            if let device = device
-            {
-                self.device = device
-                self.photon = Photon(device: device)
-            }
-            devicePromise.fulfill()
         }
-        waitForExpectations(timeout: 3)
     }
 }
 

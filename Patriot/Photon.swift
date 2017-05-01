@@ -173,7 +173,7 @@ extension Photon
         }
     }
     
-    
+
     func refreshActivities() -> Promise<[String: String]>
     {
         return Promise { fulfill, reject in
@@ -181,13 +181,14 @@ extension Photon
             particleDevice.getVariable("Activities") { (result: Any?, error: Error?) in
                 if error == nil
                 {
+                    print("Refresh activities read \(result)")
                     if let hwActivities = result as? String, hwActivities != "" {
                         self.parseActivities(hwActivities)
                     }
                     print("Activities result: \(self.activities)")
                     fulfill(self.activities!)
                 } else {
-                    print("  Error reading activities variable.")
+                    print("  Error reading activities variable: \(error!)")
                     reject(PhotonError.ActivitiesVariable)
                 }
             }
