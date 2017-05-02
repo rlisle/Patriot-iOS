@@ -27,6 +27,7 @@ class AppDependencies
         var hardware = PhotonManager.sharedInstance
         activitiesDataManager?.hardware = hardware
         hardware.activityDelegate = activitiesDataManager
+        hardware.deviceDelegate = activitiesDataManager
         
         //TODO: move to interactor. Here for initial testing only.
         hardware.login(user: Secret.LoginEmail, password: Secret.LoginPassword).then { _ -> Void in

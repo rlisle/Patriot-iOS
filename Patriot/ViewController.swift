@@ -140,6 +140,7 @@ extension ViewController : ActivitiesDisplaying
 {
     func activitiesChanged()
     {
+        print("DEBUG: VC activitiesChanged")
         collectionView?.reloadData()
     }
     

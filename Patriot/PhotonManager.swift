@@ -116,7 +116,9 @@ class PhotonManager: NSObject, HwManager
                 else
                 {
                     self.addAllPhotonsToCollection(devices: devices)
-                    fulfill()
+                    .then { _ in
+                        self.activityDelegate?.supportedListChanged(list: self.supportedNames)
+                    }
                 }
             }
         }
