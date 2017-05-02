@@ -83,15 +83,17 @@ class Photon: HwController
      */
     func refresh() -> Promise<Void>
     {
-        return Promise { fulfill, reject in
-            firstly {
-                return refreshDevices()
-            }.then {_ in
-                return self.refreshActivities()
-            }.then {_ in 
-                return self.refreshSupported()
-            }.then {_ in
-                fulfill()
+        print("Photon refresh")
+        return refreshDevices()
+        .then {_ -> Promise<Void> in
+            print("...refreshActivities")
+            return self.refreshActivities()
+        }.then { _ in
+            print("...refreshSupported")
+            return self.refreshSupported()
+//            }.then {_ in
+//                print("...fulfill")
+//                fulfill()
             }
 // Would prefer this, but can't figure out how to get compiler to accept it.
 //            firstly {
@@ -101,13 +103,13 @@ class Photon: HwController
 //                let activitiesPromise = self.refreshActivities()
 //                return when(fulfilled: supportedPromise, activitiesPromise)
 //            }
-        }
+//        }
     }
 }
 
 extension Photon
 {
-    func refreshDevices() -> Promise<Set<String>>
+    func refreshDevices() -> Promise<Void>
     {
         return Promise { fulfill, reject in
             devices = []
@@ -117,7 +119,7 @@ extension Photon
                     if let hwDevices = result as? String, hwDevices != ""
                     {
                         self.parseDeviceNames(hwDevices)
-                        fulfill(self.devices!)
+                        fulfill()
                     }
                 } else {
                     print("  Error reading devices variable.")
@@ -141,7 +143,7 @@ extension Photon
     }
     
     
-    func refreshSupported() -> Promise<Set<String>>
+    func refreshSupported() -> Promise<Void>
     {
         return Promise { fulfill, reject in
             supported = []
@@ -151,7 +153,7 @@ extension Photon
                     if let hwSupported = result as? String, hwSupported != ""
                     {
                         self.parseSupported(hwSupported)
-                        fulfill(self.supported!)
+                        fulfill()
                     }
                 } else {
                     print("  Error reading supported variable.")
@@ -174,7 +176,7 @@ extension Photon
     }
     
 
-    func refreshActivities() -> Promise<[String: String]>
+    func refreshActivities() -> Promise<Void>
     {
         return Promise { fulfill, reject in
             activities = [: ]
@@ -186,7 +188,7 @@ extension Photon
                         self.parseActivities(hwActivities)
                     }
                     print("Activities result: \(self.activities)")
-                    fulfill(self.activities!)
+                    fulfill()
                 } else {
                     print("  Error reading activities variable: \(error!)")
                     reject(PhotonError.ActivitiesVariable)
@@ -210,14 +212,15 @@ extension Photon
     }
 
 
-    func readPublishName() -> Promise<[String: String]>
+    func readPublishName() -> Promise<Void>
     {
         return Promise { fulfill, reject in
             particleDevice.getVariable("Publish") { (result: Any?, error: Error?) in
                 if error == nil
                 {
-                    print("Publish name = \(result)")
+                    print("Publish name = \(result!)")
                     self.publish = result as! String
+                    fulfill()
                 } else {
                     print("  Error reading publish variable.")
                     reject(PhotonError.PublishVariable)

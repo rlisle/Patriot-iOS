@@ -81,10 +81,13 @@ class PhotonIntegrationTests: XCTestCase
         let expect = expectation(description: "devices")
         login().then { _ -> Void in
             self.findTestDevice().then { _ -> Void in
-                self.photon?.refreshDevices().then { devices -> Void in
-                    print("devices = \(devices)")
-                    XCTAssert(devices.contains("led"))
-                    expect.fulfill()
+                self.photon?.refreshDevices().then { _ -> Void in
+                    if let devices = self.photon?.devices
+                    {
+                        print("devices = \(devices)")
+                        XCTAssert(devices.contains("led"))
+                        expect.fulfill()
+                    }
                 }
             }
         }
@@ -97,10 +100,13 @@ class PhotonIntegrationTests: XCTestCase
         let expect = expectation(description: "supported")
         login().then { _ -> Void in
             self.findTestDevice().then { _ -> Void in
-                self.photon?.refreshSupported().then { supported -> Void in
-                    print("supported = \(supported)")
-                    XCTAssert(supported.contains("photon"))
-                    expect.fulfill()
+                self.photon?.refreshSupported().then { _ -> Void in
+                    if let supported = self.photon?.supported
+                    {
+                        print("supported = \(supported)")
+                        XCTAssert(supported.contains("photon"))
+                        expect.fulfill()
+                    }
                 }
             }
         }
@@ -122,10 +128,13 @@ class PhotonIntegrationTests: XCTestCase
                         print("Error publishing event \(e.localizedDescription)")
                     }
                     print("published test:33")
-                    self.photon?.refreshActivities().then { activities -> Void in
-                        print("activities read: \(activities)")
-                        XCTAssertEqual(activities["test"], "33")
-                        expect.fulfill()
+                    self.photon?.refreshActivities().then { _ -> Void in
+                        if let activities = self.photon?.activities
+                        {
+                            print("activities read: \(activities)")
+                            XCTAssertEqual(activities["test"], "33")
+                            expect.fulfill()
+                        }
                     }
                 }
             }

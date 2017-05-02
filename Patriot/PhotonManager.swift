@@ -105,41 +105,48 @@ class PhotonManager: NSObject, HwManager
      */
     func getAllPhotonDevices() -> Promise<Void>
     {
+        var count = 0
         return Promise { fulfill, reject in
             print("getAllPhotonDevices")
             ParticleCloud.sharedInstance().getDevices { (devices: [ParticleDevice]?, error: Error?) in
-                guard error == nil else {
+                if error != nil {
+                    print("Error: \(error!)")
                     reject(error!)
-                    
-                    return
                 }
-                self.addAllPhotonsToCollection(devices: devices)
-                fulfill()
+                else
+                {
+                    self.addAllPhotonsToCollection(devices: devices)
+                    fulfill()
+                }
             }
         }
     }
 
 
-    func addAllPhotonsToCollection(devices: [ParticleDevice]?)
+    func addAllPhotonsToCollection(devices: [ParticleDevice]?) -> Promise<Void>
     {
         self.photons = [: ]
+        var promises = [Promise<Void>]()
         if let particleDevices = devices
         {
+            print("addAllPhotonsToCollection: \(particleDevices)")
             for device in particleDevices
             {
-                if self.isValidPhoton(device)
+                if isValidPhoton(device)
                 {
                     if let name = device.name?.lowercased()
                     {
+                        print("Adding photon \(name)")
                         let photon = Photon(device: device)
                         self.photons[name] = photon
-                        photon.refresh().then { _ in
-                            self.deviceDelegate?.deviceFound(name: name)
-                        }
+                        self.deviceDelegate?.deviceFound(name: name)
+                        promises.append(photon.refresh())
                     }
                 }
             }
+            return when(fulfilled: promises)
         }
+        return Promise(error: NSError(domain: "No devices", code: 0, userInfo: nil))
     }
     
     

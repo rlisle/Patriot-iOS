@@ -67,8 +67,13 @@ class PhotonManagerIntegrationTests: XCTestCase
     
     func test_LoginToTestAccount_DoesNotReturnError()
     {
-        login()
-        XCTAssert(ParticleCloud.sharedInstance().isAuthenticated)
+        let promise = expectation(description: "login")
+        manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
+        .then { _ -> Void in
+            XCTAssert(ParticleCloud.sharedInstance().isAuthenticated)
+            promise.fulfill()
+        }
+        waitForExpectations(timeout: 3)
     }
     
     
@@ -82,12 +87,14 @@ class PhotonManagerIntegrationTests: XCTestCase
     
     func test_GetAllPhotonDevices_ReturnsTestDevice()
     {
-        login()
         let promise = expectation(description: "login")
-        self.manager.getAllPhotonDevices().then { _ -> Void in
-            let myPhoton = self.manager.getPhoton(named: "myPhoton")
-            XCTAssertEqual(myPhoton?.name, "myPhoton")
-            promise.fulfill()
+        manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
+        .then { _ -> Void in
+            self.manager.getAllPhotonDevices().then { _ -> Void in
+                let myPhoton = self.manager.getPhoton(named: "myPhoton")
+                XCTAssertEqual(myPhoton?.name, "myPhoton")
+                promise.fulfill()
+            }
         }
         waitForExpectations(timeout: 3)
     }
@@ -96,24 +103,28 @@ class PhotonManagerIntegrationTests: XCTestCase
     //TODO: test is failing because production login overriding test login
     func test_GetAllPhotonDevices_CallsDelegate()
     {
-        login()
         let promise = expectation(description: "login")
-        self.manager.getAllPhotonDevices().then { _ -> Void in
-            XCTAssertEqual(self.deviceFound, "myphoton")
-            promise.fulfill()
+        manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
+        .then { _ -> Void in
+            self.manager.getAllPhotonDevices().then { _ -> Void in
+                XCTAssertEqual(self.deviceFound, "myphoton")
+                promise.fulfill()
+            }
         }
         waitForExpectations(timeout: 3)
     }
     
     
     //MARK: performDiscovery
-    func test_PerformDiscovery_CallsDelegate()
+    func test_discoverDevices_CallsDelegate()
     {
-        login()
-        let promise = expectation(description: "discovery")
-        self.manager.discoverDevices().then { _ -> Void in
-            XCTAssertEqual(self.deviceFound, "myphoton")
-            promise.fulfill()
+        let promise = expectation(description: "login")
+        manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
+        .then { _ -> Void in
+            self.manager.discoverDevices().then { _ -> Void in
+                XCTAssertEqual(self.deviceFound, "myphoton")
+                promise.fulfill()
+            }
         }
         waitForExpectations(timeout: 5)
     }
