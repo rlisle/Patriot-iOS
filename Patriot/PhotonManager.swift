@@ -26,6 +26,7 @@ import Foundation
 import Particle_SDK
 import PromiseKit
 
+
 protocol HwManager
 {
     static var sharedInstance:  HwManager           { get }
@@ -73,7 +74,6 @@ class PhotonManager: NSObject, HwManager
     func login(user: String, password: String) -> Promise<Void>
     {
         return Promise { fulfill, reject in
-            print("loginToParticleCloud")
             ParticleCloud.sharedInstance().login(withUser: user, password: password) { (error) in
                 if let error = error {
                     return reject(error)
@@ -107,7 +107,6 @@ class PhotonManager: NSObject, HwManager
     {
         var count = 0
         return Promise { fulfill, reject in
-            print("getAllPhotonDevices")
             ParticleCloud.sharedInstance().getDevices { (devices: [ParticleDevice]?, error: Error?) in
                 if error != nil {
                     print("Error: \(error!)")
@@ -116,7 +115,8 @@ class PhotonManager: NSObject, HwManager
                 else
                 {
                     self.addAllPhotonsToCollection(devices: devices)
-                    .then { _ in
+                    .then { _ -> Void in
+                        print("addAllPhotonsToCollection .then")
                         self.activityDelegate?.supportedListChanged(list: self.supportedNames)
                     }
                 }
@@ -131,7 +131,6 @@ class PhotonManager: NSObject, HwManager
         var promises = [Promise<Void>]()
         if let particleDevices = devices
         {
-            print("addAllPhotonsToCollection: \(particleDevices)")
             for device in particleDevices
             {
                 if isValidPhoton(device)
@@ -146,6 +145,7 @@ class PhotonManager: NSObject, HwManager
                     }
                 }
             }
+            print("addAllPhotons... returning when")
             return when(fulfilled: promises)
         }
         return Promise(error: NSError(domain: "No devices", code: 0, userInfo: nil))

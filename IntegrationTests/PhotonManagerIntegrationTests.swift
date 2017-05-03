@@ -19,6 +19,33 @@ import XCTest
 import Particle_SDK
 import PromiseKit
 
+class MockParticleDevice: ParticleDevice
+{
+    override func getVariable(_ variableName: String, completion: ((Any?, Error?) -> Swift.Void)? = nil) -> URLSessionDataTask
+    {
+        switch variableName
+        {
+        case "Devices":
+            completion?("led",nil)
+        case "Supported":
+            completion?("photon",nil)
+        case "Activities":
+            completion?("photon:0",nil)
+        default:
+            completion?("testKey:testValue",nil)
+        }
+        return URLSessionDataTask()
+    }
+    
+    override var variables: [String: String]
+    {
+        get {
+            return ["Devices": "String", "Activities": "String", "Supported": "String"]
+        }
+    }
+}
+
+
 class PhotonManagerIntegrationTests: XCTestCase
 {
     var manager: PhotonManager!
@@ -84,19 +111,43 @@ class PhotonManagerIntegrationTests: XCTestCase
         XCTAssertEqual(manager.photons.count, 0)
     }
     
+    func test_addAllPhotonsToCollection()
+    {
+        let params = ["name": "testPhoton", "connected": "true"]
+        if let mockParticleDevice = MockParticleDevice(params: params)
+        {
+            let promise = expectation(description: "addAllPhotons")
+            let mockDevices = [mockParticleDevice]
+            self.manager.addAllPhotonsToCollection(devices: mockDevices as! [ParticleDevice])
+            .then { _ -> Void in
+                print("test getAllPhotonDevices .then")
+                let myPhoton = self.manager.getPhoton(named: "testPhoton")
+                XCTAssertEqual(myPhoton?.name, "testPhoton")
+                promise.fulfill()
+            }
+            waitForExpectations(timeout: 2)
+        }
+        else
+        {
+            XCTFail("mockParticleDevice not created")
+        }
+    }
+    
     
     func test_GetAllPhotonDevices_ReturnsTestDevice()
     {
         let promise = expectation(description: "login")
         manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
         .then { _ -> Void in
-            self.manager.getAllPhotonDevices().then { _ -> Void in
+            self.manager.getAllPhotonDevices()
+            .then { _ -> Void in
+                print("test getAllPhotonDevices .then")
                 let myPhoton = self.manager.getPhoton(named: "myPhoton")
                 XCTAssertEqual(myPhoton?.name, "myPhoton")
                 promise.fulfill()
             }
         }
-        waitForExpectations(timeout: 3)
+        waitForExpectations(timeout: 5)
     }
     
     

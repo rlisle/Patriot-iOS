@@ -150,6 +150,7 @@ extension Photon
             particleDevice.getVariable("Supported") { (result: Any?, error: Error?) in
                 if error == nil
                 {
+                    print("   refreshSupported no error, result = \(result!)")
                     if let hwSupported = result as? String, hwSupported != ""
                     {
                         self.parseSupported(hwSupported)
@@ -179,6 +180,12 @@ extension Photon
     func refreshActivities() -> Promise<Void>
     {
         return Promise { fulfill, reject in
+            guard particleDevice.variables["Activities"] != nil else
+            {
+                fulfill()
+                
+                return
+            }
             activities = [: ]
             particleDevice.getVariable("Activities") { (result: Any?, error: Error?) in
                 if error == nil

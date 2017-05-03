@@ -61,7 +61,7 @@ return false
         var index = 0
         for name in supported
         {
-            print("Adding activity \(name)")
+            print("ActivitiesDM: Adding activity \(name)")
             self.activities.append(Activity(name: name, command: name, percent: 0))
             
             //TODO: determine actual initial activity state. It might be on.
