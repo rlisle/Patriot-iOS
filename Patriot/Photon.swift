@@ -83,13 +83,13 @@ class Photon: HwController
      */
     func refresh() -> Promise<Void>
     {
-        print("Photon refresh")
+        print("p1. Photon refresh")
         return refreshDevices()
         .then {_ -> Promise<Void> in
-            print("...refreshActivities")
+            print("p2. ...refreshActivities")
             return self.refreshActivities()
         }.then { _ in
-            print("...refreshSupported")
+            print("p3. ...refreshSupported")
             return self.refreshSupported()
 //            }.then {_ in
 //                print("...fulfill")
@@ -132,7 +132,7 @@ extension Photon
     
     private func parseDeviceNames(_ deviceString: String)
     {
-        print("Parsing devices: \(deviceString)")
+        print("p4. Parsing devices: \(deviceString)")
         let items = deviceString.components(separatedBy: ",")
         for item in items
         {
@@ -150,7 +150,7 @@ extension Photon
             particleDevice.getVariable("Supported") { (result: Any?, error: Error?) in
                 if error == nil
                 {
-                    print("   refreshSupported no error, result = \(result!)")
+                    print("p5.   refreshSupported no error, result = \(result!)")
                     if let hwSupported = result as? String, hwSupported != ""
                     {
                         self.parseSupported(hwSupported)
@@ -167,7 +167,7 @@ extension Photon
     
     private func parseSupported(_ supportedString: String)
     {
-        print("Parsing supported: \(supportedString)")
+        print("p6. Parsing supported: \(supportedString)")
         let items = supportedString.components(separatedBy: ",")
         for item in items
         {
@@ -190,11 +190,11 @@ extension Photon
             particleDevice.getVariable("Activities") { (result: Any?, error: Error?) in
                 if error == nil
                 {
-                    print("Refresh activities read \(result)")
+                    print("p7. Refresh activities read \(result)")
                     if let hwActivities = result as? String, hwActivities != "" {
                         self.parseActivities(hwActivities)
                     }
-                    print("Activities result: \(self.activities)")
+                    print("p8. Activities result: \(self.activities)")
                     fulfill()
                 } else {
                     print("  Error reading activities variable: \(error!)")
@@ -207,7 +207,7 @@ extension Photon
     
     private func parseActivities(_ activitiesString: String)
     {
-        print("Parsing activities: \(activitiesString)")
+        print("p9. Parsing activities: \(activitiesString)")
         let items = activitiesString.components(separatedBy: ",")
         for item in items
         {
@@ -225,7 +225,7 @@ extension Photon
             particleDevice.getVariable("Publish") { (result: Any?, error: Error?) in
                 if error == nil
                 {
-                    print("Publish name = \(result!)")
+                    print("p10. Publish name = \(result!)")
                     self.publish = result as! String
                     fulfill()
                 } else {

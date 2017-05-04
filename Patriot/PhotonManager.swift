@@ -105,7 +105,6 @@ class PhotonManager: NSObject, HwManager
      */
     func getAllPhotonDevices() -> Promise<Void>
     {
-        var count = 0
         return Promise { fulfill, reject in
             ParticleCloud.sharedInstance().getDevices { (devices: [ParticleDevice]?, error: Error?) in
                 if error != nil {
@@ -116,7 +115,7 @@ class PhotonManager: NSObject, HwManager
                 {
                     self.addAllPhotonsToCollection(devices: devices)
                     .then { _ -> Void in
-                        print("addAllPhotonsToCollection .then")
+                        print("1. addAllPhotonsToCollection .then")
                         self.activityDelegate?.supportedListChanged(list: self.supportedNames)
                     }
                 }
@@ -137,7 +136,7 @@ class PhotonManager: NSObject, HwManager
                 {
                     if let name = device.name?.lowercased()
                     {
-                        print("Adding photon \(name)")
+                        print("2. Adding photon \(name)")
                         let photon = Photon(device: device)
                         self.photons[name] = photon
                         self.deviceDelegate?.deviceFound(name: name)
@@ -145,7 +144,7 @@ class PhotonManager: NSObject, HwManager
                     }
                 }
             }
-            print("addAllPhotons... returning when")
+            print("3. addAllPhotons... returning when \(promises)")
             return when(fulfilled: promises)
         }
         return Promise(error: NSError(domain: "No devices", code: 0, userInfo: nil))
@@ -187,14 +186,14 @@ extension PhotonManager
 {
     func refreshSupportedNames()
     {
-        print("refreshSupportedNames")
+        print("4. refreshSupportedNames")
         supportedNames = []
         for (name, photon) in photons
         {
             let particleDevice = photon.particleDevice
             if particleDevice?.variables["Supported"] != nil
             {
-                print("  reading Supported variable from \(name)")
+                print("5.  reading Supported variable from \(name)")
                 particleDevice?.getVariable("Supported") { (result: Any?, error: Error?) in
                     if error == nil
                     {
@@ -215,13 +214,13 @@ extension PhotonManager
     
     private func parseSupportedNames(_ supported: String) -> Set<String>
     {
-        print("Parsing supported names: \(supported)")
+        print("6. Parsing supported names: \(supported)")
         var newSupported: Set<String> = []
         let items = supported.components(separatedBy: ",")
         for item in items
         {
             let lcItem = item.localizedLowercase
-            print("New supported = \(lcItem)")
+            print("7. New supported = \(lcItem)")
             newSupported.insert(lcItem)
         }
         
@@ -231,20 +230,20 @@ extension PhotonManager
     
     func refreshCurrentActivities()
     {
-        print("refreshCurrentActivities")
+        print("8. refreshCurrentActivities")
         currentActivities = [: ]
         for (name, photon) in photons
         {
             let particleDevice = photon.particleDevice
             if particleDevice?.variables["Activities"] != nil
             {
-                print("  reading Activities variable from \(name)")
+                print("9.  reading Activities variable from \(name)")
                 particleDevice?.getVariable("Activities") { (result: Any?, error: Error?) in
                     if error == nil
                     {
                         if let activities = result as? String, activities != ""
                         {
-                            print("Activities = \(activities)")
+                            print("10. Activities = \(activities)")
                             let items = activities.components(separatedBy: ",")
                             for item in items
                             {
@@ -256,7 +255,7 @@ extension PhotonManager
                     } else {
                         print("Error reading Supported variable. Skipping this device.")
                     }
-                    print("Updated Supported names = \(self.supportedNames)")
+                    print("11. Updated Supported names = \(self.supportedNames)")
                     self.activityDelegate?.supportedListChanged(list: self.supportedNames)
                 }
             }

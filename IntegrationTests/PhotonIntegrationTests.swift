@@ -172,6 +172,22 @@ class PhotonIntegrationTests: XCTestCase
         }
         waitForExpectations(timeout: 5)
     }
+    
+    
+    func test_Photon_Refresh_updates_devices()
+    {
+        let expect = expectation(description: "refresh")
+        login().then { _ -> Void in
+            self.findTestDevice().then { _ -> Void in
+                self.photon?.refresh().then { _ -> Void in
+                    XCTAssert((self.photon?.devices?.count)! > 0)
+                    XCTAssertEqual(self.photon?.devices?.first, "led")
+                    expect.fulfill()
+                }
+            }
+        }
+        waitForExpectations(timeout: 5)
+    }
 }
 
 
