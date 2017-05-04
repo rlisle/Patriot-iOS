@@ -99,6 +99,8 @@ class PhotonManagerIntegrationTests: XCTestCase
         .then { _ -> Void in
             XCTAssert(ParticleCloud.sharedInstance().isAuthenticated)
             promise.fulfill()
+        }.catch { error in
+            XCTFail()
         }
         waitForExpectations(timeout: 3)
     }
@@ -118,12 +120,14 @@ class PhotonManagerIntegrationTests: XCTestCase
         {
             let promise = expectation(description: "addAllPhotons")
             let mockDevices = [mockParticleDevice]
-            self.manager.addAllPhotonsToCollection(devices: mockDevices as! [ParticleDevice])
+            self.manager.addAllPhotonsToCollection(devices: mockDevices)
             .then { _ -> Void in
                 print("test getAllPhotonDevices .then")
                 let myPhoton = self.manager.getPhoton(named: "testPhoton")
                 XCTAssertEqual(myPhoton?.name, "testPhoton")
                 promise.fulfill()
+            }.catch { error in
+                XCTFail()
             }
             waitForExpectations(timeout: 2)
         }
@@ -153,16 +157,17 @@ class PhotonManagerIntegrationTests: XCTestCase
     }
     
     
-    //TODO: test is failing because production login overriding test login
     func test_GetAllPhotonDevices_CallsDelegate()
     {
         let promise = expectation(description: "login")
         manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
-        .then { _ -> Void in
-            self.manager.getAllPhotonDevices().then { _ -> Void in
+        .then { _ in
+            return self.manager.getAllPhotonDevices().then { _ -> Void in
                 XCTAssertEqual(self.deviceFound, "myphoton")
                 promise.fulfill()
             }
+        }.catch { error in
+            XCTFail()
         }
         waitForExpectations(timeout: 3)
     }
@@ -173,11 +178,13 @@ class PhotonManagerIntegrationTests: XCTestCase
     {
         let promise = expectation(description: "login")
         manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
-        .then { _ -> Void in
+        .then { _ in
             self.manager.discoverDevices().then { _ -> Void in
                 XCTAssertEqual(self.deviceFound, "myphoton")
                 promise.fulfill()
             }
+        }.catch { error in
+            XCTFail()
         }
         waitForExpectations(timeout: 5)
     }
