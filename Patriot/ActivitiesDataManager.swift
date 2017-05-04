@@ -23,14 +23,14 @@ class ActivitiesDataManager
     
     init()
     {
-        activities.append(Activity(name: "booth", command: "booth", percent: 0))
-        activities.append(Activity(name: "coffee", command: "coffee", percent: 0))
-        activities.append(Activity(name: "computer", command: "computer", percent: 0))
-        activities.append(Activity(name: "ronslight", command: "ronscouch", percent: 0))
-        activities.append(Activity(name: "shelleyslight", command: "shelleyscouch", percent: 0))
-        activities.append(Activity(name: "piano", command: "piano", percent: 0))
-        activities.append(Activity(name: "tv", command: "tv", percent: 0))
-        activities.append(Activity(name: "dishes", command: "dishes", percent: 0))
+//        activities.append(Activity(name: "booth", command: "booth", percent: 0))
+//        activities.append(Activity(name: "coffee", command: "coffee", percent: 0))
+//        activities.append(Activity(name: "computer", command: "computer", percent: 0))
+//        activities.append(Activity(name: "ronslight", command: "ronscouch", percent: 0))
+//        activities.append(Activity(name: "shelleyslight", command: "shelleyscouch", percent: 0))
+//        activities.append(Activity(name: "piano", command: "piano", percent: 0))
+//        activities.append(Activity(name: "tv", command: "tv", percent: 0))
+//        activities.append(Activity(name: "dishes", command: "dishes", percent: 0))
     }
 
 
@@ -58,14 +58,14 @@ return false
     
     func refreshActivities(supported: Set<String>)
     {
-        var index = 0
+        print("refreshActivities: \(supported)")
         for name in supported
         {
             print("ActivitiesDM: Adding activity \(name)")
             self.activities.append(Activity(name: name, command: name, percent: 0))
             
             //TODO: determine actual initial activity state. It might be on.
-            index = index + 1
+            
         }
         delegate?.activitiesChanged()
     }
@@ -77,10 +77,7 @@ extension ActivitiesDataManager: ActivityNotifying
     func supportedListChanged(list: Set<String>)
     {
         print("ActivitiesDataManager supportedListChanged: \(list)")
-        //TODO: this needs to update the VC
         refreshActivities(supported: list)
-        //delegate?.setActivitiesData(activities)
-        
     }
 
     // Handle activity:percent events

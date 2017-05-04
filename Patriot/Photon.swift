@@ -190,7 +190,7 @@ extension Photon
             particleDevice.getVariable("Activities") { (result: Any?, error: Error?) in
                 if error == nil
                 {
-                    print("p7. Refresh activities read \(result)")
+                    print("p7. Refresh activities read \(result!)")
                     if let hwActivities = result as? String, hwActivities != "" {
                         self.parseActivities(hwActivities)
                     }

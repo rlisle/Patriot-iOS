@@ -28,10 +28,14 @@ class AppDependencies
         activitiesDataManager?.hardware = hardware
         hardware.activityDelegate = activitiesDataManager
         hardware.deviceDelegate = activitiesDataManager
+        activitiesDataManager?.delegate = viewController
         
         //TODO: move to interactor. Here for initial testing only.
-        hardware.login(user: Secret.LoginEmail, password: Secret.LoginPassword).then { _ -> Void in
-            hardware.discoverDevices()
+        hardware.login(user: Secret.LoginEmail, password: Secret.LoginPassword).then { _ in
+            return hardware.discoverDevices()
+        }.catch { error in
+            //TODO: handle error
+            print("ERROR: login failed: \(error)")
         }
     }
 }

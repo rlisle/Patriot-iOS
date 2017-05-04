@@ -16,14 +16,14 @@ private let reuseIdentifier = "ActivityCell"
 
 class ViewController: UICollectionViewController
 {
-    var displayData: [ActivityDisplayData] = []
+    var dataManager: ActivitiesDataManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let delegate = UIApplication.shared.delegate as? AppDelegate
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate
         {
-            delegate.appDependencies.configureActivities(viewController: self)
+            appDelegate.appDependencies.configureActivities(viewController: self)
         }
     }
 
@@ -32,16 +32,15 @@ class ViewController: UICollectionViewController
     {
         super.viewWillAppear(animated)
         print("Activities viewWillAppear")
-        
     }
 
     
     func tap(_ gestureRecognizer: UIGestureRecognizer)
     {
-        if let index = gestureRecognizer.view?.tag
-        {
+//        if let index = gestureRecognizer.view?.tag
+//        {
 //            interactor?.toggleActivity(index: index)
-        }
+//        }
     }
 }
 
@@ -57,9 +56,8 @@ extension ViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        print("ActivitiesVC: # items = \(displayData.count)")
-        
-        return displayData.count 
+        return 0
+        //return displayData?.count ?? 0
     }
 
 
@@ -70,27 +68,27 @@ extension ViewController {
 
         styleCell(cell)
         
-        if displayData.count > indexPath.row
-        {
-            let activity = displayData[indexPath.row];
-            if let cell = cell as? ActivitiesCollectionViewCell
-            {
-                //TODO: move this logic to the activity struct
-                print("Cell activity \(activity.name) is \(activity.percent)%")
-                let isOn = activity.percent > 0
-                let image = isOn ? activity.onImage : activity.offImage
-                cell.imageView.image = image
-
-                let caption = activity.name.capitalized
-                cell.label.text = caption
-                
-                cell.tag = indexPath.row
-                
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap(_: )))
-                cell.addGestureRecognizer(tapGesture)
-                
-            }
-        }
+//        if displayData.count > indexPath.row
+//        {
+//            let activity = displayData[indexPath.row];
+//            if let cell = cell as? ActivitiesCollectionViewCell
+//            {
+//                //TODO: move this logic to the activity struct
+//                print("Cell activity \(activity.name) is \(activity.percent)%")
+//                let isOn = activity.percent > 0
+//                let image = isOn ? activity.onImage : activity.offImage
+//                cell.imageView.image = image
+//
+//                let caption = activity.name.capitalized
+//                cell.label.text = caption
+//                
+//                cell.tag = indexPath.row
+//                
+//                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap(_: )))
+//                cell.addGestureRecognizer(tapGesture)
+//                
+//            }
+//        }
         
         return cell
     }
@@ -146,7 +144,7 @@ extension ViewController : ActivitiesDisplaying
     
     func activityDidChange(index: Int, percent: Int)
     {
-        print("vc activityDidChange: \(index), \(percent)")
+        print("DEBUG: VC activityDidChange: \(index), \(percent)")
     }
 }
 
