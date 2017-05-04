@@ -117,8 +117,10 @@ class PhotonManager: NSObject, HwManager
                     .then { _ -> Void in
                         print("1. addAllPhotonsToCollection .then")
                         self.activityDelegate?.supportedListChanged(list: self.supportedNames)
+                        fulfill()
                     }.catch { error in
                         print("1b. error: \(error)")
+                        reject(error)
                     }.always { print("1c. always")}
                 }
             }

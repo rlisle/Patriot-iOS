@@ -138,14 +138,16 @@ class PhotonManagerIntegrationTests: XCTestCase
     {
         let promise = expectation(description: "login")
         manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
-        .then { _ -> Void in
-            self.manager.getAllPhotonDevices()
+        .then { _ in
+            return self.manager.getAllPhotonDevices()
             .then { _ -> Void in
                 print("test getAllPhotonDevices .then")
                 let myPhoton = self.manager.getPhoton(named: "myPhoton")
                 XCTAssertEqual(myPhoton?.name, "myPhoton")
                 promise.fulfill()
             }
+        }.catch { error in
+            XCTFail()
         }
         waitForExpectations(timeout: 5)
     }
