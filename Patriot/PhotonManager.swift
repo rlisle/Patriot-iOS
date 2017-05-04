@@ -117,7 +117,9 @@ class PhotonManager: NSObject, HwManager
                     .then { _ -> Void in
                         print("1. addAllPhotonsToCollection .then")
                         self.activityDelegate?.supportedListChanged(list: self.supportedNames)
-                    }
+                    }.catch { error in
+                        print("1b. error: \(error)")
+                    }.always { print("1c. always")}
                 }
             }
         }
@@ -140,7 +142,9 @@ class PhotonManager: NSObject, HwManager
                         let photon = Photon(device: device)
                         self.photons[name] = photon
                         self.deviceDelegate?.deviceFound(name: name)
-                        promises.append(photon.refresh())
+                        let promise = photon.refresh()
+                        print("2b. adding promise: \(promise)")
+                        promises.append(promise)
                     }
                 }
             }
@@ -171,7 +175,7 @@ class PhotonManager: NSObject, HwManager
         print("sendActivityCommand: \(command) percent: \(percent)")
         let data = command + ":" + String(percent)
         print("Setting activity: \(data)")
-        ParticleCloud.sharedInstance().publishEvent(withName: eventName, data: data, isPrivate: false, ttl: 60)
+        ParticleCloud.sharedInstance().publishEvent(withName: eventName, data: data, isPrivate: true, ttl: 60)
         { (error:Error?) in
             if let e = error
             {
