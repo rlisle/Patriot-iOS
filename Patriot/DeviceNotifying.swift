@@ -9,7 +9,8 @@
 import Foundation
 
 
-protocol DeviceNotifying {
+protocol DeviceNotifying: class
+{
     func deviceFound(name: String)
     func deviceLost(name: String)
 }

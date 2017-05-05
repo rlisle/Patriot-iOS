@@ -36,9 +36,6 @@ enum ParticleSDKError : Error
 
 class PhotonManager: NSObject, HwManager
 {
-    // Singleton pattern. Use sharedInstance instead of instantiating a new objects.
-    static let sharedInstance: HwManager = PhotonManager()
-
     var deviceDelegate:     DeviceNotifying?
     var activityDelegate:   ActivityNotifying?
     
@@ -99,7 +96,7 @@ class PhotonManager: NSObject, HwManager
                     self.addAllPhotonsToCollection(devices: devices)
                     .then { _ -> Void in
                         print("1. addAllPhotonsToCollection .then")
-                        self.activityDelegate?.supportedListChanged(list: self.supportedNames)
+                        self.activityDelegate?.supportedListChanged()
                         fulfill()
                     }.catch { error in
                         print("1b. error: \(error)")
@@ -168,6 +165,12 @@ class PhotonManager: NSObject, HwManager
             }
         }
     }
+    
+    func subscribeToEvents()
+    {
+        //TODO:
+        
+    }
 }
 
 
@@ -194,7 +197,7 @@ extension PhotonManager
                         print("Error reading Supported variable. Skipping this device.")
                     }
                     print("Updated Supported names = \(self.supportedNames)")
-                    self.activityDelegate?.supportedListChanged(list: self.supportedNames)
+                    self.activityDelegate?.supportedListChanged()
                 }
             }
         }
@@ -245,7 +248,7 @@ extension PhotonManager
                         print("Error reading Supported variable. Skipping this device.")
                     }
                     print("11. Updated Supported names = \(self.supportedNames)")
-                    self.activityDelegate?.supportedListChanged(list: self.supportedNames)
+                    self.activityDelegate?.supportedListChanged()
                 }
             }
         }

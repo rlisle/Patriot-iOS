@@ -134,17 +134,17 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-extension ViewController : ActivitiesDisplaying
+extension ViewController : ActivityNotifying
 {
-    func activitiesChanged()
+    func supportedListChanged()
     {
-        print("DEBUG: VC activitiesChanged")
+        print("DEBUG: VC supportedListChanged")
         collectionView?.reloadData()
     }
     
-    func activityDidChange(index: Int, percent: Int)
+    func activityChanged(name: String, index: Int, percent: Int)
     {
-        print("DEBUG: VC activityDidChange: \(index), \(percent)")
+        print("DEBUG: VC activityChanged: \(name), \(index), \(percent)")
     }
 }
 

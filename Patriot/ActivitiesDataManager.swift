@@ -8,18 +8,12 @@
 
 import UIKit
 
-protocol ActivitiesDisplaying
-{
-    func activitiesChanged()
-    func activityDidChange(index: Int, percent: Int)
-}
-
 
 class ActivitiesDataManager
 {
     var activities:     [ Activity ] = []
     let hardware:       HwManager
-    var delegate:       ActivitiesDisplaying?
+    var delegate:       ActivityNotifying?
     
     init(hardware: HwManager)
     {
@@ -68,31 +62,33 @@ return false
             //TODO: determine actual initial activity state. It might be on.
             
         }
-        delegate?.activitiesChanged()
+        delegate?.supportedListChanged()
     }
 }
 
 
 extension ActivitiesDataManager: ActivityNotifying
 {
-    func supportedListChanged(list: Set<String>)
+    func supportedListChanged()
     {
-        print("ActivitiesDataManager supportedListChanged: \(list)")
+        print("ActivitiesDataManager supportedListChanged")
+        let list = hardware.supportedNames
         refreshActivities(supported: list)
     }
 
     // Handle activity:percent events
-    func activityChanged(event: String)
+    func activityChanged(name: String, index: Int, percent: Int)
     {
-        print("ActivityDataManager: ActivityChanged: \(event)")
-        let splitArray = event.components(separatedBy: ":")
-        let isOn = splitArray.last!.caseInsensitiveCompare("0") != .orderedSame
-        let percent = isOn ? 100 : 0
-        if let index = activities.index(where: {$0.name == splitArray.first})
-        {
-            activities[index].percent = percent
-            delegate?.activityDidChange(index: index, percent: percent)
-        }
+        print("ActivityDataManager: ActivityChanged: \(name)")
+        //TODO: move to hardware
+//        let splitArray = event.components(separatedBy: ":")
+//        let isOn = splitArray.last!.caseInsensitiveCompare("0") != .orderedSame
+//        let percent = isOn ? 100 : 0
+//        if let index = activities.index(where: {$0.name == splitArray.first})
+//        {
+//            activities[index].percent = percent
+//            delegate?.activityDidChange(index: index, percent: percent)
+//        }
     }
 }
 

@@ -9,8 +9,8 @@
 import Foundation
 
 
-protocol ActivityNotifying
+protocol ActivityNotifying: class
 {
-    func supportedListChanged(list: Set<String>)
-    func activityChanged(event: String)
+    func supportedListChanged()
+    func activityChanged(name: String, index: Int, percent: Int)
 }
