@@ -155,10 +155,10 @@ class PhotonManager: NSObject, HwManager
     }
 
     
-    func sendActivityCommand(command: String, percent: Int)
+    func sendCommand(activity: String, percent: Int)
     {
-        print("sendActivityCommand: \(command) percent: \(percent)")
-        let data = command + ":" + String(percent)
+        print("sendCommand: \(activity) percent: \(percent)")
+        let data = activity + ":" + String(percent)
         print("Setting activity: \(data)")
         ParticleCloud.sharedInstance().publishEvent(withName: eventName, data: data, isPrivate: true, ttl: 60)
         { (error:Error?) in

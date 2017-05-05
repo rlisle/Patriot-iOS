@@ -6,18 +6,18 @@
 //  Copyright © 2016 Ron Lisle. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
-struct Activity
+class Activity
 {
-    let name:    String
-    let command: String
-    var percent: Int
+    let name:       String
+    var onImage:    UIImage?
+    var offImage:   UIImage?
+    var percent:    Int
     
-    init(name: String, command: String, percent: Int) {
+    init(name: String, percent: Int = 0) {
         self.name    = name
-        self.command = command
         self.percent = percent
     }
 }

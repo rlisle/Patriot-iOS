@@ -29,7 +29,6 @@
 		E432A1621EB60BEB003C9E0E /* ActivityNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A15E1EB60BAE003C9E0E /* ActivityNotifying.swift */; };
 		E432A1631EB60DB2003C9E0E /* Hardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A15B1EB60A7C003C9E0E /* Hardware.swift */; };
 		E432A1641EB60DB3003C9E0E /* Hardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A15B1EB60A7C003C9E0E /* Hardware.swift */; };
-		E432A1681EB627D6003C9E0E /* ActivityDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1671EB627D6003C9E0E /* ActivityDisplayModel.swift */; };
 		E432A16A1EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1691EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift */; };
 		E432A16D1EB62E3D003C9E0E /* ActivitiesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */; };
 		E432A16F1EB62FC9003C9E0E /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */; };
@@ -84,7 +83,6 @@
 		E432A15B1EB60A7C003C9E0E /* Hardware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hardware.swift; sourceTree = "<group>"; };
 		E432A15E1EB60BAE003C9E0E /* ActivityNotifying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityNotifying.swift; sourceTree = "<group>"; };
 		E432A1651EB60EBF003C9E0E /* secret-template.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "secret-template.swift"; sourceTree = "<group>"; };
-		E432A1671EB627D6003C9E0E /* ActivityDisplayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDisplayModel.swift; sourceTree = "<group>"; };
 		E432A1691EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesCollectionViewCell.swift; sourceTree = "<group>"; };
 		E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesDataManager.swift; sourceTree = "<group>"; };
 		E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */,
-				E432A1671EB627D6003C9E0E /* ActivityDisplayModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -534,7 +531,6 @@
 				E432A1541EB609B4003C9E0E /* DeviceNotifying.swift in Sources */,
 				E432A16A1EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift in Sources */,
 				E432A14C1EB607E3003C9E0E /* Photon.swift in Sources */,
-				E432A1681EB627D6003C9E0E /* ActivityDisplayModel.swift in Sources */,
 				E432A16F1EB62FC9003C9E0E /* ActivityModel.swift in Sources */,
 				E432A15F1EB60BAE003C9E0E /* ActivityNotifying.swift in Sources */,
 				E432A1711EB63054003C9E0E /* AppDependencies.swift in Sources */,

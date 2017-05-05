@@ -33,7 +33,7 @@ class MockHwManager: HwManager
     }
     
     
-    func sendActivityCommand(command: String, percent: Int)
+    func sendCommand(activity: String, percent: Int)
     {
     }
 }

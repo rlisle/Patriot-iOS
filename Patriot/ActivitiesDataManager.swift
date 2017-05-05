@@ -52,8 +52,8 @@ return false
     func setActivity(at: Int, percent: Int)
     {
         activities[at].percent = percent
-        let command = activities[at].command
-        hardware.sendActivityCommand(command: command, percent: percent)
+        let name = activities[at].name
+        hardware.sendCommand(activity: name, percent: percent)
     }
     
     
@@ -63,7 +63,7 @@ return false
         for name in supported
         {
             print("ActivitiesDM: Adding activity \(name)")
-            self.activities.append(Activity(name: name, command: name, percent: 0))
+            self.activities.append(Activity(name: name, percent: 0))
             
             //TODO: determine actual initial activity state. It might be on.
             

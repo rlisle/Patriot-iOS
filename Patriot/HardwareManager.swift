@@ -25,5 +25,5 @@ protocol HwManager
     
     func login(user: String, password: String) -> Promise<Void>
     func discoverDevices() -> Promise<Void>
-    func sendActivityCommand(command: String, percent: Int)
+    func sendCommand(activity: String, percent: Int)
 }
