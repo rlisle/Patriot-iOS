@@ -194,7 +194,7 @@ extension Photon
                     if let hwActivities = result as? String, hwActivities != "" {
                         self.parseActivities(hwActivities)
                     }
-                    print("p8. Activities result: \(self.activities)")
+                    print("p8. Activities result: \(String(describing: self.activities))")
                     fulfill()
                 } else {
                     print("  Error reading activities variable: \(error!)")

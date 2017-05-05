@@ -27,23 +27,6 @@ import Particle_SDK
 import PromiseKit
 
 
-protocol HwManager
-{
-    static var sharedInstance:  HwManager           { get }
-    var deviceDelegate:         DeviceNotifying?    { get set }
-    var activityDelegate:       ActivityNotifying?  { get set }
-    var photons:                [String: Photon]    { get }
-    var eventName:              String              { get }
-    var deviceNames:            [String]            { get }
-    var supportedNames:         Set<String>         { get }
-    var currentActivities:      [String: String]    { get }
-    
-    func login(user: String, password: String) -> Promise<Void>
-    func discoverDevices() -> Promise<Void>
-    func sendActivityCommand(command: String, percent: Int)
-}
-
-
 enum ParticleSDKError : Error
 {
     case invalidUserPassword

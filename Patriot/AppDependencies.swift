@@ -23,9 +23,8 @@ class AppDependencies
     func configureActivities(viewController: ViewController)
     {
         activitiesViewController = viewController
-        activitiesDataManager = ActivitiesDataManager()
         var hardware = PhotonManager.sharedInstance
-        activitiesDataManager?.hardware = hardware
+        activitiesDataManager = ActivitiesDataManager(hardware: hardware)
         hardware.activityDelegate = activitiesDataManager
         hardware.deviceDelegate = activitiesDataManager
         activitiesDataManager?.delegate = viewController

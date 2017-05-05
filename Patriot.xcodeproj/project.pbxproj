@@ -40,6 +40,13 @@
 		E49EB17D1EB4BCA400FBA04D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E49EB17C1EB4BCA400FBA04D /* Assets.xcassets */; };
 		E49EB1801EB4BCA400FBA04D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E49EB17E1EB4BCA400FBA04D /* LaunchScreen.storyboard */; };
 		E49EB18B1EB4BCA400FBA04D /* PatriotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49EB18A1EB4BCA400FBA04D /* PatriotTests.swift */; };
+		E4A6B7B91EBB6D61008CDED0 /* ActivitiesDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6B7B81EBB6D61008CDED0 /* ActivitiesDataManagerTests.swift */; };
+		E4A6B7BB1EBB6EA0008CDED0 /* HardwareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6B7BA1EBB6EA0008CDED0 /* HardwareManager.swift */; };
+		E4A6B7BE1EBB6F56008CDED0 /* HardwareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6B7BA1EBB6EA0008CDED0 /* HardwareManager.swift */; };
+		E4A6B7BF1EBB6F57008CDED0 /* HardwareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6B7BA1EBB6EA0008CDED0 /* HardwareManager.swift */; };
+		E4A6FAE91EBC9F0000CBFD38 /* MockHwManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FAE81EBC9F0000CBFD38 /* MockHwManager.swift */; };
+		E4BC73121EBCA46E00622EDC /* ActivitiesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */; };
+		E4BC73131EBCA4A000622EDC /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +101,9 @@
 		E49EB18C1EB4BCA400FBA04D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E49EB1991EB4C43C00FBA04D /* IntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E49EB19D1EB4C43C00FBA04D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4A6B7B81EBB6D61008CDED0 /* ActivitiesDataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesDataManagerTests.swift; sourceTree = "<group>"; };
+		E4A6B7BA1EBB6EA0008CDED0 /* HardwareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardwareManager.swift; sourceTree = "<group>"; };
+		E4A6FAE81EBC9F0000CBFD38 /* MockHwManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHwManager.swift; sourceTree = "<group>"; };
 		FA0E2DDDF2812FD69A804252 /* Pods-Patriot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Patriot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Patriot/Pods-Patriot.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +166,7 @@
 				E432A15B1EB60A7C003C9E0E /* Hardware.swift */,
 				E432A14A1EB607E3003C9E0E /* Photon.swift */,
 				E432A14B1EB607E3003C9E0E /* PhotonManager.swift */,
+				E4A6B7BA1EBB6EA0008CDED0 /* HardwareManager.swift */,
 			);
 			name = Hardware;
 			sourceTree = "<group>";
@@ -216,6 +227,8 @@
 			children = (
 				E49EB18A1EB4BCA400FBA04D /* PatriotTests.swift */,
 				E49EB18C1EB4BCA400FBA04D /* Info.plist */,
+				E4A6B7B81EBB6D61008CDED0 /* ActivitiesDataManagerTests.swift */,
+				E4A6FAE81EBC9F0000CBFD38 /* MockHwManager.swift */,
 			);
 			path = PatriotTests;
 			sourceTree = "<group>";
@@ -527,6 +540,7 @@
 				E432A1711EB63054003C9E0E /* AppDependencies.swift in Sources */,
 				E432A1581EB60A0A003C9E0E /* secret.swift in Sources */,
 				E432A16D1EB62E3D003C9E0E /* ActivitiesDataManager.swift in Sources */,
+				E4A6B7BB1EBB6EA0008CDED0 /* HardwareManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,11 +549,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E432A1621EB60BEB003C9E0E /* ActivityNotifying.swift in Sources */,
+				E4A6B7BE1EBB6F56008CDED0 /* HardwareManager.swift in Sources */,
+				E4A6FAE91EBC9F0000CBFD38 /* MockHwManager.swift in Sources */,
 				E49EB18B1EB4BCA400FBA04D /* PatriotTests.swift in Sources */,
 				E432A1511EB6087E003C9E0E /* PhotonManager.swift in Sources */,
 				E432A1631EB60DB2003C9E0E /* Hardware.swift in Sources */,
+				E4BC73121EBCA46E00622EDC /* ActivitiesDataManager.swift in Sources */,
 				E432A14F1EB60879003C9E0E /* Photon.swift in Sources */,
+				E4BC73131EBCA4A000622EDC /* ActivityModel.swift in Sources */,
 				E432A1551EB609CA003C9E0E /* DeviceNotifying.swift in Sources */,
+				E4A6B7B91EBB6D61008CDED0 /* ActivitiesDataManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +568,7 @@
 			files = (
 				E432A1521EB6087F003C9E0E /* PhotonManager.swift in Sources */,
 				E432A1481EB607D4003C9E0E /* PhotonIntegrationTests.swift in Sources */,
+				E4A6B7BF1EBB6F57008CDED0 /* HardwareManager.swift in Sources */,
 				E432A1611EB60BE9003C9E0E /* ActivityNotifying.swift in Sources */,
 				E432A1501EB6087A003C9E0E /* Photon.swift in Sources */,
 				E432A1561EB609CB003C9E0E /* DeviceNotifying.swift in Sources */,

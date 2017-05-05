@@ -18,11 +18,12 @@ protocol ActivitiesDisplaying
 class ActivitiesDataManager
 {
     var activities:     [ Activity ] = []
-    var hardware:       HwManager?
+    let hardware:       HwManager
     var delegate:       ActivitiesDisplaying?
     
-    init()
+    init(hardware: HwManager)
     {
+        self.hardware = hardware
 //        activities.append(Activity(name: "booth", command: "booth", percent: 0))
 //        activities.append(Activity(name: "coffee", command: "coffee", percent: 0))
 //        activities.append(Activity(name: "computer", command: "computer", percent: 0))
@@ -52,7 +53,7 @@ return false
     {
         activities[at].percent = percent
         let command = activities[at].command
-        hardware?.sendActivityCommand(command: command, percent: percent)
+        hardware.sendActivityCommand(command: command, percent: percent)
     }
     
     
