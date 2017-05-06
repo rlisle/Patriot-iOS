@@ -12,5 +12,5 @@ import Foundation
 protocol ActivityNotifying: class
 {
     func supportedListChanged()
-    func activityChanged(name: String, index: Int, percent: Int)
+    func activityChanged(name: String, percent: Int)
 }

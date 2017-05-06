@@ -182,7 +182,7 @@ class PhotonManager: NSObject, HwManager
                         let name = splitArray[0]
                         if let percent: Int = Int(splitArray[1]), percent >= 0, percent <= 100
                         {
-                            self.activityDelegate?.activityChanged(name: name, index: 0, percent: percent)
+                            self.activityDelegate?.activityChanged(name: name, percent: percent)
                         }
                         else
                         {

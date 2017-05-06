@@ -142,7 +142,7 @@ extension ViewController : ActivityNotifying
         collectionView?.reloadData()
     }
     
-    func activityChanged(name: String, index: Int, percent: Int)
+    func activityChanged(name: String, percent: Int)
     {
         print("DEBUG: VC activityChanged: \(name), \(index), \(percent)")
     }

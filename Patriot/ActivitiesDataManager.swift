@@ -77,7 +77,7 @@ extension ActivitiesDataManager: ActivityNotifying
     }
 
     // Handle activity:percent events
-    func activityChanged(name: String, index: Int, percent: Int)
+    func activityChanged(name: String, percent: Int)
     {
         print("ActivityDataManager: ActivityChanged: \(name)")
         //TODO: move to hardware
