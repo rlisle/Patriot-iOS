@@ -40,7 +40,7 @@ class MockParticleDevice: ParticleDevice
     override var variables: [String: String]
     {
         get {
-            return ["Devices": "String", "Activities": "String", "Supported": "String"]
+            return ["Devices": "String", "Activities": "String", "Supported": "String", "PublishName": "String"]
         }
     }
 }
@@ -110,8 +110,6 @@ class PhotonManagerIntegrationTests: XCTestCase
                 let myPhoton = self.manager.getPhoton(named: "testPhoton")
                 XCTAssertEqual(myPhoton?.name, "testPhoton")
                 promise.fulfill()
-            }.catch { error in
-                XCTFail()
             }
             waitForExpectations(timeout: 2)
         }
