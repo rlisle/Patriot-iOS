@@ -161,6 +161,11 @@ extension Photon
     func readVariable(_ name: String) -> Promise<String?>
     {
         return Promise { fulfill, reject in
+            guard particleDevice.variables[name] != nil else
+            {
+                print("Variable \(name) doesn't exist on photon \(self.name)")
+                return reject(PhotonError.PublishVariable)
+            }
             particleDevice.getVariable(name) { (result: Any?, error: Error?) in
                 if let error = error {
                     reject(error)
