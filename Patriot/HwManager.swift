@@ -1,8 +1,8 @@
 //
-//  HardwareManager.swift
+//  HwManager.swift
 //  Patriot
 //
-//  The HardwareManager has app lifetime so is held by the appDelegate.
+//  The HwManager has app lifetime so is held by the appDelegate.
 //  It can be accessed via the AppFactory
 //
 //  Created by Ron Lisle on 5/4/17.
