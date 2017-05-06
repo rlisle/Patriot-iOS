@@ -13,7 +13,7 @@ import Foundation
 import PromiseKit
 
 
-protocol HwManager
+protocol HwManager: class
 {
     var deviceDelegate:         DeviceNotifying?    { get set }
     var activityDelegate:       ActivityNotifying?  { get set }

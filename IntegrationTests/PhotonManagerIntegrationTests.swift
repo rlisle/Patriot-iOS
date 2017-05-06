@@ -53,6 +53,8 @@ class PhotonManagerIntegrationTests: XCTestCase
     var deviceFound:    String?
     var deviceLost:     String?
     
+    var deviceFoundExpectation: XCTestExpectation?
+    
     override func setUp()
     {
         super.setUp()
@@ -156,19 +158,29 @@ class PhotonManagerIntegrationTests: XCTestCase
     
     
     //MARK: performDiscovery
-    func test_discoverDevices_CallsDelegate()
+    func test_discoverDevices_fulfills()
     {
         let promise = expectation(description: "login")
         manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
         .then { _ in
-            self.manager.discoverDevices().then { _ -> Void in
-                XCTAssertEqual(self.deviceFound, "myphoton")
+            self.manager.discoverDevices()
+            .then { _ in
                 promise.fulfill()
             }
-        }.catch { error in
-            XCTFail()
         }
-        waitForExpectations(timeout: 5)
+        waitForExpectations(timeout: 3)
+    }
+    
+    
+    
+    func test_discoverDevices_CallsDelegate()
+    {
+        deviceFoundExpectation = expectation(description: "login")
+        manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
+        .then { _ in
+            self.manager.discoverDevices()
+        }
+        waitForExpectations(timeout: 3)
     }
     
     
@@ -188,6 +200,7 @@ extension PhotonManagerIntegrationTests: DeviceNotifying
     {
         print("deviceFound: \(name)")
         deviceFound = name
+        deviceFoundExpectation?.fulfill()
     }
     
     

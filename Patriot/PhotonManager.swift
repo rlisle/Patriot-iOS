@@ -27,6 +27,13 @@ import Particle_SDK
 import PromiseKit
 
 
+protocol PhotonDelegate
+{
+    func device(named: String, hasDevices: [String])
+    func device(named: String, supports: [String])
+    func device(named: String, hasSeenActivities: [String: Int])
+}
+
 enum ParticleSDKError : Error
 {
     case invalidUserPassword
@@ -65,16 +72,10 @@ class PhotonManager: NSObject, HwManager
     }
 
 
-    @discardableResult func discoverDevices() -> Promise<Void>
+    func discoverDevices() -> Promise<Void>
     {
-        print("discoverDevices")
+        print("0. discoverDevices")
         return getAllPhotonDevices()
-        .then { _ -> Void in
-            print("Calling refreshCurrentActivities")
-            self.refreshCurrentActivities()
-            print("Calling refreshSupportedNames")
-            self.refreshSupportedNames()
-        }
     }
     
     
@@ -83,10 +84,8 @@ class PhotonManager: NSObject, HwManager
      */
     func getAllPhotonDevices() -> Promise<Void>
     {
-        print("0. getAllPhotonDevices")
         return Promise { fulfill, reject in
             ParticleCloud.sharedInstance().getDevices { (devices: [ParticleDevice]?, error: Error?) in
-                print("1. getDevices.then")
                 if error != nil {
                     print("Error: \(error!)")
                     reject(error!)
@@ -95,13 +94,11 @@ class PhotonManager: NSObject, HwManager
                 {
                     self.addAllPhotonsToCollection(devices: devices)
                     .then { _ -> Void in
-                        print("1a. addAllPhotonsToCollection .then")
                         self.activityDelegate?.supportedListChanged()
                         fulfill()
                     }.catch { error in
-                        print("1b. error: \(error)")
                         reject(error)
-                    }.always { print("1c. always")}
+                    }
                 }
             }
         }
@@ -198,38 +195,6 @@ class PhotonManager: NSObject, HwManager
 
 extension PhotonManager
 {
-    func refreshSupportedNames() -> Promise<Void>
-    {
-        print("4. refreshSupportedNames")
-        return Promise { fulfill, reject in
-            supportedNames = []
-            for (name, photon) in photons
-            {
-                let particleDevice = photon.particleDevice
-                if particleDevice?.variables["Supported"] != nil
-                {
-                    print("5.  reading Supported variable from \(name)")
-                    particleDevice?.getVariable("Supported") { (result: Any?, error: Error?) in
-                        if error == nil
-                        {
-                            print("5a. getVariable.then")
-                            if let supported = result as? String, supported != ""
-                            {
-                                print("5b. supported = \(supported)")
-                                self.supportedNames = self.supportedNames.union(self.parseSupportedNames(supported))
-                            }
-                        } else {
-                            print("Error reading Supported variable. Skipping this device.")
-                        }
-                        print("Updated Supported names = \(self.supportedNames)")
-                        self.activityDelegate?.supportedListChanged()
-                    }
-                }
-            }
-        }
-    }
-    
-    
     private func parseSupportedNames(_ supported: String) -> Set<String>
     {
         print("6. Parsing supported names: \(supported)")
@@ -278,6 +243,27 @@ extension PhotonManager
                 }
             }
         }
+    }
+}
+
+
+extension PhotonManager: PhotonDelegate
+{
+    func device(named: String, hasDevices: [String])
+    {
+        print("device named \(named) hasDevices \(hasDevices)")
+    }
+    
+    
+    func device(named: String, supports: [String])
+    {
+        print("device named \(named) supports \(supports)")
+    }
+    
+    
+    func device(named: String, hasSeenActivities: [String: Int])
+    {
+        print("device named \(named) hasSeenActivities \(hasSeenActivities)")
     }
 }
 

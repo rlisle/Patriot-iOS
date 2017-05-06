@@ -15,19 +15,14 @@ import PromiseKit
 
 class AppDependencies
 {
-    
-    var activitiesViewController: ViewController?
-    var activitiesDataManager: ActivitiesDataManager?
-    
+    let hardware = PhotonManager()
     
     func configureActivities(viewController: ViewController)
     {
-        activitiesViewController = viewController
-        let hardware = PhotonManager()
-        activitiesDataManager = ActivitiesDataManager(hardware: hardware)
+        let activitiesDataManager = ActivitiesDataManager(hardware: hardware)
         hardware.activityDelegate = activitiesDataManager
         hardware.deviceDelegate = activitiesDataManager
-        activitiesDataManager?.delegate = viewController
+        activitiesDataManager.delegate = viewController
         
         //TODO: move to interactor. Here for initial testing only.
         hardware.login(user: Secret.LoginEmail, password: Secret.LoginPassword).then { _ -> Void in

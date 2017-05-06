@@ -59,6 +59,9 @@ class Photon: HwController
     var supported: Set<String>?         // Cached list of supported activities
     var activities: [String: String]?   // Optional list of current activities and state
     var publish: String                 // Publish event name that this device monitors
+    
+    var delegate: PhotonDelegate?       // Notifies manager when status changes
+    
 
     internal let particleDevice: ParticleDevice! // Reference to Particle-SDK device object
     
@@ -83,12 +86,10 @@ class Photon: HwController
      */
     func refresh() -> Promise<Void>
     {
-        return refreshDevices()
-        .then { _ -> Promise<Void> in
-            let supportedPromise = self.refreshSupported()
-            let activitiesPromise = self.refreshActivities()
-            return when(fulfilled: supportedPromise, activitiesPromise)
-        }
+        let devicesPromise = refreshDevices()
+        let supportedPromise = self.refreshSupported()
+        let activitiesPromise = self.refreshActivities()
+        return when(fulfilled: devicesPromise, supportedPromise, activitiesPromise)
     }
 }
 
@@ -96,28 +97,18 @@ extension Photon
 {
     func refreshDevices() -> Promise<Void>
     {
-        return Promise { fulfill, reject in
-            devices = []
-            particleDevice.getVariable("Devices") { (result: Any?, error: Error?) in
-                if error == nil
-                {
-                    if let hwDevices = result as? String, hwDevices != ""
-                    {
-                        self.parseDeviceNames(hwDevices)
-                        fulfill()
-                    }
-                } else {
-                    print("  Error reading devices variable.")
-                    reject(PhotonError.DeviceVariable)
-                }
-            }
+        devices = nil
+        return readVariable("Devices")
+        .then { result -> Void in
+            print("refreshDevices.then")
+            self.devices = []
+            self.parseDeviceNames(result!)
         }
     }
     
     
     private func parseDeviceNames(_ deviceString: String)
     {
-        print("p4. Parsing devices: \(deviceString)")
         let items = deviceString.components(separatedBy: ",")
         for item in items
         {
@@ -130,29 +121,17 @@ extension Photon
     
     func refreshSupported() -> Promise<Void>
     {
-        return Promise { fulfill, reject in
-            supported = []
-            particleDevice.getVariable("Supported") { (result: Any?, error: Error?) in
-                if error == nil
-                {
-                    print("p5.   refreshSupported no error, result = \(result!)")
-                    if let hwSupported = result as? String, hwSupported != ""
-                    {
-                        self.parseSupported(hwSupported)
-                        fulfill()
-                    }
-                } else {
-                    print("  Error reading supported variable.")
-                    reject(PhotonError.SupportedVariable)
-                }
-            }
+        supported = nil
+        return readVariable("Supported")
+        .then { result -> Void in
+            self.supported = []
+            self.parseSupported(result!)
         }
     }
     
     
     private func parseSupported(_ supportedString: String)
     {
-        print("p6. Parsing supported: \(supportedString)")
         let items = supportedString.components(separatedBy: ",")
         for item in items
         {
@@ -164,35 +143,17 @@ extension Photon
 
     func refreshActivities() -> Promise<Void>
     {
-        return Promise { fulfill, reject in
-            guard particleDevice.variables["Activities"] != nil else
-            {
-                fulfill()
-                
-                return
-            }
-            activities = [: ]
-            particleDevice.getVariable("Activities") { (result: Any?, error: Error?) in
-                if error == nil
-                {
-                    print("p7. Refresh activities read \(result!)")
-                    if let hwActivities = result as? String, hwActivities != "" {
-                        self.parseActivities(hwActivities)
-                    }
-                    print("p8. Activities result: \(String(describing: self.activities))")
-                    fulfill()
-                } else {
-                    print("  Error reading activities variable: \(error!)")
-                    reject(PhotonError.ActivitiesVariable)
-                }
-            }
+        activities = nil
+        return readVariable("Activities")
+        .then { result -> Void in
+            self.activities = [:]
+            self.parseActivities(result!)
         }
     }
     
     
     private func parseActivities(_ activitiesString: String)
     {
-        print("p9. Parsing activities: \(activitiesString)")
         let items = activitiesString.components(separatedBy: ",")
         for item in items
         {
@@ -206,22 +167,14 @@ extension Photon
 
     func readPublishName() -> Promise<Void>
     {
-        return Promise { fulfill, reject in
-            particleDevice.getVariable("Publish") { (result: Any?, error: Error?) in
-                if error == nil
-                {
-                    print("p10. Publish name = \(result!)")
-                    self.publish = result as! String
-                    fulfill()
-                } else {
-                    print("  Error reading publish variable.")
-                    reject(PhotonError.PublishVariable)
-                }
-            }
+        return readVariable("Publish")
+        .then { result -> Void in
+            self.publish = result!
         }
     }
 
-    func readVariable(name: String) -> Promise<String?>
+
+    func readVariable(_ name: String) -> Promise<String?>
     {
         return Promise { fulfill, reject in
             particleDevice.getVariable(name) { (result: Any?, error: Error?) in

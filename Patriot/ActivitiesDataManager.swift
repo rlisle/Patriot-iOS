@@ -13,7 +13,7 @@ class ActivitiesDataManager
 {
     var activities:     [ Activity ] = []
     let hardware:       HwManager
-    var delegate:       ActivityNotifying?
+    weak var delegate:  ActivityNotifying?
     
     init(hardware: HwManager)
     {

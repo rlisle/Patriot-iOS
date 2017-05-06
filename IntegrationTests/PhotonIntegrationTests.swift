@@ -80,12 +80,31 @@ class PhotonIntegrationTests: XCTestCase
     }
     
     
-    func test_Photon_ReadsDevices()
+    func test_Photon_ReadVariable()
+    {
+        let expect = expectation(description: "readVariable")
+        login().then { _ in
+            return self.findTestDevice().then { _ -> Promise<Void> in
+               return self.photon!.readVariable("Devices").then { variable -> Void in
+                    print("readVariable: \(variable)")
+                    expect.fulfill()
+                }
+            }
+        }.catch { error in
+            XCTFail()
+        }
+        waitForExpectations(timeout: 3)
+    }
+    
+    
+    func test_Photon_RefreshDevices()
     {
         let expect = expectation(description: "devices")
         login().then { _ in
-            return self.findTestDevice().then { _ in
-               return self.photon?.refreshDevices().then { _ -> Void in
+            return self.findTestDevice().then { _ -> Promise<Void> in
+                print("found device: \(self.photon!)")
+               return self.photon!.refreshDevices().then { _ -> Void in
+                    print("refreshDevices.then")
                     if let devices = self.photon?.devices
                     {
                         print("devices = \(devices)")
@@ -97,7 +116,7 @@ class PhotonIntegrationTests: XCTestCase
         }.catch { error in
             XCTFail()
         }
-        waitForExpectations(timeout: 3)
+        waitForExpectations(timeout: 5)
     }
     
     
