@@ -26,5 +26,4 @@ class ActivitiesDataManagerTests: XCTestCase {
         XCTAssertNotNil(dm)
     }
     
-    
 }

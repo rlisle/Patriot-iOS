@@ -67,17 +67,14 @@ class PhotonManager: NSObject, HwManager
 
     @discardableResult func discoverDevices() -> Promise<Void>
     {
+        print("discoverDevices")
         return getAllPhotonDevices()
-//        return Promise { fulfill, reject in
-//            print("PhotonManager performDiscovery")
-//            self.getAllPhotonDevices().then { allPhotons in
-//                return self.refreshCurrentActivities()
-//            }.then { activities in
-//                return self.getAllDeviceNames()
-//            }.then { deviceNames -> Void in
-//                return self.refreshSupportedNames()
-//            }
-//        }
+        .then { _ -> Void in
+            print("Calling refreshCurrentActivities")
+            self.refreshCurrentActivities()
+            print("Calling refreshSupportedNames")
+            self.refreshSupportedNames()
+        }
     }
     
     
@@ -86,8 +83,10 @@ class PhotonManager: NSObject, HwManager
      */
     func getAllPhotonDevices() -> Promise<Void>
     {
+        print("0. getAllPhotonDevices")
         return Promise { fulfill, reject in
             ParticleCloud.sharedInstance().getDevices { (devices: [ParticleDevice]?, error: Error?) in
+                print("1. getDevices.then")
                 if error != nil {
                     print("Error: \(error!)")
                     reject(error!)
@@ -96,7 +95,7 @@ class PhotonManager: NSObject, HwManager
                 {
                     self.addAllPhotonsToCollection(devices: devices)
                     .then { _ -> Void in
-                        print("1. addAllPhotonsToCollection .then")
+                        print("1a. addAllPhotonsToCollection .then")
                         self.activityDelegate?.supportedListChanged()
                         fulfill()
                     }.catch { error in
@@ -199,28 +198,32 @@ class PhotonManager: NSObject, HwManager
 
 extension PhotonManager
 {
-    func refreshSupportedNames()
+    func refreshSupportedNames() -> Promise<Void>
     {
         print("4. refreshSupportedNames")
-        supportedNames = []
-        for (name, photon) in photons
-        {
-            let particleDevice = photon.particleDevice
-            if particleDevice?.variables["Supported"] != nil
+        return Promise { fulfill, reject in
+            supportedNames = []
+            for (name, photon) in photons
             {
-                print("5.  reading Supported variable from \(name)")
-                particleDevice?.getVariable("Supported") { (result: Any?, error: Error?) in
-                    if error == nil
-                    {
-                        if let supported = result as? String, supported != ""
+                let particleDevice = photon.particleDevice
+                if particleDevice?.variables["Supported"] != nil
+                {
+                    print("5.  reading Supported variable from \(name)")
+                    particleDevice?.getVariable("Supported") { (result: Any?, error: Error?) in
+                        if error == nil
                         {
-                            self.supportedNames = self.supportedNames.union(self.parseSupportedNames(supported))
+                            print("5a. getVariable.then")
+                            if let supported = result as? String, supported != ""
+                            {
+                                print("5b. supported = \(supported)")
+                                self.supportedNames = self.supportedNames.union(self.parseSupportedNames(supported))
+                            }
+                        } else {
+                            print("Error reading Supported variable. Skipping this device.")
                         }
-                    } else {
-                        print("Error reading Supported variable. Skipping this device.")
+                        print("Updated Supported names = \(self.supportedNames)")
+                        self.activityDelegate?.supportedListChanged()
                     }
-                    print("Updated Supported names = \(self.supportedNames)")
-                    self.activityDelegate?.supportedListChanged()
                 }
             }
         }
@@ -272,6 +275,27 @@ extension PhotonManager
                     }
                     print("11. Updated Supported names = \(self.supportedNames)")
                     self.activityDelegate?.supportedListChanged()
+                }
+            }
+        }
+    }
+}
+
+
+extension PhotonManager
+{
+    func readVariable(device: ParticleDevice, name: String) -> Promise<String>
+    {
+        return Promise { fulfill, reject in
+            device.getVariable("Supported")
+            { (result: Any?, error: Error?) in
+                if let variable = result as? String
+                {
+                    fulfill(variable)
+                }
+                else
+                {
+                    reject(error!)
                 }
             }
         }

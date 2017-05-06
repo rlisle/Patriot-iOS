@@ -72,24 +72,6 @@ class PhotonManagerIntegrationTests: XCTestCase
     }
     
     
-    //MARK: Singleton-by-choice
-    
-    func test_TwoSharedReferences_AreTheSameInstance()
-    {
-        let shared1 = PhotonManager.sharedInstance as! PhotonManager
-        let shared2 = PhotonManager.sharedInstance as! PhotonManager
-        XCTAssertEqual(shared1, shared2)
-    }
-    
-    
-    func test_TwoDirectlyInitializedInstances_AreNotTheSameInstance()
-    {
-        let shared1 = PhotonManager()
-        let shared2 = PhotonManager()
-        XCTAssertNotEqual(shared1, shared2)
-    }
-    
-
     //MARK: Login
     
     func test_LoginToTestAccount_DoesNotReturnError()
@@ -218,15 +200,15 @@ extension PhotonManagerIntegrationTests: DeviceNotifying
 
 extension PhotonManagerIntegrationTests: ActivityNotifying
 {
-    func supportedListChanged(list: Set<String>)
+    func supportedListChanged()
     {
-        print("supportedListChanged: \(list)")
+        print("supportedListChanged")
     }
     
     
-    func activityChanged(event: String)
+    func activityChanged(name: String, percent: Int)
     {
-        print("activityChanged: \(event)")
+        print("activityChanged: \(name):\(percent)")
     }
 }
 

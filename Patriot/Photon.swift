@@ -83,27 +83,12 @@ class Photon: HwController
      */
     func refresh() -> Promise<Void>
     {
-        print("p1. Photon refresh")
         return refreshDevices()
-        .then {_ -> Promise<Void> in
-            print("p2. ...refreshActivities")
-            return self.refreshActivities()
-        }.then { _ in
-            print("p3. ...refreshSupported")
-            return self.refreshSupported()
-//            }.then {_ in
-//                print("...fulfill")
-//                fulfill()
-            }
-// Would prefer this, but can't figure out how to get compiler to accept it.
-//            firstly {
-//                return refreshDevices()
-//            }.then { _ in
-//                let supportedPromise = self.refreshSupported()
-//                let activitiesPromise = self.refreshActivities()
-//                return when(fulfilled: supportedPromise, activitiesPromise)
-//            }
-//        }
+        .then { _ -> Promise<Void> in
+            let supportedPromise = self.refreshSupported()
+            let activitiesPromise = self.refreshActivities()
+            return when(fulfilled: supportedPromise, activitiesPromise)
+        }
     }
 }
 
