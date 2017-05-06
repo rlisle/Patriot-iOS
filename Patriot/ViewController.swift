@@ -144,7 +144,11 @@ extension ViewController : ActivityNotifying
     
     func activityChanged(name: String, percent: Int)
     {
-        print("DEBUG: VC activityChanged: \(name), \(index), \(percent)")
+        print("DEBUG: VC activityChanged: \(name), \(percent)")
+        if let index = dataManager?.activities.index(where: {$0.name == name})
+        {
+            print("DEBUG: index of activityChanged = \(index)")
+        }
     }
 }
 

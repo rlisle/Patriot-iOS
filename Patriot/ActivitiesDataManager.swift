@@ -80,15 +80,12 @@ extension ActivitiesDataManager: ActivityNotifying
     func activityChanged(name: String, percent: Int)
     {
         print("ActivityDataManager: ActivityChanged: \(name)")
-        //TODO: move to hardware
-//        let splitArray = event.components(separatedBy: ":")
-//        let isOn = splitArray.last!.caseInsensitiveCompare("0") != .orderedSame
-//        let percent = isOn ? 100 : 0
-//        if let index = activities.index(where: {$0.name == splitArray.first})
-//        {
-//            activities[index].percent = percent
-//            delegate?.activityDidChange(index: index, percent: percent)
-//        }
+        if let index = activities.index(where: {$0.name == name})
+        {
+            print("DEBUG: index of activity = \(index)")
+            activities[index].percent = percent
+        }
+        delegate?.activityChanged(name: name, percent: percent)
     }
 }
 
