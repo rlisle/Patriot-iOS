@@ -38,6 +38,8 @@ enum PhotonError : Error
 // Public interface
 class Photon: HwController
 {
+    let uninitializedString = "uninitialized"
+    
     var devices: Set<String>?           // Cached list of device names exposed by Photon
     var supported: Set<String>?         // Cached list of supported activities
     var activities: [String: String]?   // Optional list of current activities and state
@@ -60,7 +62,7 @@ class Photon: HwController
     required init(device: ParticleDevice)
     {
         particleDevice  = device
-        publish         = "uninitialized"
+        publish         = uninitializedString
     }
 
     /**
@@ -131,7 +133,9 @@ extension Photon
         return readVariable("Activities")
         .then { result -> Void in
             self.activities = [:]
-            self.parseActivities(result!)
+            if let result = result {
+                self.parseActivities(result)
+            }
         }
     }
     
@@ -153,7 +157,7 @@ extension Photon
     {
         return readVariable("PublishName")
         .then { result -> Void in
-            self.publish = result!
+            self.publish = result ?? self.uninitializedString
         }
     }
 
@@ -164,7 +168,8 @@ extension Photon
             guard particleDevice.variables[name] != nil else
             {
                 print("Variable \(name) doesn't exist on photon \(self.name)")
-                return reject(PhotonError.PublishVariable)
+                
+                return fulfill(nil)
             }
             particleDevice.getVariable(name) { (result: Any?, error: Error?) in
                 if let error = error {
