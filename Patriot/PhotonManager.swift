@@ -36,6 +36,7 @@ enum ParticleSDKError : Error
 
 class PhotonManager: NSObject, HwManager
 {
+    var subscribeHandler:   Any?
     var deviceDelegate:     DeviceNotifying?
     var activityDelegate:   ActivityNotifying?
     
@@ -64,7 +65,7 @@ class PhotonManager: NSObject, HwManager
     }
 
 
-    func discoverDevices() -> Promise<Void>
+    @discardableResult func discoverDevices() -> Promise<Void>
     {
         return getAllPhotonDevices()
 //        return Promise { fulfill, reject in
@@ -168,8 +169,17 @@ class PhotonManager: NSObject, HwManager
     
     func subscribeToEvents()
     {
-        //TODO:
-        
+        subscribeHandler = ParticleCloud.sharedInstance().subscribeToMyDevicesEvents(withPrefix: eventName, handler: { (event: ParticleEvent?, error: Error?) in
+            if let _ = error {
+                print("Error subscribing to events")
+            }
+            else
+            {
+                DispatchQueue.main.async(execute: {
+                    print("DEBUG: received event with data \(String(describing: event?.data))")
+                })
+            }
+        })
     }
 }
 
