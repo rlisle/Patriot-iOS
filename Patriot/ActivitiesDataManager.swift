@@ -82,7 +82,7 @@ extension ActivitiesDataManager: ActivityNotifying
         print("ActivityDataManager: ActivityChanged: \(name)")
         if let index = activities.index(where: {$0.name == name})
         {
-            print("DEBUG: index of activity = \(index)")
+            print("   index of activity = \(index)")
             activities[index].percent = percent
         }
         delegate?.activityChanged(name: name, percent: percent)
@@ -94,7 +94,7 @@ extension ActivitiesDataManager: DeviceNotifying
 {
     func deviceFound(name: String)
     {
-        print("DEBUG: Device found: \(name)")
+        print("Device found: \(name)")
         //Currently not really doing anything with this.
         //This will become important once we allow the app to 
         //configure/program device activites
@@ -103,7 +103,7 @@ extension ActivitiesDataManager: DeviceNotifying
     
     func deviceLost(name: String)
     {
-        print("DEBUG: Device lost: \(name)")
+        print("Device lost: \(name)")
         //Ditto above
     }
 }

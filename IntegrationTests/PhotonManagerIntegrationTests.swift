@@ -161,7 +161,7 @@ class PhotonManagerIntegrationTests: XCTestCase
     func test_discoverDevices_fulfills()
     {
         let promise = expectation(description: "login")
-        manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
+        _ = manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
         .then { _ in
             self.manager.discoverDevices()
             .then { _ in
@@ -176,7 +176,7 @@ class PhotonManagerIntegrationTests: XCTestCase
     func test_discoverDevices_CallsDelegate()
     {
         deviceFoundExpectation = expectation(description: "login")
-        manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
+        _ = manager.login(user: Secret.TestEmail, password: Secret.TestPassword)
         .then { _ in
             self.manager.discoverDevices()
         }

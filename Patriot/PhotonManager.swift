@@ -72,7 +72,7 @@ class PhotonManager: NSObject, HwManager
     }
 
 
-    func discoverDevices() -> Promise<Void>
+    @discardableResult func discoverDevices() -> Promise<Void>
     {
         return getAllPhotonDevices()
     }
@@ -170,7 +170,7 @@ class PhotonManager: NSObject, HwManager
             else
             {
                 DispatchQueue.main.async(execute: {
-                    print("DEBUG: received event with data \(String(describing: event?.data))")
+                    print("Subscribe: received event with data \(String(describing: event?.data))")
                     if let eventData = event?.data {
                         let splitArray = eventData.components(separatedBy: ":")
                         let name = splitArray[0]

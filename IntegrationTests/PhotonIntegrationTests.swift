@@ -86,7 +86,7 @@ class PhotonIntegrationTests: XCTestCase
         login().then { _ in
             return self.findTestDevice().then { _ -> Promise<Void> in
                return self.photon!.readVariable("Devices").then { variable -> Void in
-                    print("readVariable: \(variable)")
+                    print("readVariable: \(String(describing: variable))")
                     expect.fulfill()
                 }
             }

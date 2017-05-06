@@ -15,20 +15,20 @@ import PromiseKit
 
 class AppDependencies
 {
-    let hardware = PhotonManager()
+    let hwManager = PhotonManager()
     
     func configureActivities(viewController: ViewController)
     {
-        let activitiesDataManager = ActivitiesDataManager(hardware: hardware)
-        hardware.activityDelegate = activitiesDataManager
-        hardware.deviceDelegate = activitiesDataManager
+        let activitiesDataManager = ActivitiesDataManager(hardware: hwManager)
+        hwManager.activityDelegate = activitiesDataManager
+        hwManager.deviceDelegate = activitiesDataManager
         activitiesDataManager.delegate = viewController
         
         //TODO: move to interactor. Here for initial testing only.
-        hardware.login(user: Secret.LoginEmail, password: Secret.LoginPassword).then { _ -> Void in
-            self.hardware.subscribeToEvents()
+        hwManager.login(user: Secret.LoginEmail, password: Secret.LoginPassword).then { _ -> Void in
+            self.hwManager.subscribeToEvents()
             //Allow this to proceed asynchronously
-            self.hardware.discoverDevices()
+            _ = self.hwManager.discoverDevices()
         }.catch { error in
             //TODO: handle error
             print("ERROR: login failed: \(error)")
