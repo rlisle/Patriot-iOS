@@ -86,10 +86,12 @@ class Photon: HwController
      */
     func refresh() -> Promise<Void>
     {
+        let publishPromise = readPublishName()
         let devicesPromise = refreshDevices()
         let supportedPromise = self.refreshSupported()
         let activitiesPromise = self.refreshActivities()
-        return when(fulfilled: devicesPromise, supportedPromise, activitiesPromise)
+        let promises = [ publishPromise, devicesPromise, supportedPromise, activitiesPromise ]
+        return when(fulfilled: promises)
     }
 }
 
@@ -100,7 +102,6 @@ extension Photon
         devices = nil
         return readVariable("Devices")
         .then { result -> Void in
-            print("refreshDevices.then")
             self.devices = []
             self.parseDeviceNames(result!)
         }
@@ -167,7 +168,7 @@ extension Photon
 
     func readPublishName() -> Promise<Void>
     {
-        return readVariable("Publish")
+        return readVariable("PublishName")
         .then { result -> Void in
             self.publish = result!
         }

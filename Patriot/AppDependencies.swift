@@ -26,8 +26,9 @@ class AppDependencies
         
         //TODO: move to interactor. Here for initial testing only.
         hardware.login(user: Secret.LoginEmail, password: Secret.LoginPassword).then { _ -> Void in
-            hardware.subscribeToEvents()
-            hardware.discoverDevices()
+            self.hardware.subscribeToEvents()
+            //Allow this to proceed asynchronously
+            self.hardware.discoverDevices()
         }.catch { error in
             //TODO: handle error
             print("ERROR: login failed: \(error)")

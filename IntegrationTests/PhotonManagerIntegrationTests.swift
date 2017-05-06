@@ -106,7 +106,7 @@ class PhotonManagerIntegrationTests: XCTestCase
             let mockDevices = [mockParticleDevice]
             self.manager.addAllPhotonsToCollection(devices: mockDevices)
             .then { _ -> Void in
-                print("test getAllPhotonDevices .then")
+                print("test addAllPhotonDevices .then")
                 let myPhoton = self.manager.getPhoton(named: "testPhoton")
                 XCTAssertEqual(myPhoton?.name, "testPhoton")
                 promise.fulfill()
