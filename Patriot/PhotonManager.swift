@@ -177,6 +177,19 @@ class PhotonManager: NSObject, HwManager
             {
                 DispatchQueue.main.async(execute: {
                     print("DEBUG: received event with data \(String(describing: event?.data))")
+                    if let eventData = event?.data {
+                        let splitArray = eventData.components(separatedBy: ":")
+                        let name = splitArray[0]
+                        if let percent: Int = Int(splitArray[1]), percent >= 0, percent <= 100
+                        {
+                            self.activityDelegate?.activityChanged(name: name, index: 0, percent: percent)
+                        }
+                        else
+                        {
+                            print("Event data is not a valid number")
+                        }
+                    }
+                    
                 })
             }
         })
