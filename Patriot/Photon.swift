@@ -42,7 +42,7 @@ class Photon: HwController
     
     var devices: Set<String>?           // Cached list of device names exposed by Photon
     var supported: Set<String>?         // Cached list of supported activities
-    var activities: [String: String]?   // Optional list of current activities and state
+    var activities: [String: Int]?      // Optional list of current activities and state
     var publish: String                 // Publish event name that this device monitors
     
     var delegate: PhotonDelegate?       // Notifies manager when status changes
@@ -71,6 +71,7 @@ class Photon: HwController
      */
     func refresh() -> Promise<Void>
     {
+        print("refreshing \(name)")
         let publishPromise = readPublishName()
         let devicesPromise = refreshDevices()
         let supportedPromise = self.refreshSupported()
@@ -96,12 +97,17 @@ extension Photon
     private func parseDeviceNames(_ deviceString: String)
     {
         let items = deviceString.components(separatedBy: ",")
+        guard items.count > 0 else {
+            return
+        }
+        devices = Set<String>()
         for item in items
         {
             let itemComponents = item.components(separatedBy: ":")
             let lcDevice = itemComponents[0].localizedLowercase
             devices?.insert(lcDevice)
         }
+        delegate?.device(named: self.name, hasDevices: devices!)
     }
     
     
@@ -118,12 +124,19 @@ extension Photon
     
     private func parseSupported(_ supportedString: String)
     {
+        print("parseSupported: \(supportedString)")
         let items = supportedString.components(separatedBy: ",")
+        guard items.count > 0 else {
+            return
+        }
+        supported = Set<String>()
         for item in items
         {
             let lcSupported = item.localizedLowercase
             supported?.insert(lcSupported)
         }
+        print("calling device \(self.name) supports \(supported!)")
+        delegate?.device(named: self.name, supports: supported!)
     }
     
 
@@ -143,13 +156,18 @@ extension Photon
     private func parseActivities(_ activitiesString: String)
     {
         let items = activitiesString.components(separatedBy: ",")
+        guard items.count > 0 else {
+            return
+        }
+        activities = [: ]
         for item in items
         {
             let itemComponents = item.components(separatedBy: ":")
             let lcActivity = itemComponents[0].localizedLowercase
             let lcValue = itemComponents[1].lowercased()
-            activities![lcActivity] = lcValue
+            activities![lcActivity] = Int(lcValue) ?? 0
         }
+        delegate?.device(named: self.name, hasSeenActivities: activities!)
     }
 
 

@@ -29,8 +29,8 @@ import PromiseKit
 
 protocol PhotonDelegate
 {
-    func device(named: String, hasDevices: [String])
-    func device(named: String, supports: [String])
+    func device(named: String, hasDevices: Set<String>)
+    func device(named: String, supports: Set<String>)
     func device(named: String, hasSeenActivities: [String: Int])
 }
 
@@ -49,9 +49,9 @@ class PhotonManager: NSObject, HwManager
     
     var photons: [String: Photon] = [: ]   // All the particle devices attached to logged-in user's account
     let eventName          = "patriot"
-    var deviceNames:        [String] = []       // Names exposed by the "Devices" variables
-    var supportedNames:     Set<String> = []    // Activity names exposed by the "Supported" variables
-    var currentActivities:  [String: String] = [: ] // List of currently on activities reported by Master
+    var deviceNames        = Set<String>()      // Names exposed by the "Devices" variables
+    var supportedNames     = Set<String>()      // Activity names exposed by the "Supported" variables
+    var currentActivities:  [String: Int] = [: ] // List of currently on activities reported by Master
     
 
     /**
@@ -119,6 +119,7 @@ class PhotonManager: NSObject, HwManager
                     {
                         print("Adding photon \(name) to collection")
                         let photon = Photon(device: device)
+                        photon.delegate = self
                         self.photons[name] = photon
                         self.deviceDelegate?.deviceFound(name: name)
                         let promise = photon.refresh()
@@ -245,23 +246,27 @@ extension PhotonManager
 }
 
 
+// These methods report the capabilities of each photon asynchronously
 extension PhotonManager: PhotonDelegate
 {
-    func device(named: String, hasDevices: [String])
+    func device(named: String, hasDevices: Set<String>)
     {
         print("device named \(named) hasDevices \(hasDevices)")
+        deviceNames = deviceNames.union(hasDevices)
     }
     
     
-    func device(named: String, supports: [String])
+    func device(named: String, supports: Set<String>)
     {
         print("device named \(named) supports \(supports)")
+        supportedNames = supportedNames.union(supports)
     }
     
     
     func device(named: String, hasSeenActivities: [String: Int])
     {
         print("device named \(named) hasSeenActivities \(hasSeenActivities)")
+        hasSeenActivities.forEach { (k,v) in currentActivities[k] = v }
     }
 }
 

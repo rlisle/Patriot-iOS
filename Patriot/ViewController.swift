@@ -138,7 +138,7 @@ extension ViewController : ActivityNotifying
 {
     func supportedListChanged()
     {
-        print("DEBUG: VC supportedListChanged")
+        print("VC supportedListChanged")
         collectionView?.reloadData()
     }
     

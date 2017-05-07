@@ -19,9 +19,9 @@ protocol HwManager: class
     var activityDelegate:       ActivityNotifying?  { get set }
     var photons:                [String: Photon]    { get }
     var eventName:              String              { get }
-    var deviceNames:            [String]            { get }
+    var deviceNames:            Set<String>         { get }
     var supportedNames:         Set<String>         { get }
-    var currentActivities:      [String: String]    { get }
+    var currentActivities:      [String: Int]       { get }
     
     func login(user: String, password: String) -> Promise<Void>
     func discoverDevices() -> Promise<Void>
