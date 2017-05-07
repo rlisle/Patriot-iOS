@@ -56,8 +56,7 @@ extension ViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return 0
-        //return displayData?.count ?? 0
+        return dataManager?.activities.count ?? 0
     }
 
 
@@ -68,27 +67,26 @@ extension ViewController {
 
         styleCell(cell)
         
-//        if displayData.count > indexPath.row
-//        {
-//            let activity = displayData[indexPath.row];
-//            if let cell = cell as? ActivitiesCollectionViewCell
-//            {
-//                //TODO: move this logic to the activity struct
-//                print("Cell activity \(activity.name) is \(activity.percent)%")
-//                let isOn = activity.percent > 0
-//                let image = isOn ? activity.onImage : activity.offImage
-//                cell.imageView.image = image
-//
-//                let caption = activity.name.capitalized
-//                cell.label.text = caption
-//                
-//                cell.tag = indexPath.row
-//                
-//                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap(_: )))
-//                cell.addGestureRecognizer(tapGesture)
-//                
-//            }
-//        }
+        if let activities = dataManager?.activities, activities.count > indexPath.row
+        {
+            let activity = activities[indexPath.row];
+            if let cell = cell as? ActivitiesCollectionViewCell
+            {
+                //TODO: move this logic to the activity struct
+                print("Cell activity \(activity.name) is \(activity.percent)%")
+                let isOn = activity.percent > 0
+                let image = isOn ? activity.onImage : activity.offImage
+                cell.imageView.image = image
+
+                let caption = activity.name.capitalized
+                cell.label.text = caption
+                
+                cell.tag = indexPath.row
+                
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap(_: )))
+                cell.addGestureRecognizer(tapGesture)
+            }
+        }
         
         return cell
     }
