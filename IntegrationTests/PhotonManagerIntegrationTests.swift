@@ -104,7 +104,7 @@ class PhotonManagerIntegrationTests: XCTestCase
         {
             let promise = expectation(description: "addAllPhotons")
             let mockDevices = [mockParticleDevice]
-            self.manager.addAllPhotonsToCollection(devices: mockDevices)
+            _ = self.manager.addAllPhotonsToCollection(devices: mockDevices)
             .then { _ -> Void in
                 print("test addAllPhotonDevices .then")
                 let myPhoton = self.manager.getPhoton(named: "testPhoton")

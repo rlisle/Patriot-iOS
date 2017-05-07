@@ -51,7 +51,7 @@ class PhotonIntegrationTests: XCTestCase
     func test_ThatPhoton_IsSet()
     {
         let photonPromise = expectation(description: "photon")
-        login().then { _ in
+        _ = login().then { _ in
             return self.findTestDevice().then { _ -> Void in
                 XCTAssertNotNil(self.photon)
                 photonPromise.fulfill()
