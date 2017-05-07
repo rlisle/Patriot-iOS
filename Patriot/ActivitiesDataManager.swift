@@ -32,8 +32,7 @@ class ActivitiesDataManager
 
     func isActivityOn(at: Int) -> Bool
     {
-//        return activities[at].percent > 0
-return false
+        return activities[at].percent > 0
     }
 
     

@@ -27,9 +27,7 @@ class ViewController: UICollectionViewController
         {
             appDelegate.appDependencies.configureActivities(viewController: self)
         }
-        
         addGradient()
-
     }
 
     
@@ -51,10 +49,10 @@ class ViewController: UICollectionViewController
     
     func tap(_ gestureRecognizer: UIGestureRecognizer)
     {
-//        if let index = gestureRecognizer.view?.tag
-//        {
-//            interactor?.toggleActivity(index: index)
-//        }
+        if let index = gestureRecognizer.view?.tag
+        {
+            dataManager?.toggleActivity(at: index)
+        }
     }
 }
 
@@ -156,11 +154,11 @@ extension ViewController : ActivityNotifying
     
     func activityChanged(name: String, percent: Int)
     {
-        print("DEBUG: VC activityChanged: \(name), \(percent)")
+        print("VC activityChanged: \(name), \(percent)")
         if let index = dataManager?.activities.index(where: {$0.name == name})
         {
-            print("DEBUG: index of activityChanged = \(index)")
+            print("   index of activityChanged = \(index)")
+            collectionView?.reloadItems(at: [IndexPath(row: index, section: 0)])
         }
     }
 }
-
