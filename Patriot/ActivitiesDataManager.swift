@@ -45,6 +45,7 @@ class ActivitiesDataManager
     
     func setActivity(at: Int, percent: Int)
     {
+        print("DM set activity at: \(at) to \(percent)")
         activities[at].percent = percent
         let name = activities[at].name
         hardware.sendCommand(activity: name, percent: percent)
