@@ -16,9 +16,9 @@ class MockHwManager: HwManager
     var activityDelegate:       ActivityNotifying?
     var photons:                [String: Photon]    = [: ]
     var eventName:              String              = "unspecified"
-    var deviceNames:            [String]            = []
+    var deviceNames:            Set<String>         = []
     var supportedNames =        Set<String>()
-    var currentActivities:      [String: String]    = [: ]
+    var currentActivities:      [String: Int]       = [: ]
 
 
     func login(user: String, password: String) -> Promise<Void>
