@@ -39,6 +39,20 @@ class ActivitiesDataManagerTests: XCTestCase {
         let list: Set<String> = ["test1", "test2", "test3"]
         mockHardware.sendDelegateSupportedListChanged(names: list)
         XCTAssertNotNil(changedList)
+        XCTAssertEqual(changedList?.count, 3)
+    }
+
+    
+    func test_ThatSupportedListChanged_ActivityDataCorrect()
+    {
+        let list: Set<String> = ["test1"]
+        mockHardware.sendDelegateSupportedListChanged(names: list)
+        XCTAssertNotNil(changedList)
+        XCTAssertEqual(changedList?.count,1)
+        if let activity = changedList?[0] {
+            XCTAssertEqual(activity.name,"test1")
+            XCTAssertEqual(activity.percent,0)
+        }
     }
     
 }
