@@ -17,6 +17,7 @@ class ActivitiesDataManager
     
     init(hardware: HwManager)
     {
+        print("DM init")
         self.hardware = hardware
 //        activities.append(Activity(name: "booth", command: "booth", percent: 0))
 //        activities.append(Activity(name: "coffee", command: "coffee", percent: 0))
@@ -49,11 +50,16 @@ return false
         let name = activities[at].name
         hardware.sendCommand(activity: name, percent: percent)
     }
-    
-    
-    func refreshActivities(supported: Set<String>)
+}
+
+
+//MARK: Helper Methods
+
+extension ActivitiesDataManager
+{
+    func refresh(supported: Set<String>)
     {
-        print("refreshActivities: \(supported)")
+        print("refresh: \(supported)")
         for name in supported
         {
             print("ActivitiesDM: Adding activity \(name)")
@@ -73,10 +79,10 @@ extension ActivitiesDataManager: ActivityNotifying
     {
         print("ActivitiesDataManager supportedListChanged")
         let list = hardware.supportedNames
-        refreshActivities(supported: list)
+        refresh(supported: list)
     }
 
-    // Handle activity:percent events
+
     func activityChanged(name: String, percent: Int)
     {
         print("ActivityDataManager: ActivityChanged: \(name)")

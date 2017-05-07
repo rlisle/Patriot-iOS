@@ -38,3 +38,16 @@ class MockHwManager: HwManager
     }
 }
 
+
+//MARK: Testing Methods
+
+extension MockHwManager
+{
+    func sendDelegateSupportedListChanged(names: Set<String>)
+    {
+        supportedNames = names
+        activityDelegate?.supportedListChanged()
+    }
+}
+
+
