@@ -128,7 +128,7 @@ class PhotonIntegrationTests: XCTestCase
                 _ = self.photon?.refreshActivities().then { _ -> Void in
                     if let activities = self.photon?.activities
                     {
-                        XCTAssertEqual(activities["test"], "33")
+                        XCTAssertEqual(activities["test"], 33)
                         expect.fulfill()
                     }
                 }
