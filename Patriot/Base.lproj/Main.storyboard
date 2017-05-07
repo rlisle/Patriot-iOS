@@ -14,10 +14,10 @@
         <scene sceneID="6Xi-dY-hB2">
             <objects>
                 <collectionViewController id="kze-QZ-tiD" customClass="ViewController" customModule="Patriot" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="KDo-pa-Roq">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="KDo-pa-Roq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Prq-3D-DEV">
                             <size key="itemSize" width="250" height="250"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -25,7 +25,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCell" id="Oqh-D3-YMT">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCell" id="Oqh-D3-YMT" customClass="ActivitiesCollectionViewCell" customModule="Patriot" customModuleProvider="target">
                                 <rect key="frame" x="62.5" y="0.0" width="250" height="250"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -36,8 +36,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXS-5k-hVf">
-                                            <rect key="frame" x="8" y="221" width="234" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="8" y="227.5" width="234" height="14.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -52,6 +52,10 @@
                                     <constraint firstAttribute="trailing" secondItem="xvd-vH-G1b" secondAttribute="trailing" id="d4D-d6-I71"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="BXS-5k-hVf" secondAttribute="trailing" id="jwR-Jj-zVv"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="xvd-vH-G1b" id="lsy-Co-L3L"/>
+                                    <outlet property="label" destination="BXS-5k-hVf" id="TqW-os-vds"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>

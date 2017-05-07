@@ -17,7 +17,9 @@ private let reuseIdentifier = "ActivityCell"
 class ViewController: UICollectionViewController
 {
     var dataManager: ActivitiesDataManager?
-
+    let colors = Colors()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,8 +27,20 @@ class ViewController: UICollectionViewController
         {
             appDelegate.appDependencies.configureActivities(viewController: self)
         }
+        
+        addGradient()
+
     }
 
+    
+    func addGradient()
+    {
+        view.backgroundColor = UIColor.clear
+        let backgroundLayer = colors.gl
+        backgroundLayer.frame = view.frame
+        view.layer.insertSublayer(backgroundLayer, at: 0)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool)
     {

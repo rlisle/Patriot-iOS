@@ -10,6 +10,7 @@
 		1A4140F8729E1FC3C7B6B1DF /* Pods_IntegrationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D126776005D773F26E28AEE /* Pods_IntegrationTests.framework */; };
 		70F41E728D67DB2D52369B26 /* Pods_PatriotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC5B585582339570622CC4E /* Pods_PatriotTests.framework */; };
 		9820D3696E6F7AB1A5EEF0EE /* Pods_Patriot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6896CA38F42FD381333A5B0B /* Pods_Patriot.framework */; };
+		E426BEF31EBF65BF0082517A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E426BEF21EBF65BF0082517A /* Colors.swift */; };
 		E432A1481EB607D4003C9E0E /* PhotonIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1461EB607D4003C9E0E /* PhotonIntegrationTests.swift */; };
 		E432A1491EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1471EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift */; };
 		E432A14C1EB607E3003C9E0E /* Photon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A14A1EB607E3003C9E0E /* Photon.swift */; };
@@ -77,6 +78,7 @@
 		9E5DFBFE4CB69660C54284B5 /* Pods-IntegrationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests.release.xcconfig"; sourceTree = "<group>"; };
 		ACFFF650179FA7139DF7089E /* Pods-PatriotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PatriotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PatriotTests/Pods-PatriotTests.release.xcconfig"; sourceTree = "<group>"; };
 		B509096D8564412980F09864 /* Pods-Patriot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Patriot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Patriot/Pods-Patriot.release.xcconfig"; sourceTree = "<group>"; };
+		E426BEF21EBF65BF0082517A /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E432A1461EB607D4003C9E0E /* PhotonIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotonIntegrationTests.swift; sourceTree = "<group>"; };
 		E432A1471EB607D4003C9E0E /* PhotonManagerIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotonManagerIntegrationTests.swift; sourceTree = "<group>"; };
 		E432A14A1EB607E3003C9E0E /* Photon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photon.swift; sourceTree = "<group>"; };
@@ -160,6 +162,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E426BEF11EBF65AE0082517A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E426BEF21EBF65BF0082517A /* Colors.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		E432A14E1EB60852003C9E0E /* Hardware */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +217,7 @@
 		E49EB1741EB4BCA400FBA04D /* Patriot */ = {
 			isa = PBXGroup;
 			children = (
+				E426BEF11EBF65AE0082517A /* UI */,
 				E432A1651EB60EBF003C9E0E /* secret-template.swift */,
 				E432A1571EB60A0A003C9E0E /* secret.swift */,
 				E432A16B1EB62971003C9E0E /* Models */,
@@ -530,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E49EB1781EB4BCA400FBA04D /* ViewController.swift in Sources */,
+				E426BEF31EBF65BF0082517A /* Colors.swift in Sources */,
 				E432A14D1EB607E3003C9E0E /* PhotonManager.swift in Sources */,
 				E432A15C1EB60A7C003C9E0E /* Hardware.swift in Sources */,
 				E49EB1761EB4BCA400FBA04D /* AppDelegate.swift in Sources */,
