@@ -17,8 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
+        disableSleepWhilePluggedIn()
         
         return true
+    }
+    
+    
+    func disableSleepWhilePluggedIn()
+    {
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        if UIDevice.current.batteryState != .unplugged
+        {
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
     }
 }
 
