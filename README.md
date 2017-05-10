@@ -19,8 +19,10 @@ devices that can communicate with each other, and is:
 2. Super simple to program
 3. Reuses existing code, including the Alexa skills, iOS apps, and Photon library code.
 
-Refer to [Alexa Controlled Photon Project without Alexa Coding](https://www.hackster.io/patriot-iot/alexa-controlled-photon-project-without-alexa-coding-f47d84)
-on Hackster.io or my blog at lisles.net for more information.
+I've posted a short video showing it on [YouTube](https://www.youtube.com/watch?v=XLDxsvO_ALY).
+
+Refer to [Patriot iOS App](https://www.hackster.io/patriot/patriot-ios-app-d67a75) and [Alexa Controlled Photon Project without Alexa Coding](https://www.hackster.io/patriot-iot/alexa-controlled-photon-project-without-alexa-coding-f47d84)
+on Hackster.io, or my blog at lisles.net for more information.
 
 ## iOS Apps
 This repository contains the iOS control panel app that allows you to interact with Patriot devices using your 4s or newer iPhone. A separate Patriot-iOS6 reposity is used for code supporting older iPhones (3GS and 4)
