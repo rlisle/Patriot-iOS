@@ -153,7 +153,7 @@ class PhotonManager: NSObject, HwManager
         print("sendCommand: \(activity) percent: \(percent)")
         let data = activity + ":" + String(percent)
         print("Publishing event: \(eventName) data: \(data)")
-        ParticleCloud.sharedInstance().publishEvent(withName: eventName, data: data, isPrivate: false, ttl: 60)
+        ParticleCloud.sharedInstance().publishEvent(withName: eventName, data: data, isPrivate: true, ttl: 60)
         { (error:Error?) in
             if let e = error
             {
@@ -174,7 +174,7 @@ class PhotonManager: NSObject, HwManager
                     print("Subscribe: received event with data \(String(describing: event?.data))")
                     if let eventData = event?.data {
                         let splitArray = eventData.components(separatedBy: ":")
-                        let name = splitArray[0]
+                        let name = splitArray[0].lowercased()
                         if let percent: Int = Int(splitArray[1]), percent >= 0, percent <= 100
                         {
                             self.activityDelegate?.activityChanged(name: name, percent: percent)
