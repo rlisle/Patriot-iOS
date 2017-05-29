@@ -34,6 +34,7 @@
 		E432A16D1EB62E3D003C9E0E /* ActivitiesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */; };
 		E432A16F1EB62FC9003C9E0E /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */; };
 		E432A1711EB63054003C9E0E /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1701EB63054003C9E0E /* AppDependencies.swift */; };
+		E44117571EDC340B0063FD71 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44117561EDC340B0063FD71 /* Interactor.swift */; };
 		E46C4BC21EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
 		E46C4BC31EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
 		E46C4BC41EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
@@ -92,6 +93,7 @@
 		E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesDataManager.swift; sourceTree = "<group>"; };
 		E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
 		E432A1701EB63054003C9E0E /* AppDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		E44117561EDC340B0063FD71 /* Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		E46C4BC11EBE548C0002F2D1 /* HwController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HwController.swift; sourceTree = "<group>"; };
 		E49EB1721EB4BCA400FBA04D /* Patriot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patriot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				E49EB17C1EB4BCA400FBA04D /* Assets.xcassets */,
 				E49EB17E1EB4BCA400FBA04D /* LaunchScreen.storyboard */,
 				E49EB1811EB4BCA400FBA04D /* Info.plist */,
+				E44117561EDC340B0063FD71 /* Interactor.swift */,
 			);
 			path = Patriot;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				E432A15C1EB60A7C003C9E0E /* Hardware.swift in Sources */,
 				E49EB1761EB4BCA400FBA04D /* AppDelegate.swift in Sources */,
 				E46C4BC21EBE548C0002F2D1 /* HwController.swift in Sources */,
+				E44117571EDC340B0063FD71 /* Interactor.swift in Sources */,
 				E432A1541EB609B4003C9E0E /* DeviceNotifying.swift in Sources */,
 				E432A16A1EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift in Sources */,
 				E432A14C1EB607E3003C9E0E /* Photon.swift in Sources */,

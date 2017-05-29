@@ -16,12 +16,17 @@ private let reuseIdentifier = "ActivityCell"
 
 class ViewController: UICollectionViewController
 {
+    var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
     var dataManager: ActivitiesDataManager?
     let colors = Colors()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(configure))
+        screenEdgeRecognizer.edges = .left
+        view.addGestureRecognizer(screenEdgeRecognizer)
         
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate
         {
@@ -30,6 +35,15 @@ class ViewController: UICollectionViewController
         addGradient()
     }
 
+
+    func configure(_ recognizer: UIScreenEdgePanGestureRecognizer)
+    {
+        if recognizer.state == .recognized
+        {
+            print("Edge pan detected")
+        }
+    }
+    
     
     func addGradient()
     {

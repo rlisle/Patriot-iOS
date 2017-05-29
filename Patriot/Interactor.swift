@@ -6,4 +6,10 @@
 //  Copyright © 2017 Ron Lisle. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class Interactor: UIPercentDrivenInteractiveTransition
+{
+    var hasStarted = false
+    var shouldFinish = false
+}
