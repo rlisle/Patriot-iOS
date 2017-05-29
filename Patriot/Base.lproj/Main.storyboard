@@ -14,7 +14,7 @@
         <scene sceneID="6Xi-dY-hB2">
             <objects>
                 <collectionViewController id="kze-QZ-tiD" customClass="ViewController" customModule="Patriot" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="KDo-pa-Roq">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="KDo-pa-Roq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -63,7 +63,18 @@
                             <outlet property="delegate" destination="kze-QZ-tiD" id="8cn-9h-rhv"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="KQX-l2-xde"/>
+                    <navigationItem key="navigationItem" id="KQX-l2-xde">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="HPl-Dk-WhE">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Z44-e9-0j9">
+                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Config"/>
+                                <connections>
+                                    <segue destination="cRo-X4-PTt" kind="presentation" identifier="openConfig" id="B07-xn-w7C"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYb-Tk-UMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -85,10 +96,10 @@
             </objects>
             <point key="canvasLocation" x="-968" y="-503"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Config View Controller-->
         <scene sceneID="qTt-RY-Lgj">
             <objects>
-                <tableViewController id="cRo-X4-PTt" sceneMemberID="viewController">
+                <tableViewController id="cRo-X4-PTt" customClass="ConfigViewController" customModule="Patriot" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="D1R-yd-GJ8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -20,7 +20,6 @@ class ViewController: UICollectionViewController
     var dataManager: ActivitiesDataManager?
     let colors = Colors()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,12 +67,34 @@ class ViewController: UICollectionViewController
             dataManager?.toggleActivity(at: index)
         }
     }
+
+    
+    @IBAction func openConfig(sender: AnyObject)
+    {
+        performSegue(withIdentifier: "openConfig", sender: nil)
+    }
+
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let destinationViewController = segue.destination as? ConfigViewController {
+            destinationViewController.transitioningDelegate = self
+        }
+    }
+}
+
+
+extension ViewController: UIViewControllerTransitioningDelegate
+{
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentConfigAnimator()
+    }
 }
 
 
 // MARK: UICollectionViewDataSource
-extension ViewController {
-
+extension ViewController
+{
     override func numberOfSections(in collectionView: UICollectionView) -> Int
     {
         return 1
