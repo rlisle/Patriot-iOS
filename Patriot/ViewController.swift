@@ -40,6 +40,9 @@ class ViewController: UICollectionViewController
         if recognizer.state == .recognized
         {
             print("Edge pan detected")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let configVC = storyboard.instantiateViewController(withIdentifier :"configViewController")
+            self.navigationController?.present(configVC, animated: true)
         }
     }
     
@@ -57,8 +60,15 @@ class ViewController: UICollectionViewController
     {
         super.viewWillAppear(animated)
         print("Activities viewWillAppear")
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
+    
+    override func viewDidDisappear(_ animated: Bool)
+    {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     
     func tap(_ gestureRecognizer: UIGestureRecognizer)
     {
