@@ -18,4 +18,11 @@ class ConfigViewController: UITableViewController {
     @IBAction func closeMenu(sender: AnyObject) {
         dismiss(animated: true, completion: nil)
     }
+    
+    override func viewDidLayoutSubviews() {
+        if let rect = self.navigationController?.navigationBar.frame {
+            let y = rect.size.height + rect.origin.y
+            self.tableView.contentInset = UIEdgeInsetsMake( y, 0, 0, 0)
+        }
+    }
 }
