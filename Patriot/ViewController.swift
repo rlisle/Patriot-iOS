@@ -24,7 +24,7 @@ class ViewController: UICollectionViewController
         super.viewDidLoad()
         
         screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(configure))
-        screenEdgeRecognizer.edges = .left
+        screenEdgeRecognizer.edges = .right
         view.addGestureRecognizer(screenEdgeRecognizer)
         
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -40,9 +40,7 @@ class ViewController: UICollectionViewController
         if recognizer.state == .recognized
         {
             print("Edge pan detected")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let configVC = storyboard.instantiateViewController(withIdentifier :"configViewController")
-            self.navigationController?.present(configVC, animated: true)
+            performSegue(withIdentifier: "openConfig", sender: nil)
         }
     }
     
@@ -64,8 +62,9 @@ class ViewController: UICollectionViewController
     }
 
     
-    override func viewDidDisappear(_ animated: Bool)
+    override func viewWillDisappear(_ animated: Bool)
     {
+        super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
@@ -79,27 +78,35 @@ class ViewController: UICollectionViewController
     }
 
     
-    @IBAction func openConfig(sender: AnyObject)
+//    @IBAction func openConfig(sender: AnyObject)
+//    {
+//        performSegue(withIdentifier: "openConfig", sender: nil)
+//    }
+
+
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
     {
-        performSegue(withIdentifier: "openConfig", sender: nil)
+        print("shouldPerformSeque")
+        return true
     }
-
-
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if let destinationViewController = segue.destination as? ConfigViewController {
-            destinationViewController.transitioningDelegate = self
-        }
+        print("prepareForSegue")
+//        if let destinationViewController = segue.destination as? ConfigViewController {
+//            destinationViewController.transitioningDelegate = self
+//        }
     }
 }
 
 
-extension ViewController: UIViewControllerTransitioningDelegate
-{
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PresentConfigAnimator()
-    }
-}
+//extension ViewController: UIViewControllerTransitioningDelegate
+//{
+//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        return PresentConfigAnimator()
+//    }
+//}
 
 
 // MARK: UICollectionViewDataSource
