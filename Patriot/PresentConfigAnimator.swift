@@ -18,6 +18,7 @@ extension PresentConfigAnimator : UIViewControllerAnimatedTransitioning
 {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval
     {
+        print("duration")
         return 0.6
     }
     

@@ -40,7 +40,13 @@ class ViewController: UICollectionViewController
         if recognizer.state == .recognized
         {
             print("Edge pan detected")
-            performSegue(withIdentifier: "openConfig", sender: nil)
+// For unknown reasons, the transitioningDelegate methods are not called when using performSegue
+//            performSegue(withIdentifier: "openConfig", sender: nil)
+// so doing it the old fashioned way which works.
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "configViewController")
+            vc.transitioningDelegate = self
+            present(vc, animated: true)
         }
     }
     
@@ -84,7 +90,7 @@ class ViewController: UICollectionViewController
         if let destinationViewController = segue.destination as? ConfigViewController {
         
             print("Setting transitioningDelegate to self")
-            
+            destinationViewController.modalPresentationStyle = .custom  // no effect
             destinationViewController.transitioningDelegate = self
         }
     }
@@ -93,6 +99,7 @@ class ViewController: UICollectionViewController
 
 extension ViewController: UIViewControllerTransitioningDelegate
 {
+    //TODO: these are never called
     func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
     {
         print("interactionControllForPresenting...")
