@@ -2,21 +2,29 @@
 //  PresentConfigAnimator.swift
 //  Patriot
 //
+//  This is the config animation controller
+//
 //  Created by Ron Lisle on 5/29/17.
 //  Copyright © 2017 Ron Lisle. All rights reserved.
 //
 import UIKit
  
-class PresentConfigAnimator : NSObject {
+class PresentConfigAnimator : NSObject
+{
 }
 
 
-extension PresentConfigAnimator : UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+extension PresentConfigAnimator : UIViewControllerAnimatedTransitioning
+{
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval
+    {
         return 0.6
     }
     
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning)
+    {
+        print("animateTransition")
         guard
             let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
             let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)

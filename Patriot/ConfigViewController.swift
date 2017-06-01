@@ -12,7 +12,6 @@ class ConfigViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     @IBAction func closeMenu(sender: AnyObject) {

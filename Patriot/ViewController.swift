@@ -78,29 +78,35 @@ class ViewController: UICollectionViewController
     }
 
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
-    {
-        print("shouldPerformSeque")
-        return true
-    }
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         print("prepareForSegue")
-//        if let destinationViewController = segue.destination as? ConfigViewController {
-//            destinationViewController.transitioningDelegate = self
-//        }
+        if let destinationViewController = segue.destination as? ConfigViewController {
+        
+            print("Setting transitioningDelegate to self")
+            
+            destinationViewController.transitioningDelegate = self
+        }
     }
 }
 
 
-//extension ViewController: UIViewControllerTransitioningDelegate
-//{
-//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        return PresentConfigAnimator()
-//    }
-//}
+extension ViewController: UIViewControllerTransitioningDelegate
+{
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
+    {
+        print("interactionControllForPresenting...")
+        
+        return nil
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    
+        print("animationController(forPresented...")
+        
+        return PresentConfigAnimator()
+    }
+}
 
 
 // MARK: UICollectionViewDataSource

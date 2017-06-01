@@ -171,7 +171,7 @@ class PhotonManager: NSObject, HwManager
             else
             {
                 DispatchQueue.main.async(execute: {
-                    print("Subscribe: received event with data \(String(describing: event?.data))")
+                    //print("Subscribe: received event with data \(String(describing: event?.data))")
                     if let eventData = event?.data {
                         let splitArray = eventData.components(separatedBy: ":")
                         let name = splitArray[0].lowercased()
@@ -181,7 +181,7 @@ class PhotonManager: NSObject, HwManager
                         }
                         else
                         {
-                            print("Event data is not a valid number")
+//                            print("Event data is not a valid number")
                         }
                     }
                     
