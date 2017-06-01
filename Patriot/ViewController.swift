@@ -78,12 +78,6 @@ class ViewController: UICollectionViewController
     }
 
     
-//    @IBAction func openConfig(sender: AnyObject)
-//    {
-//        performSegue(withIdentifier: "openConfig", sender: nil)
-//    }
-
-
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
     {
         print("shouldPerformSeque")
