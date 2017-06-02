@@ -16,6 +16,7 @@ private let reuseIdentifier = "ActivityCell"
 
 class ViewController: UICollectionViewController
 {
+    fileprivate let swipeInteractionController = Interactor()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
     var dataManager: ActivitiesDataManager?
     let colors = Colors()
@@ -23,8 +24,8 @@ class ViewController: UICollectionViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(configure))
-        screenEdgeRecognizer.edges = .right
+        screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleConfigRecognizer))
+        screenEdgeRecognizer.edges = .left
         view.addGestureRecognizer(screenEdgeRecognizer)
         
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -35,12 +36,16 @@ class ViewController: UICollectionViewController
     }
 
 
-    func configure(_ recognizer: UIScreenEdgePanGestureRecognizer)
+    func handleConfigRecognizer(_ recognizer: UIScreenEdgePanGestureRecognizer)
     {
-        if recognizer.state == .recognized
+        print("recognizer handler")
+        if recognizer.state == .began
         {
-            print("Edge pan detected")
             performSegue(withIdentifier: "openConfig", sender: nil)
+        }
+        else
+        {
+            swipeInteractionController.handleGesture(gestureRecognizer: recognizer)
         }
     }
     
@@ -80,12 +85,11 @@ class ViewController: UICollectionViewController
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        print("prepareForSegue")
-        if let destinationViewController = segue.destination as? ConfigViewController {
-        
-            print("Setting transitioningDelegate to self")
+        if let destinationViewController = segue.destination as? ConfigViewController
+        {
             destinationViewController.modalPresentationStyle = .custom  // no effect
             destinationViewController.transitioningDelegate = self
+            swipeInteractionController.wireToViewController(viewController: destinationViewController)
         }
     }
 }
@@ -93,18 +97,12 @@ class ViewController: UICollectionViewController
 
 extension ViewController: UIViewControllerTransitioningDelegate
 {
-    //TODO: these are never called
     func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
     {
-        print("interactionControllForPresenting...")
-        
-        return nil
+        return swipeInteractionController
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    
-        print("animationController(forPresented...")
-        
         return PresentConfigAnimator()
     }
 }

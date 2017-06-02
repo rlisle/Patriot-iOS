@@ -11,6 +11,10 @@ import UIKit
  
 class PresentConfigAnimator : NSObject
 {
+    let configWidth: CGFloat = 0.9
+    let percentThreshold: CGFloat = 0.3
+    let snapshotNumber = 12345
+
 }
 
 
@@ -28,29 +32,26 @@ extension PresentConfigAnimator : UIViewControllerAnimatedTransitioning
         print("animateTransition")
         guard
             let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
+            let snapshot = fromVC.view.snapshotView(afterScreenUpdates: false)
             else {
                 return
         }
         let containerView = transitionContext.containerView
         containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
-        //TODO: move this into guard statement above?
-        if let snapshot = fromVC.view.snapshotView(afterScreenUpdates: false)
+        snapshot.tag = snapshotNumber
+        snapshot.isUserInteractionEnabled = false
+        snapshot.layer.shadowOpacity = 0.7
+        containerView.insertSubview(snapshot, aboveSubview: toVC.view)
+        fromVC.view.isHidden = true
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations:
         {
-            snapshot.tag = ConfigHelper.snapshotNumber
-            snapshot.isUserInteractionEnabled = false
-            snapshot.layer.shadowOpacity = 0.7
-            containerView.insertSubview(snapshot, aboveSubview: toVC.view)
-            fromVC.view.isHidden = true
-            UIView.animate(withDuration: transitionDuration(using: transitionContext), animations:
-            {
-                snapshot.center.x += UIScreen.main.bounds.width * ConfigHelper.configWidth
-            },
-            completion: { _ in
-                fromVC.view.isHidden = false
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-                }
-            )
-        }
+            snapshot.center.x += UIScreen.main.bounds.width * self.configWidth
+        },
+        completion: { _ in
+            fromVC.view.isHidden = false
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            }
+        )
     }
 }
