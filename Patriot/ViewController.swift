@@ -40,13 +40,7 @@ class ViewController: UICollectionViewController
         if recognizer.state == .recognized
         {
             print("Edge pan detected")
-// For unknown reasons, the transitioningDelegate methods are not called when using performSegue
-//            performSegue(withIdentifier: "openConfig", sender: nil)
-// so doing it the old fashioned way which works.
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "configViewController")
-            vc.transitioningDelegate = self
-            present(vc, animated: true)
+            performSegue(withIdentifier: "openConfig", sender: nil)
         }
     }
     

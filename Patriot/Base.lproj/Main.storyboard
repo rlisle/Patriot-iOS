@@ -65,7 +65,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="KQX-l2-xde"/>
                     <connections>
-                        <segue destination="cRo-X4-PTt" kind="show" identifier="openConfig" id="aS3-FA-s4u"/>
+                        <segue destination="cRo-X4-PTt" kind="presentation" identifier="openConfig" id="aS3-FA-s4u"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYb-Tk-UMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
