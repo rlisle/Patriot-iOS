@@ -8,13 +8,24 @@
 
 import UIKit
 
-class ConfigViewController: UITableViewController {
+class ConfigViewController: UITableViewController
+{
+    var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleUnwindRecognizer))
+        screenEdgeRecognizer.edges = .right
+        view.addGestureRecognizer(screenEdgeRecognizer)
     }
 
-    @IBAction func closeMenu(sender: AnyObject) {
-        dismiss(animated: true, completion: nil)
+
+    func handleUnwindRecognizer(_ recognizer: UIScreenEdgePanGestureRecognizer)
+    {
+        if recognizer.state == .began
+        {
+            print("unwind begin")
+            dismiss(animated: true, completion: nil)
+        }
     }
 }

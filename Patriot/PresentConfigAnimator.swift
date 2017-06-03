@@ -11,7 +11,7 @@ import UIKit
  
 class PresentConfigAnimator : NSObject
 {
-    let configWidth: CGFloat = 0.9
+    let configWidth: CGFloat = 1
     let percentThreshold: CGFloat = 0.3
     let snapshotNumber = 12345
 

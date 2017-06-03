@@ -38,7 +38,6 @@ class ViewController: UICollectionViewController
 
     func handleConfigRecognizer(_ recognizer: UIScreenEdgePanGestureRecognizer)
     {
-        print("recognizer handler")
         if recognizer.state == .began
         {
             performSegue(withIdentifier: "openConfig", sender: nil)
