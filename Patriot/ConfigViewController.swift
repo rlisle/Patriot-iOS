@@ -10,10 +10,12 @@ import UIKit
 
 class ConfigViewController: UITableViewController
 {
+    fileprivate let swipeInteractionController = Interactor()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleUnwindRecognizer))
         screenEdgeRecognizer.edges = .right
         view.addGestureRecognizer(screenEdgeRecognizer)
@@ -24,8 +26,13 @@ class ConfigViewController: UITableViewController
     {
         if recognizer.state == .began
         {
-            print("unwind begin")
-            dismiss(animated: true, completion: nil)
+            let transition: CATransition = CATransition()
+            transition.duration = 0.5
+            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.type = kCATransitionReveal
+            transition.subtype = kCATransitionFromRight
+            view.window!.layer.add(transition, forKey: nil)
+            dismiss(animated: false, completion: nil)
         }
     }
 }
