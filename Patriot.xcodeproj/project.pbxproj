@@ -34,6 +34,9 @@
 		E432A16D1EB62E3D003C9E0E /* ActivitiesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */; };
 		E432A16F1EB62FC9003C9E0E /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */; };
 		E432A1711EB63054003C9E0E /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1701EB63054003C9E0E /* AppDependencies.swift */; };
+		E44117571EDC340B0063FD71 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44117561EDC340B0063FD71 /* Interactor.swift */; };
+		E441175D1EDC40070063FD71 /* PresentConfigAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E441175C1EDC40070063FD71 /* PresentConfigAnimator.swift */; };
+		E44117611EDC46D30063FD71 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44117601EDC46D30063FD71 /* ConfigViewController.swift */; };
 		E46C4BC21EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
 		E46C4BC31EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
 		E46C4BC41EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
@@ -92,6 +95,9 @@
 		E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesDataManager.swift; sourceTree = "<group>"; };
 		E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
 		E432A1701EB63054003C9E0E /* AppDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		E44117561EDC340B0063FD71 /* Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
+		E441175C1EDC40070063FD71 /* PresentConfigAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentConfigAnimator.swift; sourceTree = "<group>"; };
+		E44117601EDC46D30063FD71 /* ConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
 		E46C4BC11EBE548C0002F2D1 /* HwController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HwController.swift; sourceTree = "<group>"; };
 		E49EB1721EB4BCA400FBA04D /* Patriot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patriot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +198,26 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		E441175A1EDC3FA20063FD71 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				E44117561EDC340B0063FD71 /* Interactor.swift */,
+				E441175C1EDC40070063FD71 /* PresentConfigAnimator.swift */,
+				E44117601EDC46D30063FD71 /* ConfigViewController.swift */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		E441175B1EDC3FCB0063FD71 /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				E49EB1771EB4BCA400FBA04D /* ViewController.swift */,
+				E432A1691EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift */,
+				E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */,
+			);
+			name = Activities;
+			sourceTree = "<group>";
+		};
 		E49EB1691EB4BCA400FBA04D = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +243,8 @@
 		E49EB1741EB4BCA400FBA04D /* Patriot */ = {
 			isa = PBXGroup;
 			children = (
+				E441175B1EDC3FCB0063FD71 /* Activities */,
+				E441175A1EDC3FA20063FD71 /* Configuration */,
 				E426BEF11EBF65AE0082517A /* UI */,
 				E432A1651EB60EBF003C9E0E /* secret-template.swift */,
 				E432A1571EB60A0A003C9E0E /* secret.swift */,
@@ -224,9 +252,6 @@
 				E432A14E1EB60852003C9E0E /* Hardware */,
 				E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */,
 				E432A1701EB63054003C9E0E /* AppDependencies.swift */,
-				E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */,
-				E432A1691EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift */,
-				E49EB1771EB4BCA400FBA04D /* ViewController.swift */,
 				E49EB1791EB4BCA400FBA04D /* Main.storyboard */,
 				E49EB17C1EB4BCA400FBA04D /* Assets.xcassets */,
 				E49EB17E1EB4BCA400FBA04D /* LaunchScreen.storyboard */,
@@ -540,12 +565,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E441175D1EDC40070063FD71 /* PresentConfigAnimator.swift in Sources */,
 				E49EB1781EB4BCA400FBA04D /* ViewController.swift in Sources */,
 				E426BEF31EBF65BF0082517A /* Colors.swift in Sources */,
 				E432A14D1EB607E3003C9E0E /* PhotonManager.swift in Sources */,
 				E432A15C1EB60A7C003C9E0E /* Hardware.swift in Sources */,
 				E49EB1761EB4BCA400FBA04D /* AppDelegate.swift in Sources */,
 				E46C4BC21EBE548C0002F2D1 /* HwController.swift in Sources */,
+				E44117571EDC340B0063FD71 /* Interactor.swift in Sources */,
 				E432A1541EB609B4003C9E0E /* DeviceNotifying.swift in Sources */,
 				E432A16A1EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift in Sources */,
 				E432A14C1EB607E3003C9E0E /* Photon.swift in Sources */,
@@ -555,6 +582,7 @@
 				E432A1581EB60A0A003C9E0E /* secret.swift in Sources */,
 				E432A16D1EB62E3D003C9E0E /* ActivitiesDataManager.swift in Sources */,
 				E4A6B7BB1EBB6EA0008CDED0 /* HwManager.swift in Sources */,
+				E44117611EDC46D30063FD71 /* ConfigViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

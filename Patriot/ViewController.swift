@@ -16,12 +16,17 @@ private let reuseIdentifier = "ActivityCell"
 
 class ViewController: UICollectionViewController
 {
+    fileprivate let swipeInteractionController = Interactor()
+    var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
     var dataManager: ActivitiesDataManager?
     let colors = Colors()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleConfigRecognizer))
+        screenEdgeRecognizer.edges = .left
+        view.addGestureRecognizer(screenEdgeRecognizer)
         
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate
         {
@@ -30,6 +35,19 @@ class ViewController: UICollectionViewController
         addGradient()
     }
 
+
+    func handleConfigRecognizer(_ recognizer: UIScreenEdgePanGestureRecognizer)
+    {
+        if recognizer.state == .began
+        {
+            performSegue(withIdentifier: "openConfig", sender: nil)
+        }
+        else
+        {
+            swipeInteractionController.handleGesture(gestureRecognizer: recognizer)
+        }
+    }
+    
     
     func addGradient()
     {
@@ -44,8 +62,16 @@ class ViewController: UICollectionViewController
     {
         super.viewWillAppear(animated)
         print("Activities viewWillAppear")
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     
     func tap(_ gestureRecognizer: UIGestureRecognizer)
     {
@@ -54,12 +80,36 @@ class ViewController: UICollectionViewController
             dataManager?.toggleActivity(at: index)
         }
     }
+
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let destinationViewController = segue.destination as? ConfigViewController
+        {
+            destinationViewController.modalPresentationStyle = .custom  // no effect
+            destinationViewController.transitioningDelegate = self
+            swipeInteractionController.wireToViewController(viewController: destinationViewController)
+        }
+    }
+}
+
+
+extension ViewController: UIViewControllerTransitioningDelegate
+{
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?
+    {
+        return swipeInteractionController
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentConfigAnimator()
+    }
 }
 
 
 // MARK: UICollectionViewDataSource
-extension ViewController {
-
+extension ViewController
+{
     override func numberOfSections(in collectionView: UICollectionView) -> Int
     {
         return 1
@@ -162,3 +212,10 @@ extension ViewController : ActivityNotifying
         }
     }
 }
+
+
+extension ViewController    // iBeacon transmitter
+{
+    
+}
+
