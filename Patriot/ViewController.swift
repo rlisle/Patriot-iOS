@@ -9,6 +9,8 @@
 //
 
 import UIKit
+import CoreLocation
+import CoreBluetooth
 
 
 private let reuseIdentifier = "ActivityCell"
@@ -16,8 +18,15 @@ private let reuseIdentifier = "ActivityCell"
 
 class ViewController: UICollectionViewController
 {
+    fileprivate var peripheralManager: CBPeripheralManager?
+    fileprivate let uuid = UUID()
+    fileprivate let identifier = Bundle.main.bundleIdentifier!
+    fileprivate var major: CLBeaconMajorValue = 1
+    fileprivate var minor: CLBeaconMinorValue = 0
+    
     fileprivate let swipeInteractionController = Interactor()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
+    
     var dataManager: ActivitiesDataManager?
     let colors = Colors()
     
@@ -61,7 +70,6 @@ class ViewController: UICollectionViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        print("Activities viewWillAppear")
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
@@ -70,6 +78,18 @@ class ViewController: UICollectionViewController
     {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        let queue = DispatchQueue.global()
+        peripheralManager = CBPeripheralManager(delegate: self, queue: queue)
+//        if let manager = peripheralManager {  // Is this needed? delegate is set above
+//            manager.delegate = self
+//        }
     }
     
     
@@ -214,8 +234,75 @@ extension ViewController : ActivityNotifying
 }
 
 
-extension ViewController    // iBeacon transmitter
+// iBeacon support
+extension ViewController: CBPeripheralManagerDelegate
 {
+    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager)
+    {
+        peripheral.stopAdvertising()
+        print("The peripheral state is ")
+        switch peripheral.state
+        {
+        case .poweredOff:
+            print("Powered off")
+        case .poweredOn:
+            print("Powered on")
+        case .resetting:
+            print("Resetting")
+        case .unauthorized:
+            print("Unauthorized")
+        case .unknown:
+            print("Unknown")
+        case .unsupported:
+            print("Unsupported")
+        }
+        
+        // Make sure bluetooth is powered on
+        if peripheral.state != .poweredOn
+        {
+            let controller = UIAlertController(title: "Bluetooth", message: "Please turn Bluetooth on", preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(controller, animated: true, completion: nil)
+        }
+        else
+        {
+            let region = CLBeaconRegion(proximityUUID: uuid, major: major, minor: minor, identifier: identifier)
+            let manufacturerData = identifier.data(using: String.Encoding.utf8, allowLossyConversion: false)
+            let theUUid = CBUUID(nsuuid: uuid)
+            let dataToBeAdvertised:[String: Any] = [
+                CBAdvertisementDataLocalNameKey: "Patriot Control Panel",
+                CBAdvertisementDataManufacturerDataKey: manufacturerData,
+                CBAdvertisementDataServiceDataKey: [theUUid]
+            ]
+            
+            peripheral.startAdvertising(dataToBeAdvertised)
+        }
+    }
     
+    
+    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?)
+    {
+        if error == nil
+        {
+            print("peripheralManager did start advertising successfully")
+            
+          let message = "Successfully set up your beacon. " +
+          "The unique identifier of our service is: \(uuid.uuidString)"
+
+          let controller = UIAlertController(title: "iBeacon",
+            message: message,
+            preferredStyle: .alert)
+
+          controller.addAction(UIAlertAction(title: "OK",
+            style: .default,
+            handler: nil))
+
+          present(controller, animated: true, completion: nil)
+        }
+        else
+        {
+            print("Failed to advertise our beacon. Error = \(error)")
+        }
+    }
 }
 
