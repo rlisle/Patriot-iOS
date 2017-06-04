@@ -212,3 +212,10 @@ extension ViewController : ActivityNotifying
         }
     }
 }
+
+
+extension ViewController    // iBeacon transmitter
+{
+    
+}
+

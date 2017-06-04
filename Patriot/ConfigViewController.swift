@@ -10,6 +10,11 @@ import UIKit
 
 class ConfigViewController: UITableViewController
 {
+    @IBOutlet weak var transmitBeaconSwitch: UISwitch!
+    @IBOutlet weak var transmitBeaconUUID: UITextField!
+    @IBOutlet weak var transmitBeaconMajor: UITextField!
+    @IBOutlet weak var transmitBeaconMinor: UITextField!
+    
     fileprivate let swipeInteractionController = Interactor()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
 
@@ -34,5 +39,11 @@ class ConfigViewController: UITableViewController
             view.window!.layer.add(transition, forKey: nil)
             dismiss(animated: false, completion: nil)
         }
+    }
+    
+    
+    @IBAction func transmitBeaconDidChange(_ sender: UISwitch)
+    {
+        // 
     }
 }
