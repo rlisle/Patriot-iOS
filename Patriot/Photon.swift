@@ -146,7 +146,7 @@ extension Photon
         return readVariable("Activities")
         .then { result -> Void in
             self.activities = [:]
-            if let result = result {
+            if let result = result, result != "" {
                 self.parseActivities(result)
             }
         }
