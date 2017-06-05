@@ -19,7 +19,8 @@ private let reuseIdentifier = "ActivityCell"
 class ViewController: UICollectionViewController
 {
     fileprivate var peripheralManager: CBPeripheralManager?
-    fileprivate let uuid = UUID()
+    fileprivate let proximityUUID = UUID(uuidString: "50F415E3-85E4-40E1-A0A9-36943E07690F")
+    fileprivate let beaconServiceName = "Patriot Location"
     fileprivate let identifier = Bundle.main.bundleIdentifier!
     fileprivate var major: CLBeaconMajorValue = 1
     fileprivate var minor: CLBeaconMinorValue = 0
@@ -87,9 +88,6 @@ class ViewController: UICollectionViewController
         
         let queue = DispatchQueue.global()
         peripheralManager = CBPeripheralManager(delegate: self, queue: queue)
-//        if let manager = peripheralManager {  // Is this needed? delegate is set above
-//            manager.delegate = self
-//        }
     }
     
     
@@ -266,16 +264,19 @@ extension ViewController: CBPeripheralManagerDelegate
         }
         else
         {
+            guard let uuid = proximityUUID else {
+                print("Beacon UUID is not valid")
+                return
+            }
             let region = CLBeaconRegion(proximityUUID: uuid, major: major, minor: minor, identifier: identifier)
-            let manufacturerData = identifier.data(using: String.Encoding.utf8, allowLossyConversion: false)
-            let theUUid = CBUUID(nsuuid: uuid)
-            let dataToBeAdvertised:[String: Any] = [
-                CBAdvertisementDataLocalNameKey: "Patriot Control Panel",
-                CBAdvertisementDataManufacturerDataKey: manufacturerData,
-                CBAdvertisementDataServiceDataKey: [theUUid]
-            ]
-            
-            peripheral.startAdvertising(dataToBeAdvertised)
+            if let dataToBeAdvertised = region.peripheralData(withMeasuredPower: nil) as? [String: Any]
+            {
+                peripheral.startAdvertising(dataToBeAdvertised)
+            }
+            else
+            {
+                print("Unable to start beacon")
+            }
         }
     }
     
@@ -287,7 +288,7 @@ extension ViewController: CBPeripheralManagerDelegate
             print("peripheralManager did start advertising successfully")
             
           let message = "Successfully set up your beacon. " +
-          "The unique identifier of our service is: \(uuid.uuidString)"
+          "The unique identifier of the \(beaconServiceName) service is: \(proximityUUID)"
 
           let controller = UIAlertController(title: "iBeacon",
             message: message,
