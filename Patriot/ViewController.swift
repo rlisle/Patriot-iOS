@@ -288,7 +288,7 @@ extension ViewController: CBPeripheralManagerDelegate
             print("peripheralManager did start advertising successfully")
             
           let message = "Successfully set up your beacon. " +
-          "The unique identifier of the \(beaconServiceName) service is: \(proximityUUID)"
+          "The unique identifier of the \(beaconServiceName) service is: \(proximityUUID!)"
 
           let controller = UIAlertController(title: "iBeacon",
             message: message,
@@ -302,7 +302,7 @@ extension ViewController: CBPeripheralManagerDelegate
         }
         else
         {
-            print("Failed to advertise our beacon. Error = \(error)")
+            print("Failed to advertise our beacon. Error = \(error!)")
         }
     }
 }

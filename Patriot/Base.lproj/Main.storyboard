@@ -142,21 +142,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="If blank use app bundle ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Akd-ZN-3DP">
-                                                    <rect key="frame" x="57" y="6" width="310" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
-                                                </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UUID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNe-7s-FYV">
-                                                    <rect key="frame" x="8" y="11" width="41" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="UUID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNe-7s-FYV">
+                                                    <rect key="frame" x="16" y="11" width="41" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gVD-dY-AJy" customClass="VSTextField" customModule="Patriot" customModuleProvider="target">
+                                                    <rect key="frame" x="65" y="8" width="302" height="28"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cNe-7s-FYV" firstAttribute="leading" secondItem="ucL-hp-Y6O" secondAttribute="leadingMargin" constant="8" id="NZ2-pc-wJm"/>
+                                                <constraint firstItem="gVD-dY-AJy" firstAttribute="leading" secondItem="cNe-7s-FYV" secondAttribute="trailing" constant="8" id="ZKS-yK-V8D"/>
+                                                <constraint firstItem="cNe-7s-FYV" firstAttribute="centerY" secondItem="gVD-dY-AJy" secondAttribute="centerY" id="elz-JJ-2WF"/>
+                                                <constraint firstAttribute="trailing" secondItem="gVD-dY-AJy" secondAttribute="trailing" constant="8" id="ryx-6L-kqa"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2Oq-07-dVr">
@@ -220,7 +222,7 @@
                         <outlet property="transmitBeaconMajor" destination="dA0-kj-DTA" id="uJY-8N-r0e"/>
                         <outlet property="transmitBeaconMinor" destination="1EP-e1-4eJ" id="z9e-Of-b6f"/>
                         <outlet property="transmitBeaconSwitch" destination="yzR-U9-DBj" id="rol-KW-aTk"/>
-                        <outlet property="transmitBeaconUUID" destination="Akd-ZN-3DP" id="0xM-3E-Vke"/>
+                        <outlet property="transmitBeaconUUID" destination="gVD-dY-AJy" id="BFF-Y6-Oug"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QXI-Sv-uau" userLabel="First Responder" sceneMemberID="firstResponder"/>

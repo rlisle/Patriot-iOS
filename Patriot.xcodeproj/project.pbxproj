@@ -53,6 +53,7 @@
 		E4A6FAE91EBC9F0000CBFD38 /* MockHwManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FAE81EBC9F0000CBFD38 /* MockHwManager.swift */; };
 		E4BC73121EBCA46E00622EDC /* ActivitiesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */; };
 		E4BC73131EBCA4A000622EDC /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */; };
+		E4F68FE01EE82390007CE2DB /* VSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F68FDF1EE82390007CE2DB /* VSTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,7 @@
 		E4A6B7B81EBB6D61008CDED0 /* ActivitiesDataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesDataManagerTests.swift; sourceTree = "<group>"; };
 		E4A6B7BA1EBB6EA0008CDED0 /* HwManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HwManager.swift; sourceTree = "<group>"; };
 		E4A6FAE81EBC9F0000CBFD38 /* MockHwManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHwManager.swift; sourceTree = "<group>"; };
+		E4F68FDF1EE82390007CE2DB /* VSTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSTextField.swift; sourceTree = "<group>"; };
 		FA0E2DDDF2812FD69A804252 /* Pods-Patriot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Patriot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Patriot/Pods-Patriot.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,6 +220,14 @@
 			name = Activities;
 			sourceTree = "<group>";
 		};
+		E4517D4D1EE6D3740068B671 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E4F68FDF1EE82390007CE2DB /* VSTextField.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		E49EB1691EB4BCA400FBA04D = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +253,7 @@
 		E49EB1741EB4BCA400FBA04D /* Patriot */ = {
 			isa = PBXGroup;
 			children = (
+				E4517D4D1EE6D3740068B671 /* UI */,
 				E441175B1EDC3FCB0063FD71 /* Activities */,
 				E441175A1EDC3FA20063FD71 /* Configuration */,
 				E426BEF11EBF65AE0082517A /* UI */,
@@ -565,6 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4F68FE01EE82390007CE2DB /* VSTextField.swift in Sources */,
 				E441175D1EDC40070063FD71 /* PresentConfigAnimator.swift in Sources */,
 				E49EB1781EB4BCA400FBA04D /* ViewController.swift in Sources */,
 				E426BEF31EBF65BF0082517A /* Colors.swift in Sources */,

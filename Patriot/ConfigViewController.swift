@@ -11,7 +11,7 @@ import UIKit
 class ConfigViewController: UITableViewController
 {
     @IBOutlet weak var transmitBeaconSwitch: UISwitch!
-    @IBOutlet weak var transmitBeaconUUID: UITextField!
+    @IBOutlet weak var transmitBeaconUUID: VSTextField!
     @IBOutlet weak var transmitBeaconMajor: UITextField!
     @IBOutlet weak var transmitBeaconMinor: UITextField!
     
@@ -20,6 +20,8 @@ class ConfigViewController: UITableViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        transmitBeaconUUID.formatting = .uuid
         
         screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleUnwindRecognizer))
         screenEdgeRecognizer.edges = .right
