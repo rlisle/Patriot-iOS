@@ -161,9 +161,10 @@ class VSTextField: UITextField {
            Changed it to allow instance variable isHexadecimal to be used
      */
     func makeOnlyDigitsString(_ string: String) -> String {
+        let ucString = string.uppercased()
         let validCharacters = isHexadecimal ? "0123456789ABCDEF" : "0123456789"
         let characterSet: CharacterSet = CharacterSet(charactersIn: validCharacters)
-        let stringArray = string.components(separatedBy: characterSet.inverted)
+        let stringArray = ucString.components(separatedBy: characterSet.inverted)
         let allNumbers = stringArray.joined(separator: "")
         return allNumbers
     }
