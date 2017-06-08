@@ -16,7 +16,13 @@ import PromiseKit
 class AppDependencies
 {
     let hwManager = PhotonManager()
-    let settings = SettingsModel()
+    let store = UserDefaultsSettingsStore()
+    let settings: SettingsModel
+    
+    init()
+    {
+        settings = SettingsModel(store: store)
+    }
     
     func configureActivities(viewController: ViewController)
     {

@@ -11,9 +11,44 @@
 
 import Foundation
 
+enum SettingsKey: String
+{
+    case beaconUUID
+    case beaconTransmitOn
+    case beaconIdentifier
+}
+
+
+protocol SettingsStore
+{
+    func set(_ bool: Bool, forKey: SettingsKey)
+    func set(_ string: String, forKey: SettingsKey)
+}
+
+
+class UserDefaultsSettingsStore: SettingsStore
+{
+    func set(_ bool: Bool, forKey: SettingsKey)
+    {
+    
+    }
+    
+    
+    func set(_ string: String, forKey: SettingsKey)
+    {
+    
+    }
+}
+
 class SettingsModel
 {
-    var beaconUUID: String = "00000000-0000-0000-0000-000000000000"
-    var beaconTransmit: Bool = false
-    var beaconIdentifier: String = "PatriotBeacon"
+//    var beaconUUID: String = "00000000-0000-0000-0000-000000000000"
+//    var beaconTransmit: Bool = false
+//    var beaconIdentifier: String = "PatriotBeacon"
+    let store: SettingsStore
+    
+    init(store: SettingsStore)
+    {
+        self.store = store
+    }
 }

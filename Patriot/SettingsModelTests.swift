@@ -8,20 +8,45 @@
 
 import XCTest
 
+class MockSettingsStore: SettingsStore
+{
+    var key: SettingsKey?
+    var bool: Bool?
+    var string: String?
+    
+    func set(_ bool: Bool, forKey: SettingsKey)
+    {
+        key = forKey
+        self.bool = bool
+    }
+    
+    
+    func set(_ string: String, forKey: SettingsKey)
+    {
+        key = forKey
+        self.string = string
+    }
+}
+
+
 class SettingsModelTests: XCTestCase
 {
     var settings: SettingsModel!
+    var mockStore: MockSettingsStore!
     
     override func setUp()
     {
         super.setUp()
         
-        settings = SettingsModel()
+        mockStore = MockSettingsStore()
+        settings = SettingsModel(store: mockStore)
     }
+
     
     func testSettingsInstantiated()
     {
         XCTAssertNotNil(settings)
     }
     
+
 }
