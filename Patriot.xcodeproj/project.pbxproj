@@ -37,6 +37,8 @@
 		E44117571EDC340B0063FD71 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44117561EDC340B0063FD71 /* Interactor.swift */; };
 		E441175D1EDC40070063FD71 /* PresentConfigAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E441175C1EDC40070063FD71 /* PresentConfigAnimator.swift */; };
 		E44117611EDC46D30063FD71 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44117601EDC46D30063FD71 /* ConfigViewController.swift */; };
+		E458B5DC1EE89A26000C6809 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458B5DB1EE89A26000C6809 /* SettingsModel.swift */; };
+		E458B5DD1EE89A26000C6809 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458B5DB1EE89A26000C6809 /* SettingsModel.swift */; };
 		E46C4BC21EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
 		E46C4BC31EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
 		E46C4BC41EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
@@ -51,6 +53,7 @@
 		E4A6B7BE1EBB6F56008CDED0 /* HwManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6B7BA1EBB6EA0008CDED0 /* HwManager.swift */; };
 		E4A6B7BF1EBB6F57008CDED0 /* HwManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6B7BA1EBB6EA0008CDED0 /* HwManager.swift */; };
 		E4A6FAE91EBC9F0000CBFD38 /* MockHwManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6FAE81EBC9F0000CBFD38 /* MockHwManager.swift */; };
+		E4ABF8CA1EE9759200D875CB /* SettingsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABF8C91EE9759200D875CB /* SettingsModelTests.swift */; };
 		E4BC73121EBCA46E00622EDC /* ActivitiesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */; };
 		E4BC73131EBCA4A000622EDC /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */; };
 		E4F68FE01EE82390007CE2DB /* VSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F68FDF1EE82390007CE2DB /* VSTextField.swift */; };
@@ -99,6 +102,7 @@
 		E44117561EDC340B0063FD71 /* Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		E441175C1EDC40070063FD71 /* PresentConfigAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentConfigAnimator.swift; sourceTree = "<group>"; };
 		E44117601EDC46D30063FD71 /* ConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
+		E458B5DB1EE89A26000C6809 /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		E46C4BC11EBE548C0002F2D1 /* HwController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HwController.swift; sourceTree = "<group>"; };
 		E49EB1721EB4BCA400FBA04D /* Patriot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patriot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 		E4A6B7B81EBB6D61008CDED0 /* ActivitiesDataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesDataManagerTests.swift; sourceTree = "<group>"; };
 		E4A6B7BA1EBB6EA0008CDED0 /* HwManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HwManager.swift; sourceTree = "<group>"; };
 		E4A6FAE81EBC9F0000CBFD38 /* MockHwManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHwManager.swift; sourceTree = "<group>"; };
+		E4ABF8C91EE9759200D875CB /* SettingsModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModelTests.swift; sourceTree = "<group>"; };
 		E4F68FDF1EE82390007CE2DB /* VSTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSTextField.swift; sourceTree = "<group>"; };
 		FA0E2DDDF2812FD69A804252 /* Pods-Patriot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Patriot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Patriot/Pods-Patriot.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +178,7 @@
 		E426BEF11EBF65AE0082517A /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				E4F68FDF1EE82390007CE2DB /* VSTextField.swift */,
 				E426BEF21EBF65BF0082517A /* Colors.swift */,
 			);
 			name = UI;
@@ -206,6 +212,8 @@
 				E44117561EDC340B0063FD71 /* Interactor.swift */,
 				E441175C1EDC40070063FD71 /* PresentConfigAnimator.swift */,
 				E44117601EDC46D30063FD71 /* ConfigViewController.swift */,
+				E458B5DB1EE89A26000C6809 /* SettingsModel.swift */,
+				E4ABF8C91EE9759200D875CB /* SettingsModelTests.swift */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -218,14 +226,6 @@
 				E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */,
 			);
 			name = Activities;
-			sourceTree = "<group>";
-		};
-		E4517D4D1EE6D3740068B671 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				E4F68FDF1EE82390007CE2DB /* VSTextField.swift */,
-			);
-			name = UI;
 			sourceTree = "<group>";
 		};
 		E49EB1691EB4BCA400FBA04D = {
@@ -253,7 +253,6 @@
 		E49EB1741EB4BCA400FBA04D /* Patriot */ = {
 			isa = PBXGroup;
 			children = (
-				E4517D4D1EE6D3740068B671 /* UI */,
 				E441175B1EDC3FCB0063FD71 /* Activities */,
 				E441175A1EDC3FA20063FD71 /* Configuration */,
 				E426BEF11EBF65AE0082517A /* UI */,
@@ -592,6 +591,7 @@
 				E432A15F1EB60BAE003C9E0E /* ActivityNotifying.swift in Sources */,
 				E432A1711EB63054003C9E0E /* AppDependencies.swift in Sources */,
 				E432A1581EB60A0A003C9E0E /* secret.swift in Sources */,
+				E458B5DC1EE89A26000C6809 /* SettingsModel.swift in Sources */,
 				E432A16D1EB62E3D003C9E0E /* ActivitiesDataManager.swift in Sources */,
 				E4A6B7BB1EBB6EA0008CDED0 /* HwManager.swift in Sources */,
 				E44117611EDC46D30063FD71 /* ConfigViewController.swift in Sources */,
@@ -610,10 +610,12 @@
 				E432A1631EB60DB2003C9E0E /* Hardware.swift in Sources */,
 				E4BC73121EBCA46E00622EDC /* ActivitiesDataManager.swift in Sources */,
 				E432A14F1EB60879003C9E0E /* Photon.swift in Sources */,
+				E4ABF8CA1EE9759200D875CB /* SettingsModelTests.swift in Sources */,
 				E46C4BC31EBE548C0002F2D1 /* HwController.swift in Sources */,
 				E4BC73131EBCA4A000622EDC /* ActivityModel.swift in Sources */,
 				E432A1551EB609CA003C9E0E /* DeviceNotifying.swift in Sources */,
 				E4A6B7B91EBB6D61008CDED0 /* ActivitiesDataManagerTests.swift in Sources */,
+				E458B5DD1EE89A26000C6809 /* SettingsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

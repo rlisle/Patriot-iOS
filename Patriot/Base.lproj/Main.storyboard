@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="kkd-rc-3XL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="kkd-rc-3XL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -142,21 +142,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="UUID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNe-7s-FYV">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UUID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNe-7s-FYV">
                                                     <rect key="frame" x="16" y="11" width="41" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gVD-dY-AJy" customClass="VSTextField" customModule="Patriot" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVD-dY-AJy" customClass="VSTextField" customModule="Patriot" customModuleProvider="target">
                                                     <rect key="frame" x="65" y="8" width="302" height="28"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="cNe-7s-FYV" firstAttribute="centerY" secondItem="ucL-hp-Y6O" secondAttribute="centerY" id="40n-h5-qnM"/>
+                                                <constraint firstItem="gVD-dY-AJy" firstAttribute="centerY" secondItem="ucL-hp-Y6O" secondAttribute="centerY" id="ACH-bf-nR8"/>
+                                                <constraint firstItem="gVD-dY-AJy" firstAttribute="top" secondItem="ucL-hp-Y6O" secondAttribute="topMargin" id="HxF-sn-Kcb"/>
                                                 <constraint firstItem="cNe-7s-FYV" firstAttribute="leading" secondItem="ucL-hp-Y6O" secondAttribute="leadingMargin" constant="8" id="NZ2-pc-wJm"/>
                                                 <constraint firstItem="gVD-dY-AJy" firstAttribute="leading" secondItem="cNe-7s-FYV" secondAttribute="trailing" constant="8" id="ZKS-yK-V8D"/>
-                                                <constraint firstItem="cNe-7s-FYV" firstAttribute="centerY" secondItem="gVD-dY-AJy" secondAttribute="centerY" id="elz-JJ-2WF"/>
                                                 <constraint firstAttribute="trailing" secondItem="gVD-dY-AJy" secondAttribute="trailing" constant="8" id="ryx-6L-kqa"/>
                                             </constraints>
                                         </tableViewCellContentView>

@@ -16,6 +16,7 @@ import PromiseKit
 class AppDependencies
 {
     let hwManager = PhotonManager()
+    let settings = SettingsModel()
     
     func configureActivities(viewController: ViewController)
     {

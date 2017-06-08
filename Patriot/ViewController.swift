@@ -258,9 +258,12 @@ extension ViewController: CBPeripheralManagerDelegate
         // Make sure bluetooth is powered on
         if peripheral.state != .poweredOn
         {
-            let controller = UIAlertController(title: "Bluetooth", message: "Please turn Bluetooth on", preferredStyle: .alert)
-            controller.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(controller, animated: true, completion: nil)
+            DispatchQueue.main.async
+            {
+                let controller = UIAlertController(title: "Bluetooth", message: "Please turn Bluetooth on", preferredStyle: .alert)
+                controller.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(controller, animated: true, completion: nil)
+            }
         }
         else
         {
