@@ -59,8 +59,6 @@ class UserDefaultsSettingsStore: SettingsStore
 
 class SettingsModel
 {
-//    var beaconUUID: String = "00000000-0000-0000-0000-000000000000"
-//    var beaconTransmit: Bool = false
 //    var beaconIdentifier: String = "PatriotBeacon"
     let store: SettingsStore
     
@@ -70,6 +68,24 @@ class SettingsModel
         }
         set {
             store.set(newValue, forKey: .beaconUUID)
+        }
+    }
+    
+    var beaconTransmitOn: Bool? {
+        get {
+            return store.getBool(forKey: .beaconTransmitOn)
+        }
+        set {
+            store.set(newValue, forKey: .beaconTransmitOn)
+        }
+    }
+    
+    var beaconIdentifier: String? {
+        get {
+            return store.getString(forKey: .beaconIdentifier)
+        }
+        set {
+            store.set(newValue, forKey: .beaconIdentifier)
         }
     }
     

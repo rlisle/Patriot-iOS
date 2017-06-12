@@ -55,26 +55,59 @@ class SettingsModelTests: XCTestCase
     }
 
     
-    func testSettingsInstantiated()
-    {
-        XCTAssertNotNil(settings)
-    }
-    
-    
     func testBeaconUUIDReadsValueFromStore()
     {
         mockStore.string = "00000000-0000-0000-0000-000000000000"
-
-        let beaconUUID = settings.beaconUUID
-        XCTAssertEqual(beaconUUID, mockStore.string)
+        XCTAssertEqual(settings.beaconUUID, mockStore.string)
     }
+
 
     func testSetBeaconUUIDWritesValueToStore()
     {
         let testString = "00000001-0002-0003-0004-000000000005"
-
         settings.beaconUUID = testString
         XCTAssertEqual(testString, mockStore.string)
     }
+
+
+    func testBeaconTransmitReadsValueFromStore()
+    {
+        mockStore.bool = true
+        XCTAssertNotNil(settings.beaconTransmitOn)
+        XCTAssertTrue(settings.beaconTransmitOn!)
+    }
+
+
+    func testSetBeaconTransmitWritesTrueValueToStore()
+    {
+        settings.beaconTransmitOn = true
+        XCTAssertNotNil(mockStore.bool)
+        XCTAssertTrue(mockStore.bool!)
+    }
+
+
+    func testSetBeaconTransmitWritesFalseValueToStore()
+    {
+        settings.beaconTransmitOn = false
+        XCTAssertNotNil(mockStore.bool)
+        XCTAssertFalse(mockStore.bool!)
+    }
+    
+    
+    func testBeaconIdentifierReadsValueFromStore()
+    {
+        mockStore.string = "PatriotBeacon"
+        XCTAssertEqual(settings.beaconIdentifier, mockStore.string)
+    }
+
+
+    func testSetBeaconIdentifierWritesValueToStore()
+    {
+        let testString = "PatriotBeacon"
+        settings.beaconIdentifier = testString
+        XCTAssertEqual(testString, mockStore.string)
+    }
+
+
 
 }
