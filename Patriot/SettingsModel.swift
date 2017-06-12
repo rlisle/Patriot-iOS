@@ -11,6 +11,7 @@
 
 import Foundation
 
+// We'll use the default string rawValue for the key in the store
 enum SettingsKey: String
 {
     case beaconUUID
@@ -21,22 +22,38 @@ enum SettingsKey: String
 
 protocol SettingsStore
 {
-    func set(_ bool: Bool, forKey: SettingsKey)
-    func set(_ string: String, forKey: SettingsKey)
+    func getBool(forKey: SettingsKey) -> Bool?
+    func set(_ bool: Bool?, forKey: SettingsKey)
+    func getString(forKey: SettingsKey) -> String?
+    func set(_ string: String?, forKey: SettingsKey)
 }
 
 
 class UserDefaultsSettingsStore: SettingsStore
 {
-    func set(_ bool: Bool, forKey: SettingsKey)
-    {
+    let userDefaults = UserDefaults.standard
     
+    func getBool(forKey key: SettingsKey) -> Bool?
+    {
+        return userDefaults.bool(forKey: key.rawValue)
     }
     
     
-    func set(_ string: String, forKey: SettingsKey)
+    func set(_ bool: Bool?, forKey key: SettingsKey)
     {
+        userDefaults.set(bool, forKey: key.rawValue)
+    }
     
+    
+    func getString(forKey key: SettingsKey) -> String?
+    {
+        return userDefaults.string(forKey: key.rawValue)
+    }
+    
+    
+    func set(_ string: String?, forKey key: SettingsKey)
+    {
+        userDefaults.set(string, forKey: key.rawValue)
     }
 }
 
@@ -46,6 +63,16 @@ class SettingsModel
 //    var beaconTransmit: Bool = false
 //    var beaconIdentifier: String = "PatriotBeacon"
     let store: SettingsStore
+    
+    var beaconUUID: String? {
+        get {
+            return store.getString(forKey: .beaconUUID)
+        }
+        set {
+            store.set(newValue, forKey: .beaconUUID)
+        }
+    }
+    
     
     init(store: SettingsStore)
     {

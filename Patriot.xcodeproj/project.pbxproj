@@ -799,7 +799,6 @@
 			baseConfigurationReference = 779D5DD5F11EDD9C9DD9ECAA /* Pods-PatriotTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 65NFWK9633;
 				INFOPLIST_FILE = PatriotTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -815,7 +814,6 @@
 			baseConfigurationReference = ACFFF650179FA7139DF7089E /* Pods-PatriotTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 65NFWK9633;
 				INFOPLIST_FILE = PatriotTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

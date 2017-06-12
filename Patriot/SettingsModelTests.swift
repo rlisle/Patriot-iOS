@@ -13,15 +13,27 @@ class MockSettingsStore: SettingsStore
     var key: SettingsKey?
     var bool: Bool?
     var string: String?
+
+    func getBool(forKey: SettingsKey) -> Bool?
+    {
+        return bool
+    }
     
-    func set(_ bool: Bool, forKey: SettingsKey)
+    
+    func set(_ bool: Bool?, forKey: SettingsKey)
     {
         key = forKey
         self.bool = bool
     }
     
     
-    func set(_ string: String, forKey: SettingsKey)
+    func getString(forKey: SettingsKey) -> String?
+    {
+        return string
+    }
+    
+    
+    func set(_ string: String?, forKey: SettingsKey)
     {
         key = forKey
         self.string = string
@@ -48,5 +60,21 @@ class SettingsModelTests: XCTestCase
         XCTAssertNotNil(settings)
     }
     
+    
+    func testBeaconUUIDReadsValueFromStore()
+    {
+        mockStore.string = "00000000-0000-0000-0000-000000000000"
+
+        let beaconUUID = settings.beaconUUID
+        XCTAssertEqual(beaconUUID, mockStore.string)
+    }
+
+    func testSetBeaconUUIDWritesValueToStore()
+    {
+        let testString = "00000001-0002-0003-0004-000000000005"
+
+        settings.beaconUUID = testString
+        XCTAssertEqual(testString, mockStore.string)
+    }
 
 }
