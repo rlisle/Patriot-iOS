@@ -15,7 +15,7 @@ import Foundation
 enum SettingsKey: String
 {
     case beaconUUID
-    case beaconTransmitOn
+    case isBeaconTransmitOn
     case beaconIdentifier
 }
 
@@ -59,7 +59,6 @@ class UserDefaultsSettingsStore: SettingsStore
 
 class SettingsModel
 {
-//    var beaconIdentifier: String = "PatriotBeacon"
     let store: SettingsStore
     
     var beaconUUID: String? {
@@ -71,12 +70,12 @@ class SettingsModel
         }
     }
     
-    var beaconTransmitOn: Bool? {
+    var isBeaconTransmitOn: Bool? {
         get {
-            return store.getBool(forKey: .beaconTransmitOn)
+            return store.getBool(forKey: .isBeaconTransmitOn)
         }
         set {
-            store.set(newValue, forKey: .beaconTransmitOn)
+            store.set(newValue, forKey: .isBeaconTransmitOn)
         }
     }
     

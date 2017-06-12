@@ -73,14 +73,14 @@ class SettingsModelTests: XCTestCase
     func testBeaconTransmitReadsValueFromStore()
     {
         mockStore.bool = true
-        XCTAssertNotNil(settings.beaconTransmitOn)
-        XCTAssertTrue(settings.beaconTransmitOn!)
+        XCTAssertNotNil(settings.isBeaconTransmitOn)
+        XCTAssertTrue(settings.isBeaconTransmitOn!)
     }
 
 
     func testSetBeaconTransmitWritesTrueValueToStore()
     {
-        settings.beaconTransmitOn = true
+        settings.isBeaconTransmitOn = true
         XCTAssertNotNil(mockStore.bool)
         XCTAssertTrue(mockStore.bool!)
     }
@@ -88,7 +88,7 @@ class SettingsModelTests: XCTestCase
 
     func testSetBeaconTransmitWritesFalseValueToStore()
     {
-        settings.beaconTransmitOn = false
+        settings.isBeaconTransmitOn = false
         XCTAssertNotNil(mockStore.bool)
         XCTAssertFalse(mockStore.bool!)
     }
