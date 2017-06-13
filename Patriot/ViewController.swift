@@ -30,6 +30,7 @@ class ViewController: UICollectionViewController
     
     var dataManager: ActivitiesDataManager?
     let colors = Colors()
+    var settings: SettingsModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,8 +87,11 @@ class ViewController: UICollectionViewController
     {
         super.viewDidAppear(animated)
         
-        let queue = DispatchQueue.global()
-        peripheralManager = CBPeripheralManager(delegate: self, queue: queue)
+        if settings != nil && settings?.isBeaconTransmitOn == true
+        {
+            let queue = DispatchQueue.global()
+            peripheralManager = CBPeripheralManager(delegate: self, queue: queue)
+        }
     }
     
     

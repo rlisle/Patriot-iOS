@@ -26,6 +26,7 @@ class AppDependencies
     
     func configureActivities(viewController: ViewController)
     {
+        viewController.settings = settings
         let activitiesDataManager = ActivitiesDataManager(hardware: hwManager)
         viewController.dataManager = activitiesDataManager
         hwManager.activityDelegate = activitiesDataManager
