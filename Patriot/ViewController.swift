@@ -14,16 +14,13 @@ import CoreBluetooth
 
 
 private let reuseIdentifier = "ActivityCell"
+private let beaconUUID = UUID(uuidString: "50F415E3-85E4-40E1-A0A9-36943E07690F")
+private let beaconServiceName = "Patriot Location"
 
 
 class ViewController: UICollectionViewController
 {
-    fileprivate var peripheralManager: CBPeripheralManager?
-    fileprivate let proximityUUID = UUID(uuidString: "50F415E3-85E4-40E1-A0A9-36943E07690F")
-    fileprivate let beaconServiceName = "Patriot Location"
-    fileprivate let identifier = Bundle.main.bundleIdentifier!
-    fileprivate var major: CLBeaconMajorValue = 1
-    fileprivate var minor: CLBeaconMinorValue = 0
+    fileprivate var beaconTransmitter: BeaconTransmitter?
     
     fileprivate let swipeInteractionController = Interactor()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
@@ -87,10 +84,9 @@ class ViewController: UICollectionViewController
     {
         super.viewDidAppear(animated)
         
-        if settings != nil && settings?.isBeaconTransmitOn == true
+        if beaconUUID != nil && settings != nil && settings?.isBeaconTransmitOn == true
         {
-            let queue = DispatchQueue.global()
-            peripheralManager = CBPeripheralManager(delegate: self, queue: queue)
+            beaconTransmitter = BeaconTransmitter(uuid: beaconUUID!, serviceName: beaconServiceName)
         }
     }
     
@@ -237,80 +233,4 @@ extension ViewController : ActivityNotifying
 
 
 // iBeacon support
-extension ViewController: CBPeripheralManagerDelegate
-{
-    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager)
-    {
-        peripheral.stopAdvertising()
-        print("The peripheral state is ")
-        switch peripheral.state
-        {
-        case .poweredOff:
-            print("Powered off")
-        case .poweredOn:
-            print("Powered on")
-        case .resetting:
-            print("Resetting")
-        case .unauthorized:
-            print("Unauthorized")
-        case .unknown:
-            print("Unknown")
-        case .unsupported:
-            print("Unsupported")
-        }
-        
-        // Make sure bluetooth is powered on
-        if peripheral.state != .poweredOn
-        {
-            DispatchQueue.main.async
-            {
-                let controller = UIAlertController(title: "Bluetooth", message: "Please turn Bluetooth on", preferredStyle: .alert)
-                controller.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(controller, animated: true, completion: nil)
-            }
-        }
-        else
-        {
-            guard let uuid = proximityUUID else {
-                print("Beacon UUID is not valid")
-                return
-            }
-            let region = CLBeaconRegion(proximityUUID: uuid, major: major, minor: minor, identifier: identifier)
-            if let dataToBeAdvertised = region.peripheralData(withMeasuredPower: nil) as? [String: Any]
-            {
-                peripheral.startAdvertising(dataToBeAdvertised)
-            }
-            else
-            {
-                print("Unable to start beacon")
-            }
-        }
-    }
-    
-    
-    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?)
-    {
-        if error == nil
-        {
-            print("peripheralManager did start advertising successfully")
-            
-          let message = "Successfully set up your beacon. " +
-          "The unique identifier of the \(beaconServiceName) service is: \(proximityUUID!)"
-
-          let controller = UIAlertController(title: "iBeacon",
-            message: message,
-            preferredStyle: .alert)
-
-          controller.addAction(UIAlertAction(title: "OK",
-            style: .default,
-            handler: nil))
-
-          present(controller, animated: true, completion: nil)
-        }
-        else
-        {
-            print("Failed to advertise our beacon. Error = \(error!)")
-        }
-    }
-}
 
