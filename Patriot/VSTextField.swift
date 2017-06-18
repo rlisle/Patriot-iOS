@@ -57,7 +57,9 @@ class VSTextField: UITextField {
     /**
      True if input number is hexadecimal eg. UUID
      */
-    var isHexadecimal = false
+    var isHexadecimal: Bool {
+        return formatting == .uuid
+    }
     
     /**
      Max length of input string. You don't have to set this if you set formattingPattern.
@@ -75,17 +77,14 @@ class VSTextField: UITextField {
             case .socialSecurityNumber:
                 self.formattingPattern = "***-**–****"
                 self.replacementChar = "*"
-                self.isHexadecimal = false
                 
             case .phoneNumber:
                 self.formattingPattern = "***-***–****"
                 self.replacementChar = "*"
-                self.isHexadecimal = false
                 
             case .uuid:
                 self.formattingPattern = "********-****-****-****-************"
                 self.replacementChar = "*"
-                self.isHexadecimal = true
                 
             default:
                 self.maxLength = 0
@@ -153,22 +152,9 @@ class VSTextField: UITextField {
      Final text without formatting characters (read-only)
      */
     var finalStringWithoutFormatting : String {
-        return makeOnlyDigitsString(_textWithoutSecureBullets)
+        return _textWithoutSecureBullets.keepOnlyDigits(isHexadecimal: isHexadecimal)
     }
 
-    /**
-     Note: This was a class method for some reason
-           Changed it to allow instance variable isHexadecimal to be used
-     */
-    func makeOnlyDigitsString(_ string: String) -> String {
-        let ucString = string.uppercased()
-        let validCharacters = isHexadecimal ? "0123456789ABCDEF" : "0123456789"
-        let characterSet: CharacterSet = CharacterSet(charactersIn: validCharacters)
-        let stringArray = ucString.components(separatedBy: characterSet.inverted)
-        let allNumbers = stringArray.joined(separator: "")
-        return allNumbers
-    }
-    
     // MARK: - INTERNAL
     fileprivate var _formatedSecureTextEntry = false
     
@@ -195,7 +181,7 @@ class VSTextField: UITextField {
         }
         
         if formatting != .noFormatting && currentTextForFormatting.characters.count > 0 && formattingPattern.characters.count > 0 {
-            let tempString = makeOnlyDigitsString(currentTextForFormatting)
+            let tempString = currentTextForFormatting.keepOnlyDigits(isHexadecimal: isHexadecimal)
             
             var finalText = ""
             var finalSecureText = ""
@@ -244,6 +230,19 @@ class VSTextField: UITextField {
                 _textWithoutSecureBullets = _textWithoutSecureBullets.substring(to: _textWithoutSecureBullets.characters.index(_textWithoutSecureBullets.startIndex, offsetBy: maxLength))
             }
         }
+    }
+}
+
+
+extension String {
+
+    func keepOnlyDigits(isHexadecimal: Bool) -> String {
+        let ucString = self.uppercased()
+        let validCharacters = isHexadecimal ? "0123456789ABCDEF" : "0123456789"
+        let characterSet: CharacterSet = CharacterSet(charactersIn: validCharacters)
+        let stringArray = ucString.components(separatedBy: characterSet.inverted)
+        let allNumbers = stringArray.joined(separator: "")
+        return allNumbers
     }
 }
 

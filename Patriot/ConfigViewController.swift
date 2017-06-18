@@ -15,7 +15,7 @@ class ConfigViewController: UITableViewController
     @IBOutlet weak var transmitBeaconMajor: UITextField!
     @IBOutlet weak var transmitBeaconMinor: UITextField!
     
-    fileprivate let swipeInteractionController = Interactor()
+    fileprivate let swipeInteractionController = InteractiveTransition()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
 
     override func viewDidLoad() {

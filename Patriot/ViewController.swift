@@ -22,7 +22,7 @@ class ViewController: UICollectionViewController
 {
     fileprivate var beaconTransmitter: BeaconTransmitter?
     
-    fileprivate let swipeInteractionController = Interactor()
+    fileprivate let swipeInteractionController = InteractiveTransition()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
     
     var dataManager: ActivitiesDataManager?
