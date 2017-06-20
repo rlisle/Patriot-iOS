@@ -51,7 +51,7 @@ class ConfigViewController: UITableViewController
     {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self,
-                                    selector: #selector(textFieldDidChange),
+                                    selector: #selector(self.textFieldDidChange),
                                     name: NSNotification.Name.UITextFieldTextDidChange,
                                     object: nil)
     }
@@ -85,14 +85,30 @@ class ConfigViewController: UITableViewController
     }
     
     
-    @objc func textFieldDidChange(sender : AnyObject) {
+    func textFieldDidChange(sender : AnyObject) {
         guard let notification = sender as? NSNotification,
             let textFieldChanged = notification.object as? UITextField,
             textFieldChanged == self.transmitBeaconUUID else
         {
                 return
         }
-        print("UUID changed: \(transmitBeaconUUID.text)")
-        //TODO: handle text
+        if let uuidString = transmitBeaconUUID.text
+        {
+            print("UUID changed: \(uuidString)")
+            if isValidUUID(string: uuidString)
+            {
+                print("Is valid UUID")
+            }
+        }
+    }
+    
+    
+    fileprivate func isValidUUID(string: String) -> Bool
+    {
+        if string.characters.count != 32
+        {
+            return false
+        }
+        return true
     }
 }
