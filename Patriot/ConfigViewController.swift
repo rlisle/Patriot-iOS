@@ -2,6 +2,12 @@
 //  ConfigViewController.swift
 //  Patriot
 //
+//  When the Beacon UUID, major, and minor are invalid,
+//  the enable switch will be off and disabled.
+//
+//  So after making changes, the switch will need to be turned on.
+//  At that point, the data will be read and activated.
+//
 //  Created by Ron Lisle on 5/29/17.
 //  Copyright © 2017 Ron Lisle. All rights reserved.
 //
@@ -29,6 +35,35 @@ class ConfigViewController: UITableViewController
     }
 
 
+    override func viewDidAppear(_ animated: Bool)
+    {
+        registerForNotifications()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        unregisterForNotifications()
+    }
+    
+    
+    func registerForNotifications()
+    {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                    selector: #selector(textFieldDidChange),
+                                    name: NSNotification.Name.UITextFieldTextDidChange,
+                                    object: nil)
+    }
+    
+    
+    func unregisterForNotifications()
+    {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+    
+
     func handleUnwindRecognizer(_ recognizer: UIScreenEdgePanGestureRecognizer)
     {
         if recognizer.state == .began
@@ -46,6 +81,18 @@ class ConfigViewController: UITableViewController
     
     @IBAction func transmitBeaconDidChange(_ sender: UISwitch)
     {
-        // 
+        print("Transmit switch did change: \(transmitBeaconSwitch.isOn)")
+    }
+    
+    
+    @objc func textFieldDidChange(sender : AnyObject) {
+        guard let notification = sender as? NSNotification,
+            let textFieldChanged = notification.object as? UITextField,
+            textFieldChanged == self.transmitBeaconUUID else
+        {
+                return
+        }
+        print("UUID changed: \(transmitBeaconUUID.text)")
+        //TODO: handle text
     }
 }
