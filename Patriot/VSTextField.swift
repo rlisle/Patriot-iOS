@@ -85,6 +85,7 @@ class VSTextField: UITextField {
             case .uuid:
                 self.formattingPattern = "********-****-****-****-************"
                 self.replacementChar = "*"
+                formatting = .uuid
                 
             default:
                 self.maxLength = 0
