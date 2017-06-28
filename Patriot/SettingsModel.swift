@@ -4,6 +4,7 @@
 //
 //  This object implements a model for persisting user settings.
 //  It is expected to be injected into classes needing it.
+//  Defaults are provided if not previously saved.
 //
 //  Created by Ron Lisle on 6/7/17.
 //  Copyright © 2017 Ron Lisle. All rights reserved.
@@ -15,6 +16,8 @@ import Foundation
 enum SettingsKey: String
 {
     case beaconUUID
+    case beaconMajor
+    case beaconMinor
     case isBeaconTransmitOn
     case beaconIdentifier
 }
@@ -24,6 +27,8 @@ protocol SettingsStore
 {
     func getBool(forKey: SettingsKey) -> Bool?
     func set(_ bool: Bool?, forKey: SettingsKey)
+    func getInt(forKey: SettingsKey) -> Int?
+    func set(_ int: Int?, forKey: SettingsKey)
     func getString(forKey: SettingsKey) -> String?
     func set(_ string: String?, forKey: SettingsKey)
 }
@@ -45,6 +50,18 @@ class UserDefaultsSettingsStore: SettingsStore
     }
     
     
+    func getInt(forKey key: SettingsKey) -> Int?
+    {
+        return userDefaults.integer(forKey: key.rawValue)
+    }
+    
+    
+    func set(_ int: Int?, forKey key: SettingsKey)
+    {
+        userDefaults.set(int, forKey: key.rawValue)
+    }
+    
+    
     func getString(forKey key: SettingsKey) -> String?
     {
         return userDefaults.string(forKey: key.rawValue)
@@ -57,31 +74,51 @@ class UserDefaultsSettingsStore: SettingsStore
     }
 }
 
-class SettingsModel
+class Settings
 {
     let store: SettingsStore
     
-    var beaconUUID: String? {
+    var beaconUUID: String {
         get {
-            return store.getString(forKey: .beaconUUID)
+            return store.getString(forKey: .beaconUUID) ?? ""
         }
         set {
             store.set(newValue, forKey: .beaconUUID)
         }
     }
     
-    var isBeaconTransmitOn: Bool? {
+    var beaconMajor: Int {
         get {
-            return store.getBool(forKey: .isBeaconTransmitOn)
+            return store.getInt(forKey: .beaconMajor) ?? 1
+        }
+        set {
+            store.set(newValue, forKey: .beaconMajor)
+        }
+    }
+    
+    
+    var beaconMinor: Int {
+        get {
+            return store.getInt(forKey: .beaconMinor) ?? 1
+        }
+        set {
+            store.set(newValue, forKey: .beaconMinor)
+        }
+    }
+    
+    
+    var isBeaconTransmitOn: Bool {
+        get {
+            return store.getBool(forKey: .isBeaconTransmitOn) ?? false
         }
         set {
             store.set(newValue, forKey: .isBeaconTransmitOn)
         }
     }
     
-    var beaconIdentifier: String? {
+    var beaconIdentifier: String {
         get {
-            return store.getString(forKey: .beaconIdentifier)
+            return store.getString(forKey: .beaconIdentifier) ?? "Unnamed"
         }
         set {
             store.set(newValue, forKey: .beaconIdentifier)

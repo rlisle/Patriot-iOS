@@ -27,7 +27,7 @@ class ViewController: UICollectionViewController
     
     var dataManager: ActivitiesDataManager?
     let colors = Colors()
-    var settings: SettingsModel?
+    var settings: Settings?
     
     override func viewDidLoad() {
         super.viewDidLoad()

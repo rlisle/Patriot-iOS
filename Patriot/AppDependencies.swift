@@ -17,11 +17,11 @@ class AppDependencies
 {
     let hwManager = PhotonManager()
     let store = UserDefaultsSettingsStore()
-    let settings: SettingsModel
+    let settings: Settings
     
     init()
     {
-        settings = SettingsModel(store: store)
+        settings = Settings(store: store)
     }
     
     func configureActivities(viewController: ViewController)
