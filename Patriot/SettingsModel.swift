@@ -78,16 +78,24 @@ class Settings
 {
     let store: SettingsStore
     
-    var beaconUUID: String {
+    var beaconUUID: String
+    {
         get {
-            return store.getString(forKey: .beaconUUID) ?? ""
+            if let uuid = store.getString(forKey: .beaconUUID)
+            {
+                return  uuid
+            }
+            let uuid = UUID().uuidString
+            store.set(uuid, forKey: .beaconUUID)
+            return uuid
         }
         set {
             store.set(newValue, forKey: .beaconUUID)
         }
     }
     
-    var beaconMajor: Int {
+    var beaconMajor: Int
+    {
         get {
             return store.getInt(forKey: .beaconMajor) ?? 1
         }

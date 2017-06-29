@@ -14,66 +14,6 @@
 
 import UIKit
 
-class BeaconXmitData
-{
-    static let TransmitBeaconUUIDKey = "TransmitBeaconUUID"
-    static let TransmitBeaconMajorKey = "TransmitBeaconMajor"
-    static let TransmitBeaconMinorKey = "TransmitBeaconMinor"
-    static let TransmitBeaconSwitchKey = "TransmitBeaconSwitch"
-    
-    var identifier: String = "Unnamed"
-    var uuid: String = ""
-    var major: Int = 1
-    var minor: Int = 1
-    var isEnabled: Bool = false
-    
-    func isDataValid() -> Bool
-    {
-        return isValidUUID() && isValidMajor() && isValidMinor()
-    }
-    
-    
-    fileprivate func isValidUUID() -> Bool
-    {
-        if uuid.characters.count != 32
-        {
-            return false
-        }
-        return true
-    }
-    
-    
-    fileprivate func isValidMajor() -> Bool
-    {
-        if major >= 0 && major <= 255
-        {
-            return true
-        }
-        return false
-    }
-    
-    
-    fileprivate func isValidMinor() -> Bool
-    {
-        if minor >= 0 && minor <= 255
-        {
-            return true
-        }
-        return false
-    }
-    
-    
-    func loadFromStore(_ store: Settings)
-    {
-        uuid = store.beaconUUID
-        identifier = store.beaconIdentifier
-        major = store.beaconMajor
-        minor = store.beaconMinor
-        isEnabled = store.isBeaconTransmitOn
-    }
-}
-
-
 class ConfigViewController: UITableViewController
 {
     @IBOutlet weak var transmitBeaconSwitch: UISwitch!
@@ -82,7 +22,7 @@ class ConfigViewController: UITableViewController
     @IBOutlet weak var transmitBeaconMinor: UITextField!
  
     let settings = Settings(store: UserDefaultsSettingsStore())
-    var beaconXmitData = BeaconXmitData()
+    var beaconXmitData: BeaconXmitData?
     
     fileprivate let swipeInteractionController = InteractiveTransition()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
@@ -92,7 +32,7 @@ class ConfigViewController: UITableViewController
         print("config viewDidLoad")
         
         transmitBeaconUUID.formatting = .uuid
-        beaconXmitData.loadFromStore(settings)
+        beaconXmitData = BeaconXmitData(store: settings)
         
         screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleUnwindRecognizer))
         screenEdgeRecognizer.edges = .right
@@ -109,7 +49,6 @@ class ConfigViewController: UITableViewController
     
     override func viewWillDisappear(_ animated: Bool)
     {
-        print("config viewWillDisappear")
         unregisterForNotifications()
     }
     
@@ -126,12 +65,14 @@ class ConfigViewController: UITableViewController
     
     func initializeDisplayValues()
     {
-        
-        transmitBeaconUUID.text = beaconXmitData.uuid
-        transmitBeaconMajor.text = String(beaconXmitData.major)
-        transmitBeaconMinor.text = String(beaconXmitData.minor)
-        transmitBeaconSwitch.isOn = beaconXmitData.isEnabled
-        activateBeaconIfDataIsValid()
+        guard let xmitData = beaconXmitData else
+        {
+            fatalError("beaconXmitData was not set")
+        }
+        transmitBeaconUUID.text = xmitData.uuid
+        transmitBeaconMajor.text = String(xmitData.major)
+        transmitBeaconMinor.text = String(xmitData.minor)
+        transmitBeaconSwitch.isOn = xmitData.isEnabled
     }
     
     
@@ -160,7 +101,11 @@ class ConfigViewController: UITableViewController
     @IBAction func transmitBeaconDidChange(_ sender: UISwitch)
     {
         print("Transmit switch did change: \(sender.isOn)")
-        beaconXmitData.isEnabled = sender.isOn
+        beaconXmitData?.isEnabled = sender.isOn
+        if sender.isOn
+        {
+            activateBeaconIfDataIsValid()
+        }
     }
     
     
@@ -181,11 +126,11 @@ class ConfigViewController: UITableViewController
                     break
                 case self.transmitBeaconMajor:
                     print("major changed")
-                    saveBeaconMajor(string: textString)
+                    beaconMajorDidChange(string: textString)
                     break
                 case self.transmitBeaconMinor:
                     print("minor changed")
-                    saveBeaconMinor(string: textString)
+                    beaconMinorDidChange(string: textString)
                     break
                 default:
                     print("unknown text field")
@@ -197,23 +142,47 @@ class ConfigViewController: UITableViewController
     
     fileprivate func uuidDidChange(string: String)
     {
-        beaconXmitData.uuid = string
+        let stringWithoutDashes = string.replacingOccurrences(of: "-", with: "")
+        beaconXmitData?.uuid = stringWithoutDashes
         activateBeaconIfDataIsValid()
+    }
+    
+
+    fileprivate func beaconMajorDidChange(string: String)
+    {
+        if let value = Int(string)
+        {
+            beaconXmitData?.major = value
+            activateBeaconIfDataIsValid()
+        }
+    }
+    
+    
+    fileprivate func beaconMinorDidChange(string: String)
+    {
+        if let value = Int(string)
+        {
+            beaconXmitData?.minor = value
+            activateBeaconIfDataIsValid()
+        }
     }
     
     
     fileprivate func activateBeaconIfDataIsValid()
     {
         print("activateBeaconIfDataIsValid")
-        if beaconXmitData.isDataValid()
+        guard beaconXmitData != nil else {
+            fatalError("beaconXmitData not set")
+        }
+        if beaconXmitData!.isDataValid()
         {
             print("Is valid beacon data")
-            transmitBeaconSwitch.isEnabled = true
+            //TODO: enable beacon
         }
         else
         {
             print("Disabling xmit beacon")
-            transmitBeaconSwitch.isEnabled = false
+            //TODO: disable beacon
         }
     }
 }
