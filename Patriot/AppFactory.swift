@@ -1,8 +1,8 @@
 //
-//  AppDependencies.swift
+//  AppFactory.swift
 //  Patriot
 //
-//  This module contains relationships between modules.
+//  This module manages the creation and relationship between modules.
 //  It is accessible from the AppDelegate.
 //
 //  Created by Ron Lisle on 11/4/16.
@@ -13,7 +13,7 @@ import UIKit
 import PromiseKit
 
 
-class AppDependencies
+class AppFactory
 {
     let hwManager = PhotonManager()
     let store = UserDefaultsSettingsStore()

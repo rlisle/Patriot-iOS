@@ -33,7 +33,7 @@
 		E432A16A1EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1691EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift */; };
 		E432A16D1EB62E3D003C9E0E /* ActivitiesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */; };
 		E432A16F1EB62FC9003C9E0E /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */; };
-		E432A1711EB63054003C9E0E /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1701EB63054003C9E0E /* AppDependencies.swift */; };
+		E432A1711EB63054003C9E0E /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1701EB63054003C9E0E /* AppFactory.swift */; };
 		E43C65E61F05217500491819 /* BeaconXmitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C65E51F05217500491819 /* BeaconXmitData.swift */; };
 		E44117571EDC340B0063FD71 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44117561EDC340B0063FD71 /* InteractiveTransition.swift */; };
 		E441175D1EDC40070063FD71 /* PresentConfigAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E441175C1EDC40070063FD71 /* PresentConfigAnimator.swift */; };
@@ -100,7 +100,7 @@
 		E432A1691EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesCollectionViewCell.swift; sourceTree = "<group>"; };
 		E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesDataManager.swift; sourceTree = "<group>"; };
 		E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
-		E432A1701EB63054003C9E0E /* AppDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		E432A1701EB63054003C9E0E /* AppFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
 		E43C65E51F05217500491819 /* BeaconXmitData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconXmitData.swift; sourceTree = "<group>"; };
 		E44117561EDC340B0063FD71 /* InteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
 		E441175C1EDC40070063FD71 /* PresentConfigAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentConfigAnimator.swift; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 				E432A16B1EB62971003C9E0E /* Models */,
 				E432A14E1EB60852003C9E0E /* Hardware */,
 				E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */,
-				E432A1701EB63054003C9E0E /* AppDependencies.swift */,
+				E432A1701EB63054003C9E0E /* AppFactory.swift */,
 				E49EB1791EB4BCA400FBA04D /* Main.storyboard */,
 				E49EB17C1EB4BCA400FBA04D /* Assets.xcassets */,
 				E49EB17E1EB4BCA400FBA04D /* LaunchScreen.storyboard */,
@@ -605,7 +605,7 @@
 				E432A16F1EB62FC9003C9E0E /* ActivityModel.swift in Sources */,
 				E432A15F1EB60BAE003C9E0E /* ActivityNotifying.swift in Sources */,
 				E43C65E61F05217500491819 /* BeaconXmitData.swift in Sources */,
-				E432A1711EB63054003C9E0E /* AppDependencies.swift in Sources */,
+				E432A1711EB63054003C9E0E /* AppFactory.swift in Sources */,
 				E432A1581EB60A0A003C9E0E /* secret.swift in Sources */,
 				E458B5DC1EE89A26000C6809 /* SettingsModel.swift in Sources */,
 				E432A16D1EB62E3D003C9E0E /* ActivitiesDataManager.swift in Sources */,

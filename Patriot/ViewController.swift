@@ -38,7 +38,7 @@ class ViewController: UICollectionViewController
         
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate
         {
-            appDelegate.appDependencies.configureActivities(viewController: self)
+            appDelegate.appFactory.configureActivities(viewController: self)
         }
         addGradient()
     }
