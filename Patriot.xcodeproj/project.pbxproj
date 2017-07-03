@@ -206,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				E458B5DB1EE89A26000C6809 /* SettingsModel.swift */,
+				E4ABF8C91EE9759200D875CB /* SettingsModelTests.swift */,
 				E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */,
 			);
 			name = Models;
@@ -217,7 +218,6 @@
 				E44117561EDC340B0063FD71 /* InteractiveTransition.swift */,
 				E441175C1EDC40070063FD71 /* PresentConfigAnimator.swift */,
 				E44117601EDC46D30063FD71 /* ConfigViewController.swift */,
-				E4ABF8C91EE9759200D875CB /* SettingsModelTests.swift */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";

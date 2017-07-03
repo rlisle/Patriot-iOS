@@ -86,7 +86,7 @@ class ViewController: UICollectionViewController
         
         if beaconUUID != nil && settings != nil && settings?.isBeaconTransmitOn == true
         {
-            beaconTransmitter = BeaconTransmitter(uuid: beaconUUID!, serviceName: beaconServiceName)
+            beaconTransmitter = BeaconTransmitter(settings: settings!)
         }
     }
     

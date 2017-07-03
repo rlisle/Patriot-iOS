@@ -18,10 +18,14 @@ class AppFactory
     let hwManager = PhotonManager()
     let store = UserDefaultsSettingsStore()
     let settings: Settings
+    let xmitBeacon: BeaconTransmitting
     
     init()
     {
         settings = Settings(store: store)
+        let uuid = NSUUID(uuidString: settings.beaconUUID)
+        let serviceName = settings.beaconIdentifier
+        xmitBeacon = BeaconTransmitter(settings: settings)
     }
     
     func configureActivities(viewController: ViewController)

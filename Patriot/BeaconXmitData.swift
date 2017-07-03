@@ -10,6 +10,8 @@ import Foundation
 
 class BeaconXmitData
 {
+    let store: Settings
+    
     var identifier: String {
         get {
             return store.beaconIdentifier
@@ -55,7 +57,6 @@ class BeaconXmitData
         }
     }
 
-    let store: Settings
     
     init(store: Settings)
     {

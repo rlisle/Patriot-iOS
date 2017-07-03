@@ -36,8 +36,8 @@ class BeaconTransmitter: NSObject
 {
     var state: BeaconTransmittingState
     
-    fileprivate let uuid: UUID
-    fileprivate let serviceName: String
+    //TODO: change to subset protocol (eg. BeaconSettings)
+    var settings: Settings
     
     fileprivate var peripheralManager: CBPeripheralManager?
     
@@ -45,11 +45,10 @@ class BeaconTransmitter: NSObject
     fileprivate let major: CLBeaconMajorValue = 1
     fileprivate let minor: CLBeaconMinorValue = 0
     
-    init(uuid: UUID, serviceName: String)
+    init(settings: Settings)
     {
         state = .unknown
-        self.uuid = uuid
-        self.serviceName = serviceName
+        self.settings = settings
     }
 }
 
@@ -60,6 +59,7 @@ extension BeaconTransmitter: BeaconTransmitting
     {
         if enable == true
         {
+            print("BEACON TRANSMITTER: Started")
             let queue = DispatchQueue.global()
             peripheralManager = CBPeripheralManager(delegate: self, queue: queue)
         }
@@ -67,6 +67,7 @@ extension BeaconTransmitter: BeaconTransmitting
         {
             if peripheralManager != nil
             {
+                print("BEACON TRANSMITTER: Stopped")
                 peripheralManager!.stopAdvertising()
                 peripheralManager = nil
                 state = .poweredOff
@@ -105,6 +106,15 @@ extension BeaconTransmitter: CBPeripheralManagerDelegate
         
         if state == .poweredOn
         {
+            guard let uuid = UUID(uuidString: settings.beaconUUID) else
+            {
+                print("Invalid transmit beacon UUID")
+                
+                return
+            }
+            let major = CLBeaconMajorValue(settings.beaconMajor)
+            let minor = CLBeaconMinorValue(settings.beaconMinor)
+            let identifier = settings.beaconIdentifier
             let region = CLBeaconRegion(proximityUUID: uuid, major: major, minor: minor, identifier: identifier)
             if let dataToBeAdvertised = region.peripheralData(withMeasuredPower: nil) as? [String: Any]
             {

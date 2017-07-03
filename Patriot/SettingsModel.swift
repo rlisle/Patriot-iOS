@@ -13,6 +13,8 @@
 import Foundation
 
 // We'll use the default string rawValue for the key in the store
+//TODO: This is not extensible. Cases cannot be extended.
+//      Use strings + unit tests
 enum SettingsKey: String
 {
     case beaconUUID
@@ -78,6 +80,71 @@ class Settings
 {
     let store: SettingsStore
     
+//    var beaconUUID: String
+//    {
+//        get {
+//            if let uuid = store.getString(forKey: .beaconUUID)
+//            {
+//                return  uuid
+//            }
+//            let uuid = UUID().uuidString
+//            store.set(uuid, forKey: .beaconUUID)
+//            return uuid
+//        }
+//        set {
+//            store.set(newValue, forKey: .beaconUUID)
+//        }
+//    }
+//    
+//    var beaconMajor: Int
+//    {
+//        get {
+//            return store.getInt(forKey: .beaconMajor) ?? 1
+//        }
+//        set {
+//            store.set(newValue, forKey: .beaconMajor)
+//        }
+//    }
+//    
+//    
+//    var beaconMinor: Int {
+//        get {
+//            return store.getInt(forKey: .beaconMinor) ?? 1
+//        }
+//        set {
+//            store.set(newValue, forKey: .beaconMinor)
+//        }
+//    }
+//    
+//    
+//    var isBeaconTransmitOn: Bool {
+//        get {
+//            return store.getBool(forKey: .isBeaconTransmitOn) ?? false
+//        }
+//        set {
+//            store.set(newValue, forKey: .isBeaconTransmitOn)
+//        }
+//    }
+//    
+//    var beaconIdentifier: String {
+//        get {
+//            return store.getString(forKey: .beaconIdentifier) ?? "Unnamed"
+//        }
+//        set {
+//            store.set(newValue, forKey: .beaconIdentifier)
+//        }
+//    }
+    
+    
+    init(store: SettingsStore)
+    {
+        self.store = store
+    }
+}
+
+
+extension Settings
+{
     var beaconUUID: String
     {
         get {
@@ -131,11 +198,5 @@ class Settings
         set {
             store.set(newValue, forKey: .beaconIdentifier)
         }
-    }
-    
-    
-    init(store: SettingsStore)
-    {
-        self.store = store
     }
 }

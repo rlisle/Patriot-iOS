@@ -7,15 +7,19 @@
 //
 
 import XCTest
+@testable import Patriot
 
 class MockSettingsStore: SettingsStore
 {
     var key: SettingsKey?
     var bool: Bool?
+    var intValue: Int?
     var string: String?
 
     func getBool(forKey: SettingsKey) -> Bool?
     {
+        key = forKey
+        
         return bool
     }
     
@@ -24,6 +28,21 @@ class MockSettingsStore: SettingsStore
     {
         key = forKey
         self.bool = bool
+    }
+    
+    
+    func getInt(forKey: SettingsKey) -> Int?
+    {
+        key = forKey
+        
+        return intValue
+    }
+    
+    
+    func set(_ intValue: Int?, forKey: SettingsKey)
+    {
+        key = forKey
+        self.intValue = intValue
     }
     
     
@@ -43,7 +62,7 @@ class MockSettingsStore: SettingsStore
 
 class SettingsModelTests: XCTestCase
 {
-    var settings: SettingsModel!
+    var settings: Settings!
     var mockStore: MockSettingsStore!
     
     override func setUp()
@@ -51,7 +70,7 @@ class SettingsModelTests: XCTestCase
         super.setUp()
         
         mockStore = MockSettingsStore()
-        settings = SettingsModel(store: mockStore)
+        settings = Settings(store: mockStore)
     }
 
     
@@ -73,8 +92,7 @@ class SettingsModelTests: XCTestCase
     func testBeaconTransmitReadsValueFromStore()
     {
         mockStore.bool = true
-        XCTAssertNotNil(settings.isBeaconTransmitOn)
-        XCTAssertTrue(settings.isBeaconTransmitOn!)
+        XCTAssertTrue(settings.isBeaconTransmitOn)
     }
 
 
