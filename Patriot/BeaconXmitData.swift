@@ -2,6 +2,9 @@
 //  BeaconXmitData.swift
 //  Patriot
 //
+//  This model extends Settings to provide persisted 
+//  settings with specific defaults.
+//
 //  Created by Ron Lisle on 6/29/17.
 //  Copyright © 2017 Ron Lisle. All rights reserved.
 //

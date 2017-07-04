@@ -23,8 +23,6 @@ class AppFactory
     init()
     {
         settings = Settings(store: store)
-        let uuid = NSUUID(uuidString: settings.beaconUUID)
-        let serviceName = settings.beaconIdentifier
         xmitBeacon = BeaconTransmitter(settings: settings)
     }
     

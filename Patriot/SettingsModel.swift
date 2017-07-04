@@ -1,5 +1,5 @@
 //
-//  SettingsModel.swift
+//  SettingsExtension.swift
 //  Patriot
 //
 //  This object implements a model for persisting user settings.
