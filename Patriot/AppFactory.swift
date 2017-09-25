@@ -4,6 +4,7 @@
 //
 //  This module manages the creation and relationship between modules.
 //  It is accessible from the AppDelegate.
+//  It has a lifetime of the entire app.
 //
 //  Created by Ron Lisle on 11/4/16.
 //  Copyright © 2016 Ron Lisle. All rights reserved.
@@ -12,16 +13,18 @@
 import UIKit
 import PromiseKit
 
-
 class AppFactory
 {
+    let window: UIWindow
     let hwManager = PhotonManager()
     let store = UserDefaultsSettingsStore()
     let settings: Settings
+//    let flow: FlowController
     let xmitBeacon: BeaconTransmitting
     
-    init()
+    init(window: UIWindow)
     {
+        self.window = window
         settings = Settings(store: store)
         xmitBeacon = BeaconTransmitter(settings: settings)
     }

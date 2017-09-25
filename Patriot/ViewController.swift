@@ -38,7 +38,8 @@ class ViewController: UICollectionViewController
         
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate
         {
-            appDelegate.appFactory.configureActivities(viewController: self)
+            //TODO: inject factory into init
+            appDelegate.appFactory?.configureActivities(viewController: self)
         }
         addGradient()
     }
