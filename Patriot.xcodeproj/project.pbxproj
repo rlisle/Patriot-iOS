@@ -179,13 +179,9 @@
 		E432A14E1EB60852003C9E0E /* Hardware */ = {
 			isa = PBXGroup;
 			children = (
-				E432A15E1EB60BAE003C9E0E /* ActivityNotifying.swift */,
-				E432A1531EB609B4003C9E0E /* DeviceNotifying.swift */,
-				E432A15B1EB60A7C003C9E0E /* Hardware.swift */,
+				E4AA2229209B8D6100B9EE0A /* Protocols */,
 				E432A14A1EB607E3003C9E0E /* Photon.swift */,
 				E432A14B1EB607E3003C9E0E /* PhotonManager.swift */,
-				E4A6B7BA1EBB6EA0008CDED0 /* HwManager.swift */,
-				E46C4BC11EBE548C0002F2D1 /* HwController.swift */,
 			);
 			name = Hardware;
 			sourceTree = "<group>";
@@ -279,6 +275,18 @@
 				E49EB19D1EB4C43C00FBA04D /* Info.plist */,
 			);
 			path = IntegrationTests;
+			sourceTree = "<group>";
+		};
+		E4AA2229209B8D6100B9EE0A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E432A15E1EB60BAE003C9E0E /* ActivityNotifying.swift */,
+				E432A1531EB609B4003C9E0E /* DeviceNotifying.swift */,
+				E432A15B1EB60A7C003C9E0E /* Hardware.swift */,
+				E4A6B7BA1EBB6EA0008CDED0 /* HwManager.swift */,
+				E46C4BC11EBE548C0002F2D1 /* HwController.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
