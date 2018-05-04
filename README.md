@@ -2,7 +2,7 @@
 Patriot is an open source, Arduino hobby IoT project using 
 Particle.io devices, Alexa, and iOS apps.
 
-<img src="https://www.lucidchart.com/publicSegments/view/e3bd6201-11ed-484a-a632-496d1f8f6c8a/image.png" alt="Patriot IoT Diagram" style="width: 640px;"/>
+<img src="https://www.lucidchart.com/publicSegments/view/3100ab57-a51d-4509-bf89-a9be454d2b94/image.png" alt="Patriot IoT Diagram" style="width: 640px;"/>
 
 It is intended to help other hobbyists quickly create Internet-of-Things
 projects that can be controlled using Voice (Alexa) and iOS devices
@@ -26,6 +26,8 @@ on Hackster.io, or my blog at lisles.net for more information.
 
 ## iOS Apps
 This repository contains the iOS control panel app that allows you to interact with Patriot devices using your 4s or newer iPhone. A separate Patriot-iOS6 reposity is used for code supporting older iPhones (3GS and 4)
+
+<img src="https://www.lucidchart.com/publicSegments/view/b9a7d4a3-cd5f-4e69-90ff-0701760fd1f9/image.png" alt="Patriot IoT Diagram" style="width: 640px;"/>
 
 This app can be used to control devices from your iPhone or iPad.
 For example, you can use your old iOS devices as control panels
