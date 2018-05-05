@@ -9,17 +9,25 @@
 //
 
 import UIKit
+import CoreLocation
+import CoreBluetooth
 
 
 private let reuseIdentifier = "ActivityCell"
+private let beaconUUID = UUID(uuidString: "50F415E3-85E4-40E1-A0A9-36943E07690F")
+private let beaconServiceName = "Patriot Location"
 
 
 class ViewController: UICollectionViewController
 {
-    fileprivate let swipeInteractionController = Interactor()
+    fileprivate var beaconTransmitter: BeaconTransmitter?
+    
+    fileprivate let swipeInteractionController = InteractiveTransition()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
+    
     var dataManager: ActivitiesDataManager?
     let colors = Colors()
+    var settings: Settings?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +38,8 @@ class ViewController: UICollectionViewController
         
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate
         {
-            appDelegate.appDependencies.configureActivities(viewController: self)
+            //TODO: inject factory into init
+            appDelegate.appFactory?.configureActivities(viewController: self)
         }
         addGradient()
     }
@@ -61,7 +70,6 @@ class ViewController: UICollectionViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        print("Activities viewWillAppear")
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
@@ -70,6 +78,17 @@ class ViewController: UICollectionViewController
     {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        if beaconUUID != nil && settings != nil && settings?.isBeaconTransmitOn == true
+        {
+            beaconTransmitter = BeaconTransmitter(settings: settings!)
+        }
     }
     
     
@@ -214,8 +233,5 @@ extension ViewController : ActivityNotifying
 }
 
 
-extension ViewController    // iBeacon transmitter
-{
-    
-}
+// iBeacon support
 
