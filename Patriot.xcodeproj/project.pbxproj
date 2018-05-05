@@ -202,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				E458B5DB1EE89A26000C6809 /* SettingsModel.swift */,
-				E4ABF8C91EE9759200D875CB /* SettingsModelTests.swift */,
 				E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */,
 			);
 			name = Models;
@@ -287,6 +286,7 @@
 				E49EB18C1EB4BCA400FBA04D /* Info.plist */,
 				E4A6B7B81EBB6D61008CDED0 /* ActivitiesDataManagerTests.swift */,
 				E4A6FAE81EBC9F0000CBFD38 /* MockHwManager.swift */,
+				E4ABF8C91EE9759200D875CB /* SettingsModelTests.swift */,
 			);
 			path = PatriotTests;
 			sourceTree = "<group>";
