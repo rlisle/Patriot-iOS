@@ -19,14 +19,11 @@ class AppFactory
     let hwManager = PhotonManager()
     let store = UserDefaultsSettingsStore()
     let settings: Settings
-//    let flow: FlowController
-    let xmitBeacon: BeaconTransmitting
     
     init(window: UIWindow)
     {
         self.window = window
         settings = Settings(store: store)
-        xmitBeacon = BeaconTransmitter(settings: settings)
     }
     
     func configureActivities(viewController: ViewController)

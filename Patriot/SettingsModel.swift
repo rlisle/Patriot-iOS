@@ -17,11 +17,8 @@ import Foundation
 //      Use strings + unit tests
 enum SettingsKey: String
 {
-    case beaconUUID
-    case beaconMajor
-    case beaconMinor
-    case isBeaconTransmitOn
-    case beaconIdentifier
+    case particleUser
+    case particlePassword
 }
 
 
@@ -80,62 +77,6 @@ class Settings
 {
     let store: SettingsStore
     
-//    var beaconUUID: String
-//    {
-//        get {
-//            if let uuid = store.getString(forKey: .beaconUUID)
-//            {
-//                return  uuid
-//            }
-//            let uuid = UUID().uuidString
-//            store.set(uuid, forKey: .beaconUUID)
-//            return uuid
-//        }
-//        set {
-//            store.set(newValue, forKey: .beaconUUID)
-//        }
-//    }
-//    
-//    var beaconMajor: Int
-//    {
-//        get {
-//            return store.getInt(forKey: .beaconMajor) ?? 1
-//        }
-//        set {
-//            store.set(newValue, forKey: .beaconMajor)
-//        }
-//    }
-//    
-//    
-//    var beaconMinor: Int {
-//        get {
-//            return store.getInt(forKey: .beaconMinor) ?? 1
-//        }
-//        set {
-//            store.set(newValue, forKey: .beaconMinor)
-//        }
-//    }
-//    
-//    
-//    var isBeaconTransmitOn: Bool {
-//        get {
-//            return store.getBool(forKey: .isBeaconTransmitOn) ?? false
-//        }
-//        set {
-//            store.set(newValue, forKey: .isBeaconTransmitOn)
-//        }
-//    }
-//    
-//    var beaconIdentifier: String {
-//        get {
-//            return store.getString(forKey: .beaconIdentifier) ?? "Unnamed"
-//        }
-//        set {
-//            store.set(newValue, forKey: .beaconIdentifier)
-//        }
-//    }
-    
-    
     init(store: SettingsStore)
     {
         self.store = store
@@ -145,58 +86,23 @@ class Settings
 
 extension Settings
 {
-    var beaconUUID: String
+    var particleUser: String
     {
         get {
-            if let uuid = store.getString(forKey: .beaconUUID)
-            {
-                return  uuid
-            }
-            let uuid = UUID().uuidString
-            store.set(uuid, forKey: .beaconUUID)
-            return uuid
+            return store.getString(forKey: .particleUser) ?? ""
         }
         set {
-            store.set(newValue, forKey: .beaconUUID)
-        }
-    }
-    
-    var beaconMajor: Int
-    {
-        get {
-            return store.getInt(forKey: .beaconMajor) ?? 1
-        }
-        set {
-            store.set(newValue, forKey: .beaconMajor)
+            store.set(newValue, forKey: .particleUser)
         }
     }
     
     
-    var beaconMinor: Int {
+    var particlePassword: String {
         get {
-            return store.getInt(forKey: .beaconMinor) ?? 1
+            return store.getString(forKey: .particlePassword) ?? ""
         }
         set {
-            store.set(newValue, forKey: .beaconMinor)
-        }
-    }
-    
-    
-    var isBeaconTransmitOn: Bool {
-        get {
-            return store.getBool(forKey: .isBeaconTransmitOn) ?? false
-        }
-        set {
-            store.set(newValue, forKey: .isBeaconTransmitOn)
-        }
-    }
-    
-    var beaconIdentifier: String {
-        get {
-            return store.getString(forKey: .beaconIdentifier) ?? "Unnamed"
-        }
-        set {
-            store.set(newValue, forKey: .beaconIdentifier)
+            store.set(newValue, forKey: .particlePassword)
         }
     }
 }

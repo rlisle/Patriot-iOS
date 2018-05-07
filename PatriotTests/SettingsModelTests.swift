@@ -74,58 +74,32 @@ class SettingsModelTests: XCTestCase
     }
 
     
-    func testBeaconUUIDReadsValueFromStore()
+    func testParticleUserReadsValueFromStore()
     {
-        mockStore.string = "00000000-0000-0000-0000-000000000000"
-        XCTAssertEqual(settings.beaconUUID, mockStore.string)
+        mockStore.string = "user@test.com"
+        XCTAssertEqual(settings.particleUser, mockStore.string)
     }
 
 
-    func testSetBeaconUUIDWritesValueToStore()
+    func testSetParticleUserWritesValueToStore()
     {
-        let testString = "00000001-0002-0003-0004-000000000005"
-        settings.beaconUUID = testString
+        let testString = "user2@test.com"
+        settings.particleUser = testString
         XCTAssertEqual(testString, mockStore.string)
     }
 
 
-    func testBeaconTransmitReadsValueFromStore()
+    func testParticlePasswordReadsValueFromStore()
     {
-        mockStore.bool = true
-        XCTAssertTrue(settings.isBeaconTransmitOn)
+        mockStore.string = "user3@test.com"
+        XCTAssertEqual(settings.particlePassword, mockStore.string)
     }
 
 
-    func testSetBeaconTransmitWritesTrueValueToStore()
+    func testSetParticlePasswordWritesValueToStore()
     {
-        settings.isBeaconTransmitOn = true
-        XCTAssertNotNil(mockStore.bool)
-        XCTAssertTrue(mockStore.bool!)
-    }
-
-
-    func testSetBeaconTransmitWritesFalseValueToStore()
-    {
-        settings.isBeaconTransmitOn = false
-        XCTAssertNotNil(mockStore.bool)
-        XCTAssertFalse(mockStore.bool!)
-    }
-    
-    
-    func testBeaconIdentifierReadsValueFromStore()
-    {
-        mockStore.string = "PatriotBeacon"
-        XCTAssertEqual(settings.beaconIdentifier, mockStore.string)
-    }
-
-
-    func testSetBeaconIdentifierWritesValueToStore()
-    {
-        let testString = "PatriotBeacon"
-        settings.beaconIdentifier = testString
+        let testString = "password"
+        settings.particlePassword = testString
         XCTAssertEqual(testString, mockStore.string)
     }
-
-
-
 }

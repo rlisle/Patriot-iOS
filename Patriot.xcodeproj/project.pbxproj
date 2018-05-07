@@ -34,7 +34,6 @@
 		E432A16D1EB62E3D003C9E0E /* ActivitiesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */; };
 		E432A16F1EB62FC9003C9E0E /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */; };
 		E432A1711EB63054003C9E0E /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E432A1701EB63054003C9E0E /* AppFactory.swift */; };
-		E43C65E61F05217500491819 /* BeaconXmitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C65E51F05217500491819 /* BeaconXmitData.swift */; };
 		E44117571EDC340B0063FD71 /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44117561EDC340B0063FD71 /* InteractiveTransition.swift */; };
 		E441175D1EDC40070063FD71 /* PresentConfigAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E441175C1EDC40070063FD71 /* PresentConfigAnimator.swift */; };
 		E44117611EDC46D30063FD71 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44117601EDC46D30063FD71 /* ConfigViewController.swift */; };
@@ -43,7 +42,6 @@
 		E46C4BC21EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
 		E46C4BC31EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
 		E46C4BC41EBE548C0002F2D1 /* HwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C4BC11EBE548C0002F2D1 /* HwController.swift */; };
-		E47C7F6F1EF168690024950D /* BeaconTransmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47C7F6E1EF168690024950D /* BeaconTransmitter.swift */; };
 		E49EB1761EB4BCA400FBA04D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */; };
 		E49EB1781EB4BCA400FBA04D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49EB1771EB4BCA400FBA04D /* ViewController.swift */; };
 		E49EB17B1EB4BCA400FBA04D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E49EB1791EB4BCA400FBA04D /* Main.storyboard */; };
@@ -101,13 +99,11 @@
 		E432A16C1EB62E3D003C9E0E /* ActivitiesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesDataManager.swift; sourceTree = "<group>"; };
 		E432A16E1EB62FC9003C9E0E /* ActivityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
 		E432A1701EB63054003C9E0E /* AppFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
-		E43C65E51F05217500491819 /* BeaconXmitData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconXmitData.swift; sourceTree = "<group>"; };
 		E44117561EDC340B0063FD71 /* InteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
 		E441175C1EDC40070063FD71 /* PresentConfigAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentConfigAnimator.swift; sourceTree = "<group>"; };
 		E44117601EDC46D30063FD71 /* ConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
 		E458B5DB1EE89A26000C6809 /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		E46C4BC11EBE548C0002F2D1 /* HwController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HwController.swift; sourceTree = "<group>"; };
-		E47C7F6E1EF168690024950D /* BeaconTransmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconTransmitter.swift; sourceTree = "<group>"; };
 		E49EB1721EB4BCA400FBA04D /* Patriot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patriot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E49EB1751EB4BCA400FBA04D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E49EB1771EB4BCA400FBA04D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -227,15 +223,6 @@
 			name = Activities;
 			sourceTree = "<group>";
 		};
-		E47C7F6D1EF168300024950D /* Beacon */ = {
-			isa = PBXGroup;
-			children = (
-				E47C7F6E1EF168690024950D /* BeaconTransmitter.swift */,
-				E43C65E51F05217500491819 /* BeaconXmitData.swift */,
-			);
-			name = Beacon;
-			sourceTree = "<group>";
-		};
 		E49EB1691EB4BCA400FBA04D = {
 			isa = PBXGroup;
 			children = (
@@ -261,7 +248,6 @@
 		E49EB1741EB4BCA400FBA04D /* Patriot */ = {
 			isa = PBXGroup;
 			children = (
-				E47C7F6D1EF168300024950D /* Beacon */,
 				E441175B1EDC3FCB0063FD71 /* Activities */,
 				E441175A1EDC3FA20063FD71 /* Configuration */,
 				E426BEF11EBF65AE0082517A /* UI */,
@@ -606,13 +592,11 @@
 				E49EB1761EB4BCA400FBA04D /* AppDelegate.swift in Sources */,
 				E46C4BC21EBE548C0002F2D1 /* HwController.swift in Sources */,
 				E44117571EDC340B0063FD71 /* InteractiveTransition.swift in Sources */,
-				E47C7F6F1EF168690024950D /* BeaconTransmitter.swift in Sources */,
 				E432A1541EB609B4003C9E0E /* DeviceNotifying.swift in Sources */,
 				E432A16A1EB6295A003C9E0E /* ActivitiesCollectionViewCell.swift in Sources */,
 				E432A14C1EB607E3003C9E0E /* Photon.swift in Sources */,
 				E432A16F1EB62FC9003C9E0E /* ActivityModel.swift in Sources */,
 				E432A15F1EB60BAE003C9E0E /* ActivityNotifying.swift in Sources */,
-				E43C65E61F05217500491819 /* BeaconXmitData.swift in Sources */,
 				E432A1711EB63054003C9E0E /* AppFactory.swift in Sources */,
 				E432A1581EB60A0A003C9E0E /* secret.swift in Sources */,
 				E458B5DC1EE89A26000C6809 /* SettingsModel.swift in Sources */,

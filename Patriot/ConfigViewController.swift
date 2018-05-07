@@ -2,12 +2,6 @@
 //  ConfigViewController.swift
 //  Patriot
 //
-//  When the Beacon UUID, major, and minor are invalid,
-//  the enable switch will be off and disabled.
-//
-//  So after making changes, the switch will need to be turned on.
-//  At that point, the data will be read and activated.
-//
 //  Created by Ron Lisle on 5/29/17.
 //  Copyright © 2017 Ron Lisle. All rights reserved.
 //
@@ -16,13 +10,10 @@ import UIKit
 
 class ConfigViewController: UITableViewController
 {
-    @IBOutlet weak var transmitBeaconSwitch: UISwitch!
-    @IBOutlet weak var transmitBeaconUUID: VSTextField!
-    @IBOutlet weak var transmitBeaconMajor: UITextField!
-    @IBOutlet weak var transmitBeaconMinor: UITextField!
+    @IBOutlet weak var particleUser: UITextField!
+    @IBOutlet weak var particlePassword: UITextField!
  
     let settings = Settings(store: UserDefaultsSettingsStore())
-    var beaconXmitData: BeaconXmitData?
     
     fileprivate let swipeInteractionController = InteractiveTransition()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
@@ -30,10 +21,7 @@ class ConfigViewController: UITableViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         print("config viewDidLoad")
-        
-        transmitBeaconUUID.formatting = .uuid
-        beaconXmitData = BeaconXmitData(store: settings)
-        
+
         screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleUnwindRecognizer))
         screenEdgeRecognizer.edges = .right
         view.addGestureRecognizer(screenEdgeRecognizer)
@@ -65,14 +53,9 @@ class ConfigViewController: UITableViewController
     
     func initializeDisplayValues()
     {
-        guard let xmitData = beaconXmitData else
-        {
-            fatalError("beaconXmitData was not set")
-        }
-        transmitBeaconUUID.text = xmitData.uuid
-        transmitBeaconMajor.text = String(xmitData.major)
-        transmitBeaconMinor.text = String(xmitData.minor)
-        transmitBeaconSwitch.isOn = xmitData.isEnabled
+        //TODO: get from settings
+        particleUser.text = "user"
+        particlePassword.text = "password"
     }
     
     
@@ -98,17 +81,6 @@ class ConfigViewController: UITableViewController
     }
     
     
-    @IBAction func transmitBeaconDidChange(_ sender: UISwitch)
-    {
-        print("Transmit switch did change: \(sender.isOn)")
-        beaconXmitData?.isEnabled = sender.isOn
-        if sender.isOn
-        {
-            activateBeaconIfDataIsValid()
-        }
-    }
-    
-    
     func textFieldDidChange(sender : AnyObject) {
         guard let notification = sender as? NSNotification,
             let textFieldChanged = notification.object as? UITextField else
@@ -120,17 +92,13 @@ class ConfigViewController: UITableViewController
             print("text changed = \(textString)")
             switch textFieldChanged
             {
-                case self.transmitBeaconUUID:
-                    print("UUID changed")
-                    uuidDidChange(string: textString)
+                case self.particleUser:
+                    print("User changed")
+                    userDidChange(string: textString)
                     break
-                case self.transmitBeaconMajor:
-                    print("major changed")
-                    beaconMajorDidChange(string: textString)
-                    break
-                case self.transmitBeaconMinor:
-                    print("minor changed")
-                    beaconMinorDidChange(string: textString)
+                case self.particlePassword:
+                    print("Password changed")
+                    passwordDidChange(string: textString)
                     break
                 default:
                     print("unknown text field")
@@ -140,49 +108,20 @@ class ConfigViewController: UITableViewController
     }
     
     
-    fileprivate func uuidDidChange(string: String)
+    fileprivate func userDidChange(string: String)
     {
-        let stringWithoutDashes = string.replacingOccurrences(of: "-", with: "")
-        beaconXmitData?.uuid = stringWithoutDashes
-        activateBeaconIfDataIsValid()
+        // Handle changed user
     }
     
 
-    fileprivate func beaconMajorDidChange(string: String)
+    fileprivate func passwordDidChange(string: String)
     {
-        if let value = Int(string)
-        {
-            beaconXmitData?.major = value
-            activateBeaconIfDataIsValid()
-        }
+        // Handle changed password
     }
     
-    
-    fileprivate func beaconMinorDidChange(string: String)
+    fileprivate func loginIfDataIsValid()
     {
-        if let value = Int(string)
-        {
-            beaconXmitData?.minor = value
-            activateBeaconIfDataIsValid()
-        }
-    }
-    
-    
-    fileprivate func activateBeaconIfDataIsValid()
-    {
-        print("activateBeaconIfDataIsValid")
-        guard beaconXmitData != nil else {
-            fatalError("beaconXmitData not set")
-        }
-        if beaconXmitData!.isDataValid()
-        {
-            print("Is valid beacon data")
-            //TODO: enable beacon
-        }
-        else
-        {
-            print("Disabling xmit beacon")
-            //TODO: disable beacon
-        }
+        print("particle login")
+        //TODO:
     }
 }

@@ -14,14 +14,10 @@ import CoreBluetooth
 
 
 private let reuseIdentifier = "ActivityCell"
-private let beaconUUID = UUID(uuidString: "50F415E3-85E4-40E1-A0A9-36943E07690F")
-private let beaconServiceName = "Patriot Location"
 
 
 class ViewController: UICollectionViewController
 {
-    fileprivate var beaconTransmitter: BeaconTransmitter?
-    
     fileprivate let swipeInteractionController = InteractiveTransition()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
     
@@ -84,11 +80,6 @@ class ViewController: UICollectionViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        
-        if beaconUUID != nil && settings != nil && settings?.isBeaconTransmitOn == true
-        {
-            beaconTransmitter = BeaconTransmitter(settings: settings!)
-        }
     }
     
     
@@ -231,7 +222,3 @@ extension ViewController : ActivityNotifying
         }
     }
 }
-
-
-// iBeacon support
-
