@@ -17,9 +17,6 @@ import Foundation
 
 struct Secret
 {
-    static let LoginEmail       = "<YourParticleLoginEmail>"
-    static let LoginPassword    = "<YourParticleLoginPW>"
-
     //A separate test account for running integration tests
     static let TestEmail        = "<YourTestParticleLogin>"
     static let TestPassword     = "<YourTestParticlePW>"

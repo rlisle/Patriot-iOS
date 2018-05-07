@@ -12,7 +12,8 @@ class ConfigViewController: UITableViewController
 {
     @IBOutlet weak var particleUser: UITextField!
     @IBOutlet weak var particlePassword: UITextField!
- 
+    @IBOutlet weak var loginStatus: UILabel!
+    
     let settings = Settings(store: UserDefaultsSettingsStore())
     
     fileprivate let swipeInteractionController = InteractiveTransition()
@@ -53,9 +54,8 @@ class ConfigViewController: UITableViewController
     
     func initializeDisplayValues()
     {
-        //TODO: get from settings
-        particleUser.text = "user"
-        particlePassword.text = "password"
+        particleUser.text = settings.particleUser
+        particlePassword.text = settings.particlePassword
     }
     
     
@@ -93,11 +93,9 @@ class ConfigViewController: UITableViewController
             switch textFieldChanged
             {
                 case self.particleUser:
-                    print("User changed")
                     userDidChange(string: textString)
                     break
                 case self.particlePassword:
-                    print("Password changed")
                     passwordDidChange(string: textString)
                     break
                 default:
@@ -110,18 +108,24 @@ class ConfigViewController: UITableViewController
     
     fileprivate func userDidChange(string: String)
     {
-        // Handle changed user
+        print("User changed")
+        settings.particleUser = string
+        loginIfDataIsValid()
     }
     
 
     fileprivate func passwordDidChange(string: String)
     {
-        // Handle changed password
+        print("Password changed")
+        settings.particlePassword = string
+        loginIfDataIsValid()
     }
     
     fileprivate func loginIfDataIsValid()
     {
         print("particle login")
-        //TODO:
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appFactory = appDelegate.appFactory as! AppFactory
+        appFactory.loginToParticle()
     }
 }
