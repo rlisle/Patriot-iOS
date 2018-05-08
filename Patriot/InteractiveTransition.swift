@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Interactor: UIPercentDrivenInteractiveTransition
+class InteractiveTransition: UIPercentDrivenInteractiveTransition
 {
     var interactionInProgress = false      // was hasStarted
     var shouldCompleteTransition = false   // was shouldfinish

@@ -9,6 +9,8 @@
 //
 
 import UIKit
+import CoreLocation
+import CoreBluetooth
 
 
 private let reuseIdentifier = "ActivityCell"
@@ -16,10 +18,12 @@ private let reuseIdentifier = "ActivityCell"
 
 class ViewController: UICollectionViewController
 {
-    fileprivate let swipeInteractionController = Interactor()
+    fileprivate let swipeInteractionController = InteractiveTransition()
     var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
+    
     var dataManager: ActivitiesDataManager?
     let colors = Colors()
+    var settings: Settings?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +34,14 @@ class ViewController: UICollectionViewController
         
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate
         {
-            appDelegate.appDependencies.configureActivities(viewController: self)
+            //TODO: inject factory into init
+            appDelegate.appFactory?.configureActivities(viewController: self)
         }
         addGradient()
     }
 
 
-    func handleConfigRecognizer(_ recognizer: UIScreenEdgePanGestureRecognizer)
+    @objc func handleConfigRecognizer(_ recognizer: UIScreenEdgePanGestureRecognizer)
     {
         if recognizer.state == .began
         {
@@ -61,7 +66,6 @@ class ViewController: UICollectionViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        print("Activities viewWillAppear")
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
@@ -73,7 +77,13 @@ class ViewController: UICollectionViewController
     }
     
     
-    func tap(_ gestureRecognizer: UIGestureRecognizer)
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+    }
+    
+    
+    @objc func tap(_ gestureRecognizer: UIGestureRecognizer)
     {
         if let index = gestureRecognizer.view?.tag
         {
@@ -212,10 +222,3 @@ extension ViewController : ActivityNotifying
         }
     }
 }
-
-
-extension ViewController    // iBeacon transmitter
-{
-    
-}
-

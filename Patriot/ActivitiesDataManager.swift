@@ -1,6 +1,6 @@
 //
 //  ActivitiesDataManager.swift
-//  rvcp
+//  Patriot-iOS
 //
 //  Created by Ron Lisle on 11/5/16.
 //  Copyright © 2016 Ron Lisle. All rights reserved.
