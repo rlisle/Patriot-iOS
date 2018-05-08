@@ -22,6 +22,7 @@ protocol HwManager: class
     var deviceNames:            Set<String>         { get }
     var supportedNames:         Set<String>         { get }
     var currentActivities:      [String: Int]       { get }
+    var isLoggedIn:             Bool                { get }
     
     func login(user: String, password: String) -> Promise<Void>
     func discoverDevices() -> Promise<Void>

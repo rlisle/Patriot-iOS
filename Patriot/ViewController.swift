@@ -4,6 +4,8 @@
 //
 //  Display a grid of images representing each supported activity
 //
+//  If user is not yet logged in, then animate directly to settings page.
+//
 //  Created by Ron Lisle on 4/29/17.
 //  Copyright © 2017 Ron Lisle. All rights reserved.
 //

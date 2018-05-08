@@ -46,7 +46,8 @@ class PhotonManager: NSObject, HwManager
     var subscribeHandler:   Any?
     var deviceDelegate:     DeviceNotifying?
     var activityDelegate:   ActivityNotifying?
-    
+    var isLogggedIn        = false
+
     var photons: [String: Photon] = [: ]   // All the particle devices attached to logged-in user's account
     let eventName          = "patriot"
     var deviceNames        = Set<String>()      // Names exposed by the "Devices" variables
@@ -64,8 +65,10 @@ class PhotonManager: NSObject, HwManager
         return Promise { fulfill, reject in
             ParticleCloud.sharedInstance().login(withUser: user, password: password) { (error) in
                 if let error = error {
+                    isLoggedIn = false
                     return reject(error)
                 }
+                isLoggedIn = true
                 return fulfill(())
             }
         }
