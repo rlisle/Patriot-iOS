@@ -204,7 +204,7 @@ extension PhotonIntegrationTests
                 }
                 else
                 {
-                    fulfill()
+                    fulfill(())
                 }
             }
         }

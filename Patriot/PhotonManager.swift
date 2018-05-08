@@ -66,7 +66,7 @@ class PhotonManager: NSObject, HwManager
                 if let error = error {
                     return reject(error)
                 }
-                return fulfill()
+                return fulfill(())
             }
         }
     }
@@ -95,7 +95,7 @@ class PhotonManager: NSObject, HwManager
                     .then { _ -> Void in
                         print("All photons added to collection")
                         self.activityDelegate?.supportedListChanged()
-                        fulfill()
+                        fulfill(())
                     }.catch { error in
                         reject(error)
                     }

@@ -41,7 +41,7 @@ class ViewController: UICollectionViewController
     }
 
 
-    func handleConfigRecognizer(_ recognizer: UIScreenEdgePanGestureRecognizer)
+    @objc func handleConfigRecognizer(_ recognizer: UIScreenEdgePanGestureRecognizer)
     {
         if recognizer.state == .began
         {
@@ -83,7 +83,7 @@ class ViewController: UICollectionViewController
     }
     
     
-    func tap(_ gestureRecognizer: UIGestureRecognizer)
+    @objc func tap(_ gestureRecognizer: UIGestureRecognizer)
     {
         if let index = gestureRecognizer.view?.tag
         {

@@ -66,7 +66,7 @@ class ConfigViewController: UITableViewController
     }
     
 
-    func handleUnwindRecognizer(_ recognizer: UIScreenEdgePanGestureRecognizer)
+    @objc func handleUnwindRecognizer(_ recognizer: UIScreenEdgePanGestureRecognizer)
     {
         if recognizer.state == .began
         {
@@ -81,7 +81,7 @@ class ConfigViewController: UITableViewController
     }
     
     
-    func textFieldDidChange(sender : AnyObject) {
+    @objc func textFieldDidChange(sender : AnyObject) {
         guard let notification = sender as? NSNotification,
             let textFieldChanged = notification.object as? UITextField else
         {
@@ -125,7 +125,7 @@ class ConfigViewController: UITableViewController
     {
         print("particle login")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let appFactory = appDelegate.appFactory as! AppFactory
+        let appFactory = appDelegate.appFactory!
         appFactory.loginToParticle()
     }
 }
