@@ -1,8 +1,12 @@
 //
-//  LoggingIn.swift
+//  LoginManager.swift
 //  Patriot
 //
-//  Created by Rons iMac on 5/13/18.
+//  This is the protocol for the login manager
+//  It will be implemented by the specific login needed
+//  (eg. ParticleLogin)
+//
+//  Created by Ron Lisle on 5/13/18.
 //  Copyright © 2018 Ron Lisle. All rights reserved.
 //
 
@@ -11,8 +15,7 @@ import Foundation
 protocol LoginManager
 {
     var isLoggedIn:  Bool  { get }
-    var delegate: LoginNotifying? { get set }
     
-    func login(user: String, password: String) -> Bool
+    func login(user: String, password: String, completion: @escaping (Error?) -> Void) -> Bool
     func logout()
 }
